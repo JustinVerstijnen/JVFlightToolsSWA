@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unit Converter - justinverstijnen.nl</title>
+  <style>
+    :root{
+      --bg:#0f172a; --card:#111827; --muted:#334155; --text:#e5e7eb;
+      --accent:#22d3ee; --ring:#94a3b8;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(80vw 80vh at 70% -10%, #172554 0%, var(--bg) 50%);
+      color:var(--text);
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+    h1{font-size:clamp(22px,3.5vw,34px);letter-spacing:.3px;margin:0}
+    .subtitle{color:#cbd5e1;font-size:14px;display:flex;flex-direction:column;gap:4px}
+    .back-link{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;align-self:flex-start}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+
+    .section{margin:28px 0 10px}
+    .section-title{font-size:18px;margin:8px 0 6px;color:#e2e8f0;font-weight:bold;text-align:center}
+    .section-sub{font-size:13px;color:#94a3b8;text-align:center;margin:-2px 0 14px}
+    .divider{height:1px;background:linear-gradient(90deg,transparent, #2dd4bf33 30%, #2dd4bf55 50%, #2dd4bf33 70%, transparent);margin:18px 0}
+
+    .card{background:linear-gradient(180deg,#111827 0%,#0b1220 100%);border:1px solid #1f2937;border-radius:0;box-shadow:0 8px 24px rgba(0,0,0,.35);padding:16px;width:100%}
+    .card h3{margin:0 0 8px;font-size:16px;color:#f1f5f9}
+
+    label{display:block;font-size:12px;color:#cbd5e1;margin:0 0 6px}
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 2.25rem 1fr; /* middenkolom voor '=' */
+      align-items:center;
+      gap:10px;
+      width:100%;
+    }
+
+    input[type="number"], input[type="text"]{
+      width:100%; appearance:none; background:#0b1220; border:1px solid #1f2937;
+      color:#e5e7eb; border-radius:0; padding:12px 12px; font-size:14px;
+      outline:none; transition:border .15s, box-shadow .15s;
+    }
+    input:focus{border-color:var(--ring);box-shadow:0 0 0 3px rgba(148,163,184,.25)}
+    input[readonly]{opacity:.9}
+    input.dec{ ime-mode: disabled; } /* hint voor sommige browsers */
+
+    .equals{display:grid;place-items:center;height:40px;color:#94a3b8;user-select:none}
+
+    .swap{display:inline-flex;align-items:center;gap:8px;background:#0ea5a4;border:0;color:#042f2e;padding:10px 12px;border-radius:999px;font-weight:600;font-size:12px;cursor:pointer}
+    .swap::before{content:"↺";font-weight:700}
+    .swap:hover{filter:brightness(.95)}
+
+    .under{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .help{font-size:12px;color:#94a3b8}
+
+    a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Aviation Unit Converter</h1>
+        <div class="subtitle">
+          <span>A simple Unit coverter helping you through flight planning</span>
+          <a class="back-link" href="https://flighttools.justinverstijnen.nl">← Back to Flight Tools</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- DISTANCE -->
+    <div class="section">
+      <div class="section-title">Distance</div>
+      <p class="section-sub">Conversions between common aviation distance units</p>
+      <div class="grid">
+        <!-- Feet to Meters -->
+        <div class="card" data-kind="simple" data-a="Feet" data-b="Meters" data-factor="0.3048">
+          <h3>Feet to Meters</h3>
+          <label><span class="label-a">Feet</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 ft = 0.30 m</span>
+          </div>
+        </div>
+
+        <!-- Nautical Miles to km -->
+        <div class="card" data-kind="simple" data-a="Nautical Miles" data-b="Kilometers" data-factor="1.852">
+          <h3>Nautical Miles to km</h3>
+          <label><span class="label-a">Nautical Miles</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 NM = 1.85 km</span>
+          </div>
+        </div>
+
+        <!-- Inches to cm -->
+        <div class="card" data-kind="simple" data-a="Inches" data-b="Centimeters" data-factor="2.54">
+          <h3>Inches to cm</h3>
+          <label><span class="label-a">Inches</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 in = 2.54 cm</span>
+          </div>
+        </div>
+
+        <!-- Miles to km -->
+        <div class="card" data-kind="simple" data-a="Miles" data-b="Kilometers" data-factor="1.609344">
+          <h3>Miles to km</h3>
+          <label><span class="label-a">Miles</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 mi = 1.61 km</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SPEED -->
+    <div class="section">
+      <div class="section-title">Speed</div>
+      <p class="section-sub">Conversions for airspeed units</p>
+      <div class="grid">
+        <!-- Knots to Kilometers per hour -->
+        <div class="card" data-kind="simple" data-a="Knots" data-b="Kilometers per hour" data-factor="1.852">
+          <h3>Knots to Kilometers per hour</h3>
+          <label><span class="label-a">Knots</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 kt = 1.85 km/h</span>
+          </div>
+        </div>
+
+        <!-- Knots to Miles per hour -->
+        <div class="card" data-kind="simple" data-a="Knots" data-b="Miles per hour" data-factor="1.150779448">
+          <h3>Knots to Miles per hour</h3>
+          <label><span class="label-a">Knots</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 kt = 1.15 mph</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- VOLUME & MASS (Fuel) -->
+    <div class="section">
+      <div class="section-title">Volume & Mass</div>
+      <p class="section-sub">Conversions for fuel volumes and weights based on Cessna 172</p>
+
+      <div class="grid">
+        <!-- US Gallons to Pounds (fuel) -->
+        <div class="card" data-kind="fuelMass" data-a="US Gallons" data-b="Pounds (fuel)">
+          <h3>US Gallons to Pounds (fuel)</h3>
+          <label><span class="label-a">US Gallons</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 USG = 6.01 lb</span>
+          </div>
+        </div>
+
+        <!-- Pounds to Kilograms (mass) -->
+        <div class="card" data-kind="simple" data-a="Pounds" data-b="Kilograms" data-factor="0.45359237">
+          <h3>Pounds to Kilograms</h3>
+          <label><span class="label-a">Pounds</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 lb = 0.45 kg</span>
+          </div>
+        </div>
+
+        <!-- US Gallons to Liters -->
+        <div class="card" data-kind="simple" data-a="US Gallons" data-b="Liters" data-factor="3.785411784">
+          <h3>US Gallons to Liters</h3>
+          <label><span class="label-a">US Gallons</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 USG = 3.79 L</span>
+          </div>
+        </div>
+
+        <!-- Liters (fuel) to Kilograms (fuel) -->
+        <div class="card" data-kind="fuelKg" data-a="Liters (fuel)" data-b="Kilograms (fuel)">
+          <h3>Liters (fuel) to Kilograms (fuel)</h3>
+          <label><span class="label-a">Liters (fuel)</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 L = 0.72 kg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AIR PRESSURE -->
+    <div class="section">
+      <div class="section-title">Air Pressure</div>
+      <p class="section-sub">Conversions between hPa and inHg</p>
+      <div class="grid">
+        <div class="card" data-kind="simple" data-a="hPa" data-b="inHg" data-factor="0.0295299830714">
+          <h3>hPa to inHg</h3>
+          <label><span class="label-a">hPa</span></label>
+          <div class="row">
+            <input type="text" inputmode="decimal" pattern="[0-9,.-]*" class="input-a dec" placeholder="Enter value" />
+            <div class="equals">=</div>
+            <input type="text" class="input-b" placeholder="Result" readonly />
+          </div>
+          <div class="under">
+            <button class="swap" type="button"> Swap direction</button>
+            <span class="help factor">1 hPa = 0.03 inHg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ---- Constants (fuel density fixed for C172) ----
+    const DENS_KG_PER_L = 0.72;
+    const LB_PER_KG = 2.2046226218;
+    const L_PER_USG = 3.785411784;
+    const LB_PER_USG = DENS_KG_PER_L * LB_PER_KG * L_PER_USG; // ≈ 6.01
+
+    // ---- Helpers ----
+    const toNumber = (el) => {
+      // sta kommagetallen toe
+      const raw = String(el.value).replace(',', '.');
+      return parseFloat(raw);
+    };
+
+    const fmt2 = (v) => {
+      if (!isFinite(v)) return '';
+      return Number(v).toFixed(2); // altijd 2 decimalen
+    };
+
+    function updateTitle(card, a2b){
+      const aName = card.dataset.a, bName = card.dataset.b;
+      card.querySelector('h3').textContent = a2b ? `${aName} to ${bName}` : `${bName} to ${aName}`;
+      card.querySelector('.label-a').textContent = a2b ? aName : bName;
+    }
+
+    function abbr(name){
+      return name
+        .replace(/Kilometers per hour/i,'km/h')
+        .replace(/Miles per hour/i,'mph')
+        .replace(/Kilometers/i,'km')
+        .replace(/Centimeters/i,'cm')
+        .replace(/Nautical Miles/i,'NM')
+        .replace(/Meters/i,'m')
+        .replace(/Feet/i,'ft')
+        .replace(/Inches/i,'in')
+        .replace(/US Gallons/i,'USG')
+        .replace(/Pounds/i,'lb')
+        .replace(/Kilograms/i,'kg')
+        .replace(/Liters/i,'L');
+    }
+
+    function updateFactorText(card, a2b){
+      const factorEl = card.querySelector('.factor');
+      const aName = card.dataset.a, bName = card.dataset.b;
+
+      if (card.dataset.kind === 'simple'){
+        const factor = parseFloat(card.dataset.factor);
+        factorEl.textContent = a2b
+          ? `1 ${abbr(aName)} = ${fmt2(factor)} ${abbr(bName)}`
+          : `1 ${abbr(bName)} = ${fmt2(1/factor)} ${abbr(aName)}`;
+      } else if (card.dataset.kind === 'fuelMass'){
+        factorEl.textContent = a2b
+          ? `1 USG = ${fmt2(LB_PER_USG)} lb`
+          : `1 lb = ${fmt2(1/LB_PER_USG)} USG`;
+      } else if (card.dataset.kind === 'fuelKg'){
+        factorEl.textContent = a2b
+          ? `1 L = ${fmt2(DENS_KG_PER_L)} kg`
+          : `1 kg = ${fmt2(1/DENS_KG_PER_L)} L`;
+      }
+    }
+
+    // ---- Bindings ----
+    function bindSimple(card){
+      const factor = parseFloat(card.dataset.factor);
+      const inputA = card.querySelector('.input-a');
+      const inputB = card.querySelector('.input-b');
+      let a2b = true;
+
+      const recalc = ()=>{
+        const val = toNumber(inputA);
+        if (isNaN(val)) { inputB.value=''; return; }
+        inputB.value = fmt2(a2b ? val * factor : val / factor);
+      };
+
+      updateTitle(card, a2b);
+      updateFactorText(card, a2b);
+
+      inputA.addEventListener('input', recalc);
+      card.querySelector('.swap').addEventListener('click', ()=>{
+        a2b = !a2b;
+        updateTitle(card, a2b);
+        updateFactorText(card, a2b);
+        recalc();
+      });
+    }
+
+    function bindFuelMass(card){
+      const inputA = card.querySelector('.input-a');
+      const inputB = card.querySelector('.input-b');
+      let a2b = true; // USG -> lb
+
+      const recalc = ()=>{
+        const val = toNumber(inputA);
+        if (isNaN(val)) { inputB.value=''; return; }
+        inputB.value = fmt2(a2b ? val * LB_PER_USG : val / LB_PER_USG);
+      };
+
+      updateTitle(card, a2b);
+      updateFactorText(card, a2b);
+
+      inputA.addEventListener('input', recalc);
+      card.querySelector('.swap').addEventListener('click', ()=>{
+        a2b = !a2b;
+        updateTitle(card, a2b);
+        updateFactorText(card, a2b);
+        recalc();
+      });
+    }
+
+    function bindFuelKg(card){
+      const inputA = card.querySelector('.input-a');
+      const inputB = card.querySelector('.input-b');
+      let a2b = true; // L -> kg
+
+      const recalc = ()=>{
+        const val = toNumber(inputA);
+        if (isNaN(val)) { inputB.value=''; return; }
+        inputB.value = fmt2(a2b ? val * DENS_KG_PER_L : val / DENS_KG_PER_L);
+      };
+
+      updateTitle(card, a2b);
+      updateFactorText(card, a2b);
+
+      inputA.addEventListener('input', recalc);
+      card.querySelector('.swap').addEventListener('click', ()=>{
+        a2b = !a2b;
+        updateTitle(card, a2b);
+        updateFactorText(card, a2b);
+        recalc();
+      });
+    }
+
+    // Bind all cards
+    document.querySelectorAll('.card').forEach(card=>{
+      const kind = card.dataset.kind;
+      if (kind === 'simple') bindSimple(card);
+      if (kind === 'fuelMass') bindFuelMass(card);
+      if (kind === 'fuelKg') bindFuelKg(card);
+    });
+  </script>
+</body>
+</html>
