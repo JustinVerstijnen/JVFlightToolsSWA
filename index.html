@@ -132,8 +132,12 @@
 </div>
 
 <footer>
-    &copy; 2025 justinverstijnen.nl
+    &copy; <span id="year"></span> justinverstijnen.nl
 </footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
     
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4082816808518335"
      crossorigin="anonymous"></script>
