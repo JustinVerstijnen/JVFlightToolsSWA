@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Runway Orientation Tool</title>
+  <style>
+    :root{
+      --bg: #0f1220;
+      --panel: #14182b;
+      --ink: #e9eef7;
+      --muted: #9fb0c6;
+      --accent: #7cc4ff;
+      --accent-2: #9fe870;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 70% -20%, #1b2350 0%, var(--bg) 60%);
+      color: var(--ink);
+      display: grid; place-items: center;
+      padding: 24px;
+    }
+
+    .app{
+      width: min(980px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      padding: 20px 20px 16px;
+    }
+
+    header{ display:flex; align-items:center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    h1{ font-size: clamp(18px, 3vw, 24px); margin:0; letter-spacing: 0.2px; }
+    .sub{ color: var(--muted); font-size: 13px; }
+
+    .grid{
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: center;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .panel{
+      background: var(--panel);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+    }
+
+    /* Controls */
+    .controls { display: grid; gap: 14px; }
+    .row { display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+    label { font-size: 13px; color: var(--muted); }
+    input[type="range"]{ width: 100%; }
+    input[type="number"]{
+      width: 110px; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+      background: #0e1222; color: var(--ink); font-size: 14px;
+    }
+    .kpi{
+      display:grid; grid-template-columns: repeat(2, 1fr); gap:10px;
+    }
+    .kpi .card{
+      background:#0e1222; border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:10px 12px;
+    }
+    .kpi .label{ font-size:12px; color: var(--muted); }
+    .kpi .value{ font-variant-numeric: tabular-nums; font-size: 22px; font-weight:700; letter-spacing:0.4px; }
+    .small{ font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* Compass */
+    .viz{ display:grid; place-items:center; }
+    svg{ width: 100%; height: auto; max-width: 560px; aspect-ratio: 1/1; display:block; }
+    .tick{ stroke:#3a4167; }
+    .tick.major{ stroke:#546099; }
+    .tick.cardinal{ stroke:#7d8fe0; }
+    .compass-ring{ fill:url(#ringGrad); stroke: rgba(255,255,255,0.06); }
+    .runway{ stroke: #e8f1ff; stroke-width: 16; stroke-linecap: round; filter: drop-shadow(0 3px 8px rgba(0,0,0,0.4)); }
+    .runway-centerline{ stroke: #0f1220; stroke-width: 2; stroke-dasharray: 8 6; opacity: 0.7; }
+    .cardinal-text{ fill: #9fb0c6; font-size: 14px; font-weight: 600; letter-spacing: 1px; }
+    .heading-text{ fill: var(--accent); font-size: 14px; font-weight: 600; }
+    .label-bg{ fill: rgba(14,18,34,0.9); stroke: rgba(255,255,255,0.1); }
+    .runway-label{ fill: #dff1ff; font-size: 18px; font-weight: 800; text-anchor: middle; dominant-baseline: middle; }
+
+    .hint{ margin-top: 10px; display:flex; align-items:center; gap:8px; color: var(--muted); font-size: 12px; }
+    .pill{ border:1px solid rgba(255,255,255,0.14); padding:2px 8px; border-radius: 999px; font-size:11px; color:#cfe7ff; }
+    .btns{ display:flex; gap:8px; flex-wrap:wrap; }
+    button{
+      background: #182048; color:#d9e7ff; border:1px solid rgba(255,255,255,0.14);
+      padding:8px 12px; border-radius: 12px; cursor:pointer; font-weight:600;
+    }
+    button:hover{ filter: brightness(1.1); }
+  </style>
+</head>
+<body>
+  <div class="app" role="application" aria-label="Runway Orientation Tool">
+    <header>
+      <h1>Runway Orientation Tool</h1>
+      <div class="sub">Drag the compass or use the controls. Precise headings + runway numbers update live.</div>
+    </header>
+
+    <div class="grid">
+      <section class="viz panel">
+        <svg id="compass" viewBox="0 0 600 600" aria-label="Compass visualization" tabindex="0">
+          <defs>
+            <radialGradient id="ringGrad" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#0e1329"/>
+              <stop offset="60%" stop-color="#0b1023"/>
+              <stop offset="100%" stop-color="#080a19"/>
+            </radialGradient>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          <!-- Ring -->
+          <circle cx="300" cy="300" r="260" class="compass-ring"/>
+
+          <!-- Ticks will be injected here -->
+          <g id="ticks"></g>
+
+          <!-- Runway line + centerline overlay -->
+          <line id="runway" class="runway" x1="300" y1="60" x2="300" y2="540" />
+          <line id="centerline" class="runway-centerline" x1="300" y1="60" x2="300" y2="540" />
+
+          <!-- Runway number labels (positions set via JS) -->
+          <g id="labels">
+            <rect id="labelA_bg" class="label-bg" rx="8" ry="8" width="46" height="28" x="0" y="0" opacity="0.9"></rect>
+            <text id="labelA" class="runway-label">13</text>
+            <rect id="labelB_bg" class="label-bg" rx="8" ry="8" width="46" height="28" x="0" y="0" opacity="0.9"></rect>
+            <text id="labelB" class="runway-label">31</text>
+          </g>
+
+          <!-- Cardinal letters -->
+          <g id="cardinals"></g>
+
+          <!-- Center heading readout -->
+          <g id="readout" transform="translate(300,300)" filter="url(#softGlow)">
+            <text id="headingPrimary" class="heading-text" text-anchor="middle" dy="-6">133.0°</text>
+            <text id="headingRecip" class="heading-text" text-anchor="middle" dy="14" fill="#9fe870">313.0°</text>
+          </g>
+        </svg>
+        <div class="hint">
+          <span class="pill">Tip</span>
+          Drag anywhere on the compass to rotate. Use ← / → for 1° steps (hold Shift for 10°).
+        </div>
+      </section>
+
+      <section class="panel controls" aria-label="Controls">
+        <div class="row" aria-live="polite">
+          <label for="degInput">Heading (°):</label>
+          <input id="degInput" type="number" min="0" max="359.9" step="0.1" value="133" aria-describedby="degHelp" />
+          <span id="degHelp" class="small">0–359.9 (0/360 = North)</span>
+        </div>
+        <input id="degSlider" type="range" min="0" max="359.9" step="0.1" value="133" aria-label="Heading slider"/>
+
+        <div class="kpi">
+          <div class="card">
+            <div class="label">Primary runway</div>
+            <div id="kpiPrimary" class="value">RWY 13 — 133.0°</div>
+          </div>
+          <div class="card">
+            <div class="label">Reciprocal</div>
+            <div id="kpiRecip" class="value">RWY 31 — 313.0°</div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button type="button" data-set="0">N (0°)</button>
+          <button type="button" data-set="90">E (90°)</button>
+          <button type="button" data-set="180">S (180°)</button>
+          <button type="button" data-set="270">W (270°)</button>
+          <button type="button" data-set="133">Example 133°</button>
+        </div>
+
+        <p class="small" style="margin:6px 0 0;">
+          Note: By convention, runway numbers are the magnetic heading rounded to the nearest 10°, dropping the last digit.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const svg = document.getElementById('compass');
+    const ticksG = document.getElementById('ticks');
+    const cardinalsG = document.getElementById('cardinals');
+    const runway = document.getElementById('runway');
+    const centerline = document.getElementById('centerline');
+    const labelA = document.getElementById('labelA');
+    const labelB = document.getElementById('labelB');
+    const labelA_bg = document.getElementById('labelA_bg');
+    const labelB_bg = document.getElementById('labelB_bg');
+
+    const degInput = document.getElementById('degInput');
+    const degSlider = document.getElementById('degSlider');
+    const kpiPrimary = document.getElementById('kpiPrimary');
+    const kpiRecip = document.getElementById('kpiRecip');
+
+    const headingPrimaryText = document.getElementById('headingPrimary');
+    const headingRecipText = document.getElementById('headingRecip');
+
+    const cx = 300, cy = 300, R = 240; // visual radius for ticks
+
+    // Build ticks (every 10°, majors each 30°)
+    for(let deg=0; deg<360; deg+=10){
+      const rad = (deg-90) * Math.PI/180;
+      const isMajor = deg % 30 === 0;
+      const isCardinal = deg % 90 === 0;
+      const outer = R + 12;
+      const inner = isCardinal ? R - 22 : (isMajor ? R - 16 : R - 10);
+      const x1 = cx + Math.cos(rad) * inner;
+      const y1 = cy + Math.sin(rad) * inner;
+      const x2 = cx + Math.cos(rad) * outer;
+      const y2 = cy + Math.sin(rad) * outer;
+      const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('class', 'tick' + (isCardinal? ' cardinal' : isMajor? ' major' : ''));
+      l.setAttribute('stroke-width', isCardinal? 3 : (isMajor? 2 : 1));
+      ticksG.appendChild(l);
+    }
+
+    // Cardinal letters
+    const cardinals = [ ['N',0], ['E',90], ['S',180], ['W',270] ];
+    for(const [txt,deg] of cardinals){
+      const rad = (deg-90) * Math.PI/180;
+      const rText = R + 32;
+      const x = cx + Math.cos(rad) * rText;
+      const y = cy + Math.sin(rad) * rText + 5; // slight vertical tweak
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('class', 'cardinal-text');
+      t.setAttribute('text-anchor','middle');
+      t.textContent = txt;
+      cardinalsG.appendChild(t);
+    }
+
+    function norm(deg){
+      deg = Number(deg) || 0;
+      deg = ((deg % 360) + 360) % 360;
+      return deg;
+    }
+
+    function reciprocal(deg){ return norm(deg + 180); }
+
+    function headingToRunwayNum(deg){
+      const rounded = Math.round(norm(deg)/10);
+      let n = rounded % 36; // 0..35 => 0 maps to 36
+      if(n === 0) n = 36;
+      return String(n); // no leading zero by default
+    }
+
+    function formatDeg(d){ return `${d.toFixed(1)}°`; }
+
+    function updateLabelsPositions(heading){
+      const theta = (heading - 90) * Math.PI/180;
+      const thetaR = theta + Math.PI; // opposite end
+      const L = R * 0.88; // label distance from center along runway
+      const off = 18;     // small perpendicular offset for legibility
+
+      // Primary end (heading)
+      const xA = cx + Math.cos(theta) * L;
+      const yA = cy + Math.sin(theta) * L;
+      const nx = -Math.sin(theta), ny = Math.cos(theta); // unit normal
+      const ax = xA + nx * off, ay = yA + ny * off;
+
+      // Reciprocal end
+      const xB = cx + Math.cos(thetaR) * L;
+      const yB = cy + Math.sin(thetaR) * L;
+      const bx = xB + nx * off, by = yB + ny * off; // same normal
+
+      labelA.setAttribute('x', ax); labelA.setAttribute('y', ay);
+      labelB.setAttribute('x', bx); labelB.setAttribute('y', by);
+
+      // Background rounded rects centered on text
+      const w = 46, h = 28;
+      labelA_bg.setAttribute('x', ax - w/2);
+      labelA_bg.setAttribute('y', ay - h/2);
+      labelB_bg.setAttribute('x', bx - w/2);
+      labelB_bg.setAttribute('y', by - h/2);
+    }
+
+    function updateVisualization(deg){
+      const h = norm(deg);
+      const hr = reciprocal(h);
+
+      // Compute endpoints for the runway line
+      const theta = (h - 90) * Math.PI/180;
+      const x1 = cx + Math.cos(theta) * (R - 30);
+      const y1 = cy + Math.sin(theta) * (R - 30);
+      const x2 = cx - Math.cos(theta) * (R - 30);
+      const y2 = cy - Math.sin(theta) * (R - 30);
+
+      runway.setAttribute('x1', x1);
+      runway.setAttribute('y1', y1);
+      runway.setAttribute('x2', x2);
+      runway.setAttribute('y2', y2);
+      centerline.setAttribute('x1', x1);
+      centerline.setAttribute('y1', y1);
+      centerline.setAttribute('x2', x2);
+      centerline.setAttribute('y2', y2);
+
+      // Labels
+      labelA.textContent = headingToRunwayNum(h);
+      labelB.textContent = headingToRunwayNum(hr);
+      updateLabelsPositions(h);
+
+      // Readouts
+      headingPrimaryText.textContent = formatDeg(h);
+      headingRecipText.textContent = formatDeg(hr);
+      kpiPrimary.textContent = `RWY ${headingToRunwayNum(h)} — ${formatDeg(h)}`;
+      kpiRecip.textContent = `RWY ${headingToRunwayNum(hr)} — ${formatDeg(hr)}`;
+
+      // Sync controls if needed
+      if(document.activeElement !== degInput){ degInput.value = h.toFixed(1); }
+      if(document.activeElement !== degSlider){ degSlider.value = h.toFixed(1); }
+    }
+
+    // Interactivity: drag to rotate
+    let dragging = false;
+    function pointToHeading(evt){
+      const pt = svg.createSVGPoint();
+      pt.x = evt.clientX; pt.y = evt.clientY;
+      const ctm = svg.getScreenCTM().inverse();
+      const svgP = pt.matrixTransform(ctm);
+      const dx = svgP.x - cx;
+      const dy = svgP.y - cy;
+      // Convert to heading: 0 at North, clockwise positive
+      let ang = Math.atan2(dy, dx) * 180/Math.PI; // -180..180, 0=East
+      ang = (ang + 90 + 360) % 360; // now 0=North, CW
+      return ang;
+    }
+
+    svg.addEventListener('pointerdown', (e)=>{
+      dragging = true; svg.setPointerCapture(e.pointerId);
+      updateVisualization(pointToHeading(e));
+    });
+    svg.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      updateVisualization(pointToHeading(e));
+    });
+    svg.addEventListener('pointerup', (e)=>{ dragging = false; svg.releasePointerCapture(e.pointerId); });
+    svg.addEventListener('pointerleave', ()=> dragging=false);
+
+    // Keyboard nudge
+    svg.addEventListener('keydown', (e)=>{
+      const cur = parseFloat(degInput.value) || 0;
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); updateVisualization(cur - (e.shiftKey?10:1)); }
+      if(e.key === 'ArrowRight'){ e.preventDefault(); updateVisualization(cur + (e.shiftKey?10:1)); }
+    });
+
+    // Controls
+    degInput.addEventListener('input', ()=> updateVisualization(parseFloat(degInput.value)));
+    degSlider.addEventListener('input', ()=> updateVisualization(parseFloat(degSlider.value)));
+
+    document.querySelectorAll('button[data-set]').forEach(btn=>{
+      btn.addEventListener('click', ()=> updateVisualization(parseFloat(btn.dataset.set)));
+    });
+
+    // Initialize
+    updateVisualization(parseFloat(degInput.value) || 133);
+  </script>
+</body>
+</html>
