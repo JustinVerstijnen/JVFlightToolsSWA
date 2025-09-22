@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VFlight lesson tracker - justinverstijnen.nl</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    .progress-container {
+      background: #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      height: 24px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #16a34a);
+      width: 0%;
+      transition: width 0.3s ease;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    h2 {
+      margin-top: 24px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 4px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 6px 0;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+    li.done {
+      background: #dcfce7; /* groen */
+      color: #166534;
+      font-weight: 600;
+    }
+    li.todo {
+      background: #f3f4f6; /* lichtgrijs */
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✈️ Flight lesson tracker</h1>
+  </header>
+  <main>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar">0%</div>
+    </div>
+
+    <section>
+      <h2>Phase 1</h2>
+      <ul>
+        <li data-done="yes">Lesson 1.1 Basics</li>
+        <li data-done="no">Lesson 1.2 Effect of controls</li>
+        <li data-done="no">Lesson 1.3 Airwork 1</li>
+        <li data-done="no">Lesson 1.4 Airwork 2</li>
+        <li data-done="no">Lesson 1.5 Airwork 3</li>
+        <li data-done="no">Lesson 1.6 Slow flight</li>
+        <li data-done="no">Lesson 1.7 Stalls</li>
+        <li data-done="no">Lesson 1.8 Circuit 1</li>
+        <li data-done="no">Lesson 1.9 Circuit 2</li>
+        <li data-done="no">Lesson 1.10 Circuit 3 with diversion before solo</li>
+        <li data-done="no">Progress test 1</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Phase 2</h2>
+      <ul>
+        <li data-done="no">Lesson 2.1 First solo</li>
+        <li data-done="no">Lesson 2.2 Forced landing 1</li>
+        <li data-done="no">Lesson 2.3 Solo 2</li>
+        <li data-done="no">Lesson 2.4 UPRT 1</li>
+        <li data-done="no">Lesson 2.5 Solo 3</li>
+        <li data-done="no">Lesson 2.6 UPRT 2</li>
+        <li data-done="no">Lesson 2.7 Solo 4</li>
+        <li data-done="no">Lesson 2.8 Forced landing 2 + NNS</li>
+        <li data-done="no">Lesson 2.9 Solo 5</li>
+        <li data-done="no">Lesson 2.10 Precautionary landing 1:00</li>
+        <li data-done="no">Lesson 2.11 Solo 6 (Free choice of exercises)</li>
+        <li data-done="no">Lesson 2.12 Navigation ground school</li>
+        <li data-done="no">Lesson 2.13 Initial navigation to Lelystad + diversion</li>
+        <li data-done="no">Progress test 2</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Phase 3</h2>
+      <ul>
+        <li data-done="no">Lesson 3.1 Navigation 2 to aerodrome of choice</li>
+        <li data-done="no">Lesson 3.2 Navigation 3 to controlled aerodrome</li>
+        <li data-done="no">Lesson 3.3 Dual 150NM navigation flight including low level navigation</li>
+        <li data-done="no">Lesson 3.4 Solo navigation to aerodrome of choice</li>
+        <li data-done="no">Progress test 3</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Phase 4</h2>
+      <ul>
+        <li data-done="no">Lesson 4.1 Navigation to foreign aerodrome</li>
+        <li data-done="no">Lesson 4.2 Solo 150NM navigation flight</li>
+        <li data-done="no">Lesson 4.3 BIF training</li>
+        <li data-done="no">Lesson 4.4 BIF & radio navigation</li>
+        <li data-done="no">Pre-exam flight test</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function updateProgress() {
+      const lessons = document.querySelectorAll("li[data-done]");
+      let total = lessons.length;
+      let done = 0;
+
+      lessons.forEach(li => {
+        if (li.dataset.done === "yes") {
+          li.classList.add("done");
+          li.classList.remove("todo");
+          done++;
+        } else {
+          li.classList.add("todo");
+          li.classList.remove("done");
+        }
+      });
+
+      const percent = Math.round((done / total) * 100);
+      const bar = document.getElementById("progressBar");
+      bar.style.width = percent + "%";
+      bar.textContent = percent + "%";
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>
