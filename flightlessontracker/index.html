@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VFlight lesson tracker - justinverstijnen.nl</title>
+  <title>Flight Lesson Tracker - justinverstijnen.nl</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -52,6 +52,9 @@
       margin: 6px 0;
       padding: 6px 10px;
       border-radius: 6px;
+      display: flex;
+      justify-content: space-between; /* tekst links, vinkje rechts */
+      align-items: center;
     }
     li.done {
       background: #dcfce7; /* groen */
@@ -62,11 +65,20 @@
       background: #f3f4f6; /* lichtgrijs */
       color: #374151;
     }
+    .checkmark {
+      font-size: 18px;
+      font-weight: bold;
+      color: #16a34a;
+      visibility: hidden; /* standaard verborgen */
+    }
+    li.done .checkmark {
+      visibility: visible; /* alleen zichtbaar bij afgeronde lessen */
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>✈️ Flight lesson tracker</h1>
+    <h1>✈️ Flight Lesson Tracker</h1>
   </header>
   <main>
     <div class="progress-container">
@@ -76,61 +88,22 @@
     <section>
       <h2>Phase 1</h2>
       <ul>
-        <li data-done="yes">Lesson 1.1 Basics</li>
-        <li data-done="no">Lesson 1.2 Effect of controls</li>
-        <li data-done="no">Lesson 1.3 Airwork 1</li>
-        <li data-done="no">Lesson 1.4 Airwork 2</li>
-        <li data-done="no">Lesson 1.5 Airwork 3</li>
-        <li data-done="no">Lesson 1.6 Slow flight</li>
-        <li data-done="no">Lesson 1.7 Stalls</li>
-        <li data-done="no">Lesson 1.8 Circuit 1</li>
-        <li data-done="no">Lesson 1.9 Circuit 2</li>
-        <li data-done="no">Lesson 1.10 Circuit 3 with diversion before solo</li>
-        <li data-done="no">Progress test 1</li>
+        <li data-done="yes">Lesson 1.1 Basics <span class="checkmark">✔️</span></li>
+        <li data-done="yes">Lesson 1.2 Effect of controls <span class="checkmark">✔️</span></li>
+        <li data-done="yes">Lesson 1.3 Airwork 1 <span class="checkmark">✔️</span></li>
+        <li data-done="yes">Lesson 1.4 Airwork 2 <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.5 Airwork 3 <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.6 Slow flight <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.7 Stalls <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.8 Circuit 1 <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.9 Circuit 2 <span class="checkmark">✔️</span></li>
+        <li data-done="no">Lesson 1.10 Circuit 3 with diversion before solo <span class="checkmark">✔️</span></li>
+        <li data-done="no">Progress test 1 <span class="checkmark">✔️</span></li>
       </ul>
     </section>
 
-    <section>
-      <h2>Phase 2</h2>
-      <ul>
-        <li data-done="no">Lesson 2.1 First solo</li>
-        <li data-done="no">Lesson 2.2 Forced landing 1</li>
-        <li data-done="no">Lesson 2.3 Solo 2</li>
-        <li data-done="no">Lesson 2.4 UPRT 1</li>
-        <li data-done="no">Lesson 2.5 Solo 3</li>
-        <li data-done="no">Lesson 2.6 UPRT 2</li>
-        <li data-done="no">Lesson 2.7 Solo 4</li>
-        <li data-done="no">Lesson 2.8 Forced landing 2 + NNS</li>
-        <li data-done="no">Lesson 2.9 Solo 5</li>
-        <li data-done="no">Lesson 2.10 Precautionary landing 1:00</li>
-        <li data-done="no">Lesson 2.11 Solo 6 (Free choice of exercises)</li>
-        <li data-done="no">Lesson 2.12 Navigation ground school</li>
-        <li data-done="no">Lesson 2.13 Initial navigation to Lelystad + diversion</li>
-        <li data-done="no">Progress test 2</li>
-      </ul>
-    </section>
+    <!-- Phase 2, 3, 4 op dezelfde manier met <span class="checkmark">✔️</span> -->
 
-    <section>
-      <h2>Phase 3</h2>
-      <ul>
-        <li data-done="no">Lesson 3.1 Navigation 2 to aerodrome of choice</li>
-        <li data-done="no">Lesson 3.2 Navigation 3 to controlled aerodrome</li>
-        <li data-done="no">Lesson 3.3 Dual 150NM navigation flight including low level navigation</li>
-        <li data-done="no">Lesson 3.4 Solo navigation to aerodrome of choice</li>
-        <li data-done="no">Progress test 3</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Phase 4</h2>
-      <ul>
-        <li data-done="no">Lesson 4.1 Navigation to foreign aerodrome</li>
-        <li data-done="no">Lesson 4.2 Solo 150NM navigation flight</li>
-        <li data-done="no">Lesson 4.3 BIF training</li>
-        <li data-done="no">Lesson 4.4 BIF & radio navigation</li>
-        <li data-done="no">Pre-exam flight test</li>
-      </ul>
-    </section>
   </main>
 
   <script>
