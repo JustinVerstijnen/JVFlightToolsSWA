@@ -3,234 +3,184 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Pressure Altitude Calculator (visueel)</title>
+  <title>Pressure & Density Altitude Visual Calculator</title>
   <style>
-    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
-    body{margin:18px;color:#111;background:#f7f7f8}
-    h1{font-size:20px;margin:0 0 10px}
-    .card{background:white;border-radius:10px;padding:14px;box-shadow:0 6px 18px rgba(20,20,30,0.06);max-width:1000px}
-    .row{display:flex;gap:12px;align-items:center}
-    label{font-size:13px;min-width:120px}
-    input[type=number],select{padding:7px;border-radius:6px;border:1px solid #ddd;font-size:14px}
-    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-    .vis{display:flex;gap:18px;margin-top:12px}
-    .svg-wrap{background:linear-gradient(#e9f0ff, #fff);padding:12px;border-radius:8px;flex:1}
-    .info{flex:1;min-width:260px}
-    .metric{font-size:28px;margin:8px 0}
-    .small{font-size:13px;color:#555}
-    button{background:#2b9d3b;color:white;padding:9px 12px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
-    .note{font-size:12px;color:#666;margin-top:8px}
-    /* scale */
-    svg{width:160px;height:520px;display:block}
-    .scale-line{stroke:#d0d7e6;stroke-width:1}
-    .tick{stroke:#9aa6bf;stroke-width:1}
-    .elev-marker{fill:#1f77b4}
-    .pa-marker{fill:#ff7f0e}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e0f2ff, #f7fff7);
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 24px;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #00695c;
+    }
+    .inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label {
+      font-size: 0.9rem;
+      color: #333;
+    }
+    input, select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+    }
+    input:focus, select:focus {
+      border-color: #00a67e;
+      outline: none;
+    }
+    .results {
+      text-align: center;
+    }
+    .result-value {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #00796b;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    canvas {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(180deg, #b2dfdb, #e0f7fa);
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Pressure altitude calculator — visueel</h1>
-    <p class="small">Vul de hoogte (elevation) en de actuele QNH (hPa). De standaard referentie is 1013 hPa. De tool laat het verschil zien en berekent de pressure altitude.</p>
-
-    <div class="controls">
-      <div class="row">
-        <label for="elev">Elevation (grondhoogte)</label>
-        <input id="elev" type="number" value="150" step="1" min="-500" aria-label="elevation">
-        <select id="elevUnit" aria-label="elevation unit">
-          <option value="ft">ft</option>
-          <option value="m">m</option>
+  <div class="container">
+    <h1>Pressure & Density Altitude Visual Calculator</h1>
+    <div class="inputs">
+      <div class="input-group">
+        <label for="elev">Elevation</label>
+        <input id="elev" type="number" value="150" step="1" min="-500">
+      </div>
+      <div class="input-group">
+        <label for="unit">Eenheid</label>
+        <select id="unit">
+          <option value="ft">Feet</option>
+          <option value="m">Meter</option>
         </select>
       </div>
-
-      <div class="row">
-        <label for="qnh">Actuele QNH (hPa)</label>
+      <div class="input-group">
+        <label for="qnh">QNH (hPa)</label>
         <input id="qnh" type="number" value="1005" step="0.1" min="800" max="1100">
       </div>
-
-      <div class="row">
-        <label for="scale">Schaal (max hoogte)</label>
-        <select id="scale">
-          <option value="2000">2000 ft</option>
-          <option value="5000">5000 ft</option>
-          <option value="10000">10000 ft</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <label></label>
-        <button id="copyBtn">Kopieer resultaat</button>
+      <div class="input-group">
+        <label for="temp">Temperatuur (°C)</label>
+        <input id="temp" type="number" value="15" step="0.1" min="-50" max="50">
       </div>
     </div>
 
-    <div class="vis">
-      <div class="svg-wrap">
-        <svg id="visSvg" viewBox="0 0 160 520" preserveAspectRatio="xMidYMid meet">
-          <!-- ground plane -->
-          <rect x="0" y="370" width="160" height="150" fill="#dfe7f6"></rect>
-          <rect x="0" y="460" width="160" height="60" fill="#b8c9ef"></rect>
-          <text x="12" y="495" font-size="11" fill="#2b3b66">grondvlak</text>
+    <canvas id="visual"></canvas>
 
-          <!-- scale lines (generated by JS) -->
-          <g id="scaleLines"></g>
-
-          <!-- markers -->
-          <g id="markers"></g>
-
-        </svg>
-      </div>
-
-      <div class="info">
-        <div class="small">Inputs</div>
-        <div>elevation: <span id="outElev">150 ft</span></div>
-        <div>qnh: <span id="outQnh">1005 hPa</span></div>
-        <div class="small" style="margin-top:10px">Resultaten</div>
-        <div>verschil QNH t.o.v. 1013: <span id="deltaHpa">8.0 hPa</span></div>
-        <div class="metric">pressure altitude: <span id="paVal">374 ft</span></div>
-        <div class="note">Berekening: pressure altitude = elevation + (1013 - QNH) × 27 ft per hPa (standaardbenadering). Als je meters gebruikt, wordt de conversie automatisch toegepast.</div>
-      </div>
+    <div class="results">
+      <div>QNH verschil: <span id="delta"></span> hPa</div>
+      <div class="result-value">Pressure Altitude: <span id="pa"></span></div>
+      <div class="result-value" style="color:#d84315;">Density Altitude: <span id="da"></span></div>
+      <div class="note">PA = Elevation + (1013 − QNH) × 27 ft/hPa<br>DA = PA + (120 × (OAT − ISA Temp))</div>
     </div>
   </div>
 
   <script>
-    // Helper conversions
-    function mToFt(m){return m*3.2808398950131}
-    function ftToM(ft){return ft/3.2808398950131}
+    const elev = document.getElementById('elev');
+    const unit = document.getElementById('unit');
+    const qnh = document.getElementById('qnh');
+    const temp = document.getElementById('temp');
+    const deltaOut = document.getElementById('delta');
+    const paOut = document.getElementById('pa');
+    const daOut = document.getElementById('da');
+    const canvas = document.getElementById('visual');
+    const ctx = canvas.getContext('2d');
 
-    const elevIn = document.getElementById('elev')
-    const elevUnit = document.getElementById('elevUnit')
-    const qnhIn = document.getElementById('qnh')
-    const scaleSel = document.getElementById('scale')
-    const outElev = document.getElementById('outElev')
-    const outQnh = document.getElementById('outQnh')
-    const deltaHpaEl = document.getElementById('deltaHpa')
-    const paValEl = document.getElementById('paVal')
+    function mToFt(m) { return m * 3.28084; }
+    function ftToM(ft) { return ft / 3.28084; }
 
-    const svg = document.getElementById('visSvg')
-    const scaleGroup = document.getElementById('scaleLines')
-    const markers = document.getElementById('markers')
+    function drawVisual(elevFt, paFt, daFt) {
+      const width = canvas.width = canvas.clientWidth;
+      const height = canvas.height = canvas.clientHeight;
+      ctx.clearRect(0, 0, width, height);
 
-    const copyBtn = document.getElementById('copyBtn')
+      const maxAlt = Math.max(daFt * 1.1, 2000); // schaal past zich automatisch aan
+      const scale = height / maxAlt;
 
-    function calc(){
-      let elevRaw = Number(elevIn.value)||0
-      const unit = elevUnit.value
-      let elevFt = unit==='m' ? mToFt(elevRaw) : elevRaw
-      const qnh = Number(qnhIn.value)||1013
-      const delta = 1013 - qnh // hPa
-      // use 27 ft per hPa (approx. 8.23 m per hPa)
-      const pa = Math.round(elevFt + delta * 27)
+      const elevY = height - elevFt * scale;
+      const paY = height - paFt * scale;
+      const daY = height - daFt * scale;
 
-      // update text outputs
-      outElev.textContent = (unit==='m') ? `${elevRaw} m (${Math.round(elevFt)} ft)` : `${Math.round(elevFt)} ft (${(Math.round(ftToM(elevFt)*10)/10)} m)`
-      outQnh.textContent = `${qnh} hPa`
-      deltaHpaEl.textContent = `${Math.abs(delta).toFixed(1)} hPa ${delta>0? 'lager dan' : delta<0? 'hoger dan' : 'gelijk aan'} 1013`
-      paValEl.textContent = `${pa} ft (${Math.round(ftToM(pa))} m)`
+      // grond
+      ctx.fillStyle = '#004d40';
+      ctx.fillRect(0, height - 10, width, 10);
 
-      drawScaleAndMarkers(elevFt, pa)
+      // elevation
+      ctx.fillStyle = '#0288d1';
+      ctx.fillRect(width/4, elevY - 3, width/2, 6);
+      ctx.fillText(`Elevation: ${Math.round(elevFt)} ft`, 10, elevY - 8);
+
+      // pressure altitude
+      ctx.fillStyle = '#ef6c00';
+      ctx.fillRect(width/4 - 10, paY - 2, width/2 + 20, 4);
+      ctx.fillText(`PA: ${Math.round(paFt)} ft`, 10, paY - 10);
+
+      // density altitude
+      ctx.fillStyle = '#c62828';
+      ctx.fillRect(width/4 - 20, daY - 2, width/2 + 40, 3);
+      ctx.fillText(`DA: ${Math.round(daFt)} ft`, 10, daY - 12);
     }
 
-    function drawScaleAndMarkers(elevFt, paFt){
-      // The svg viewBox height is 520. We'll map 0..maxScale ft to y positions inside 20..380 (above ground plane)
-      const maxScale = Number(scaleSel.value)
-      const topY = 20
-      const bottomY = 370 // top of ground plane
-      const usable = bottomY - topY
+    function calculate() {
+      let elevation = parseFloat(elev.value) || 0;
+      const qnhVal = parseFloat(qnh.value) || 1013;
+      const oat = parseFloat(temp.value) || 15;
+      const delta = 1013 - qnhVal;
+      let elevFt = unit.value === 'm' ? mToFt(elevation) : elevation;
+      const paFt = elevFt + delta * 27;
 
-      // clear existing
-      scaleGroup.innerHTML = ''
-      markers.innerHTML = ''
+      // ISA temp op hoogte (afname 2°C per 1000 ft)
+      const isaTemp = 15 - (paFt / 1000 * 2);
+      const daFt = paFt + 120 * (oat - isaTemp);
 
-      // draw horizontal ticks every 500 ft (or computed)
-      const step = 500
-      for(let h=0; h<=maxScale; h+=step){
-        const frac = h / maxScale
-        const y = topY + frac * usable
-        const g = document.createElementNS('http://www.w3.org/2000/svg','g')
-        const line = document.createElementNS('http://www.w3.org/2000/svg','line')
-        line.setAttribute('x1',10)
-        line.setAttribute('x2',150)
-        line.setAttribute('y1',y)
-        line.setAttribute('y2',y)
-        line.setAttribute('class','scale-line')
-        g.appendChild(line)
-        const t = document.createElementNS('http://www.w3.org/2000/svg','text')
-        t.setAttribute('x',118)
-        t.setAttribute('y',y-4)
-        t.setAttribute('font-size',10)
-        t.setAttribute('fill','#223')
-        t.textContent = `${maxScale - h} ft``
-        // we want labels from top (max) down to 0 at ground
-        scaleGroup.appendChild(g)
-        scaleGroup.appendChild(t)
-      }
+      deltaOut.textContent = delta.toFixed(1);
+      paOut.textContent = `${Math.round(paFt)} ft (${Math.round(ftToM(paFt))} m)`;
+      daOut.textContent = `${Math.round(daFt)} ft (${Math.round(ftToM(daFt))} m)`;
 
-      // convert a ft value to svg y (0 ft -> bottomY ; maxScale -> topY)
-      function yFor(ft){
-        // clamp
-        const clamped = Math.max(0, Math.min(ft, maxScale))
-        const frac = 1 - (clamped / maxScale) // because 0 -> bottom
-        return topY + frac * usable
-      }
-
-      // elevation marker
-      const elevY = yFor(elevFt)
-      const elevRect = document.createElementNS('http://www.w3.org/2000/svg','rect')
-      elevRect.setAttribute('x',40)
-      elevRect.setAttribute('y',Math.min(elevY, bottomY-6))
-      elevRect.setAttribute('width',80)
-      elevRect.setAttribute('height',6)
-      elevRect.setAttribute('class','elev-marker')
-      markers.appendChild(elevRect)
-      const elevText = document.createElementNS('http://www.w3.org/2000/svg','text')
-      elevText.setAttribute('x',6)
-      elevText.setAttribute('y',Math.min(elevY, bottomY-6)-6)
-      elevText.setAttribute('font-size',11)
-      elevText.textContent = `elevation ${Math.round(elevFt)} ft`
-      markers.appendChild(elevText)
-
-      // pressure altitude marker
-      const paY = yFor(paFt)
-      const paRect = document.createElementNS('http://www.w3.org/2000/svg','rect')
-      paRect.setAttribute('x',20)
-      paRect.setAttribute('y',Math.min(paY, bottomY-6))
-      paRect.setAttribute('width',120)
-      paRect.setAttribute('height',4)
-      paRect.setAttribute('class','pa-marker')
-      markers.appendChild(paRect)
-      const paText = document.createElementNS('http://www.w3.org/2000/svg','text')
-      paText.setAttribute('x',6)
-      paText.setAttribute('y',Math.min(paY, bottomY-6)-12)
-      paText.setAttribute('font-size',11)
-      paText.textContent = `pressure alt ${Math.round(paFt)} ft`
-      markers.appendChild(paText)
-
-      // if pa is above scale, show arrow and label
-      if(paFt > maxScale){
-        const arrow = document.createElementNS('http://www.w3.org/2000/svg','text')
-        arrow.setAttribute('x',6)
-        arrow.setAttribute('y',14)
-        arrow.setAttribute('font-size',12)
-        arrow.textContent = `▲ ${Math.round(paFt)} ft (boven schaal)`
-        markers.appendChild(arrow)
-      }
-
+      drawVisual(elevFt, paFt, daFt);
     }
 
-    // copy results
-    copyBtn.addEventListener('click', ()=>{
-      const txt = `Elevation: ${elevIn.value} ${elevUnit.value}\nQNH: ${qnhIn.value} hPa\nPressure altitude: ${paValEl.textContent}`
-      navigator.clipboard.writeText(txt).then(()=>{
-        copyBtn.textContent = 'Gekopieerd!'
-        setTimeout(()=>copyBtn.textContent='Kopieer resultaat',1400)
-      })
-    })
+    [elev, unit, qnh, temp].forEach(el => el.addEventListener('input', calculate));
 
-    // wire events
-    [elevIn,elevUnit,qnhIn,scaleSel].forEach(el=>el.addEventListener('input', calc))
-
-    // initial draw
-    calc()
+    calculate();
   </script>
 </body>
 </html>
