@@ -2,53 +2,74 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Nav-tool – True / Magnetic / Compass</title>
+  <title>Nav-tool – Course / Heading / Track</title>
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
+      color: #111827;
+      background: #e5e7eb;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
     }
     body {
       margin: 0;
       padding: 2rem;
       display: flex;
       justify-content: center;
+      background: #e5e7eb;
     }
     .app {
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2rem;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
-      border-radius: 1.5rem;
+      background: #f9fafb;
+      border-radius: 1.25rem;
       padding: 2rem;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
+
+    /* Layout voor invoer en resultaten naast elkaar */
+    .app-row {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+    }
+    .card-equal {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     h1 {
-      margin: 0 0 0.5rem;
-      font-size: 1.6rem;
+      margin: 0 0 0.25rem;
+      font-size: 1.7rem;
     }
     .subtitle {
-      font-size: 0.9rem;
-      color: #9ca3af;
       margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #6b7280;
     }
+
     .card {
-      background: rgba(15, 23, 42, 0.8);
-      border-radius: 1.25rem;
+      background: #ffffff;
+      border-radius: 1rem;
       padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      backdrop-filter: blur(10px);
-      margin-bottom: 1rem;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
     .card h2 {
-      margin-top: 0;
+      margin: 0 0 0.7rem;
       font-size: 1rem;
-      margin-bottom: 0.5rem;
     }
+
     .row {
       display: flex;
       align-items: center;
@@ -57,576 +78,375 @@
       flex-wrap: wrap;
     }
     .row label {
-      min-width: 150px;
-      font-size: 0.9rem;
-      color: #d1d5db;
+      min-width: 175px;
+      font-size: 0.85rem;
+      color: #374151;
     }
+
     .row small {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: #9ca3af;
+      display: block;
     }
+
     input[type="range"] {
-      flex: 1 1 auto;
-      accent-color: #38bdf8;
+      flex: 1 1 160px;
+      max-width: 260px;
     }
     input[type="number"] {
       width: 70px;
-      padding: 0.2rem 0.4rem;
+      padding: 0.2rem 0.35rem;
       border-radius: 0.4rem;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.8);
-      color: #e5e7eb;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      color: #111827;
+    }
+
+    select {
+      padding: 0.35rem 0.6rem;
       font-size: 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
     }
-    .pill-group {
-      display: inline-flex;
-      border-radius: 999px;
-      padding: 0.2rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      margin-bottom: 0.5rem;
-    }
-    .pill {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      gap: 0.25rem;
-      color: #e5e7eb;
-    }
-    .pill input {
-      display: none;
-    }
-    .pill.active {
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.7);
-    }
-    .pill span.mode-label {
-      opacity: 0.9;
-    }
-    .pill span.mode-sub {
-      font-size: 0.7rem;
-      opacity: 0.8;
-    }
-    .grid-two {
+
+    .grid-three {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 0.5rem 1.5rem;
-      font-size: 0.9rem;
-      margin-top: 0.8rem;
-    }
-    .value-label {
-      color: #9ca3af;
-    }
-    .value-number {
-      font-variant-numeric: tabular-nums;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      padding: 0.15rem 0.6rem;
-      font-size: 0.7rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: #e5e7eb;
-    }
-    .tag.dot-true::before,
-    .legend-item.true .dot {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      display: inline-block;
-      background: #22c55e;
-    }
-    .tag.dot-mag::before,
-    .legend-item.mag .dot {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      display: inline-block;
-      background: #f97316;
-    }
-    .tag.dot-compass::before,
-    .legend-item.comp .dot {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      display: inline-block;
-      background: #38bdf8;
-    }
-    canvas {
-      width: 100%;
-      border-radius: 1rem;
-      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 100%);
-    }
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 0.7rem;
-      font-size: 0.8rem;
-    }
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: #e5e7eb;
-    }
-    .legend-item .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-    }
-    .note {
-      font-size: 0.75rem;
-      color: #9ca3af;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem 1.5rem;
       margin-top: 0.6rem;
     }
-    .note strong {
-      color: #e5e7eb;
+    .group-title {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.8rem;
+      text-transform: uppercase;
     }
-    @media (max-width: 900px) {
-      body {
-        padding: 1rem;
-      }
-      .app {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .value-label { font-size: 0.8rem; color: #6b7280; }
+    .value-number { font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+
+    .note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.6rem;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 640px;
+      background: #ffffff;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 960px) {
+      .app-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <!-- Linker pane: invoer en resultaten -->
-    <div>
-      <header>
-        <h1>Compass / Track calculator</h1>
-        <div class="subtitle">
-          Reken snel tussen <strong>True track</strong>, <strong>Magnetic track</strong> en
-          <strong>Compass heading</strong> met variatie en deviatie.
-        </div>
-      </header>
+    <header>
+      <h1>Course / Heading / Track calculator</h1>
+      <div class="subtitle">Rekent TTC, TH, TT, VAR, DEV, WCA & drift + visualisatie</div>
+    </header>
 
-      <section class="card">
+    <!-- ROW met 2 even hoge kolommen -->
+    <div class="app-row">
+      <!-- Basis-invoer -->
+      <section class="card card-equal">
         <h2>Basis-invoer</h2>
-        <div class="pill-group" id="modeGroup">
-          <label class="pill active">
-            <input type="radio" name="mode" value="true" checked />
-            <span class="mode-label">True track (T)</span>
-            <span class="mode-sub">ik voer T in</span>
-          </label>
-          <label class="pill">
-            <input type="radio" name="mode" value="compass" />
-            <span class="mode-label">Compass heading (C)</span>
-            <span class="mode-sub">ik voer C in</span>
-          </label>
+
+        <div class="row">
+          <label>Welke waarde voer je in?</label>
+          <select id="modeSelect">
+            <option value="TT">True Track (TT)</option>
+            <option value="TH">True Heading (TH)</option>
+            <option value="TC">True Course (TC)</option>
+            <option value="CH">Compass Heading (CH)</option>
+          </select>
         </div>
 
         <div class="row">
-          <label for="trueTrackRange">True track (T)</label>
-          <input id="trueTrackRange" type="range" min="0" max="359" value="90" />
-          <input id="trueTrackInput" type="number" min="0" max="359" value="90" />
-          <span class="tag dot-true">T</span>
-        </div>
-        <div class="row">
-          <label for="compassHeadingRange">Compass heading (C)</label>
-          <input id="compassHeadingRange" type="range" min="0" max="359" value="90" />
-          <input id="compassHeadingInput" type="number" min="0" max="359" value="90" />
-          <span class="tag dot-compass">C</span>
+          <label>True Course (TC)<small>0–359°</small></label>
+          <input id="tcRange" type="range" min="0" max="359">
+          <input id="tcInput" type="number" min="0" max="359">
         </div>
 
         <div class="row">
-          <label for="variationRange">
-            Variatie (T → M)
-            <small>(E + / W −)</small>
-          </label>
-          <input id="variationRange" type="range" min="-30" max="30" value="5" />
-          <input id="variationInput" type="number" min="-30" max="30" value="5" />
+          <label>True Heading (TH)<small>0–359°</small></label>
+          <input id="thRange" type="range" min="0" max="359">
+          <input id="thInput" type="number" min="0" max="359">
         </div>
 
         <div class="row">
-          <label for="deviationRange">
-            Deviatie (M → C)
-            <small>(E + / W −)</small>
-          </label>
-          <input id="deviationRange" type="range" min="-10" max="10" value="2" />
-          <input id="deviationInput" type="number" min="-10" max="10" value="2" />
+          <label>True Track (TT)<small>0–359°</small></label>
+          <input id="ttRange" type="range" min="0" max="359">
+          <input id="ttInput" type="number" min="0" max="359">
         </div>
 
-        <div class="note">
-          Conventie: <strong>positief</strong> =&nbsp;Easterly, <strong>negatief</strong> =&nbsp;Westerly.<br />
-          Formules (E +):<br />
-          <strong>M = T − VAR</strong>, <strong>C = M − DEV</strong><br />
-          (dus <strong>C = T − VAR − DEV</strong>)
+        <div class="row">
+          <label>Compass Heading (CH)<small>0–359°</small></label>
+          <input id="chRange" type="range" min="0" max="359">
+          <input id="chInput" type="number" min="0" max="359">
+        </div>
+
+        <div class="row">
+          <label>Variation (VAR)<small>E +, W −</small></label>
+          <input id="variationRange" type="range" min="-30" max="30">
+          <input id="variationInput" type="number" min="-30" max="30">
+        </div>
+
+        <div class="row">
+          <label>Deviation (DEV)<small>E +, W −</small></label>
+          <input id="deviationRange" type="range" min="-10" max="10">
+          <input id="deviationInput" type="number" min="-10" max="10">
+        </div>
+
+        <div class="row">
+          <label>Wind Correction (WCA)<small>R +, L −</small></label>
+          <input id="wcaRange" type="range" min="-30" max="30">
+          <input id="wcaInput" type="number" min="-30" max="30">
+        </div>
+
+        <div class="row">
+          <label>Drift (DA)<small>Drift = −WCA</small></label>
+          <input id="driftDisplay" type="number" disabled>
         </div>
       </section>
 
-      <section class="card">
+      <!-- Resultaten -->
+      <section class="card card-equal">
         <h2>Resultaten</h2>
-        <div class="grid-two">
-          <div>
-            <div class="value-label">True track (T)</div>
-            <div class="value-number" id="trueTrackOut">090°</div>
-          </div>
-          <div>
-            <div class="value-label">Magnetic track (M)</div>
-            <div class="value-number" id="magTrackOut">085°</div>
-          </div>
-          <div>
-            <div class="value-label">Compass heading (C)</div>
-            <div class="value-number" id="compassHeadingOut">083°</div>
-          </div>
-          <div>
-            <div class="value-label">Variatie (T → M)</div>
-            <div class="value-number" id="variationOut">+5° E</div>
-          </div>
-          <div>
-            <div class="value-label">Deviatie (M → C)</div>
-            <div class="value-number" id="deviationOut">+2° E</div>
-          </div>
-          <div>
-            <div class="value-label">Relaties</div>
-            <div class="value-number" id="relationOut">
-              T → M: −5°, M → C: −2°
-            </div>
-          </div>
+
+        <div class="group-title">Course</div>
+        <div class="grid-three">
+          <div><div class="value-label">TC</div><div class="value-number" id="tcOut"></div></div>
+          <div><div class="value-label">MC</div><div class="value-number" id="mcOut"></div></div>
+          <div><div class="value-label">CC</div><div class="value-number" id="ccOut"></div></div>
+        </div>
+
+        <div class="group-title">Heading</div>
+        <div class="grid-three">
+          <div><div class="value-label">TH</div><div class="value-number" id="thOut"></div></div>
+          <div><div class="value-label">MH</div><div class="value-number" id="mhOut"></div></div>
+          <div><div class="value-label">CH</div><div class="value-number" id="chOut"></div></div>
+        </div>
+
+        <div class="group-title">Track</div>
+        <div class="grid-three">
+          <div><div class="value-label">TT</div><div class="value-number" id="ttOut"></div></div>
+          <div><div class="value-label">MT</div><div class="value-number" id="mtOut"></div></div>
+          <div><div class="value-label">CT</div><div class="value-number" id="ctOut"></div></div>
+        </div>
+
+        <div class="group-title">Hoeken</div>
+        <div class="grid-three">
+          <div><div class="value-label">VAR</div><div class="value-number" id="varOut"></div></div>
+          <div><div class="value-label">DEV</div><div class="value-number" id="devOut"></div></div>
+          <div><div class="value-label">WCA/DA</div><div class="value-number" id="wcaDriftOut"></div></div>
         </div>
       </section>
     </div>
 
-    <!-- Rechter pane: visualisatie -->
-    <div class="card">
+    <!-- Visualisatie onderaan -->
+    <section class="card">
       <h2>Visualisatie</h2>
-      <canvas id="compassCanvas" width="420" height="420"></canvas>
-
-      <div class="legend">
-        <div class="legend-item true">
-          <span class="dot"></span>
-          <span>True track (T)</span>
-        </div>
-        <div class="legend-item mag">
-          <span class="dot"></span>
-          <span>Magnetic track (M)</span>
-        </div>
-        <div class="legend-item comp">
-          <span class="dot"></span>
-          <span>Compass heading (C)</span>
-        </div>
-        <div class="legend-item">
-          <span>↑</span>
-          <span>True North (0°)</span>
-        </div>
-      </div>
-
-      <div class="note">
-        Boven in de cirkel is <strong>0° / 360°</strong> (True North). De gekleurde lijnen
-        tonen de actuele T, M en C volgens de ingestelde variatie en deviatie.
-      </div>
-    </div>
+      <canvas id="compassCanvas" width="640" height="640"></canvas>
+    </section>
   </div>
 
-  <script>
-    // --- Helper functions ----------------------------------------------------
-    function clamp(value, min, max) {
-      return Math.min(max, Math.max(min, value));
-    }
+<script>
+/* ======== helpers ======= */
+function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+function normDeg(d) { let r = d % 360; if (r < 0) r += 360; return r; }
+function pad3(d){return Math.round(normDeg(d)).toString().padStart(3,'0');}
+function formatVarDev(v){const a=Math.abs(v); if(!a)return "0°"; return (v>=0?"+":"−")+a+"° "+(v>=0?"E":"W");}
+function formatRL(v){const a=Math.abs(v); if(!a)return "0°"; return (v>=0?"+":"−")+a+"°"+(v>=0?" R":" L");}
 
-    function normalizeDeg(deg) {
-      let d = deg % 360;
-      if (d < 0) d += 360;
-      return d;
-    }
+/* ====== DOM refs ====== */
+const modeSelect=document.getElementById("modeSelect");
+const tcRange=document.getElementById("tcRange"), tcInput=document.getElementById("tcInput");
+const thRange=document.getElementById("thRange"), thInput=document.getElementById("thInput");
+const ttRange=document.getElementById("ttRange"), ttInput=document.getElementById("ttInput");
+const chRange=document.getElementById("chRange"), chInput=document.getElementById("chInput");
+const variationRange=document.getElementById("variationRange"), variationInput=document.getElementById("variationInput");
+const deviationRange=document.getElementById("deviationRange"), deviationInput=document.getElementById("deviationInput");
+const wcaRange=document.getElementById("wcaRange"), wcaInput=document.getElementById("wcaInput");
+const driftDisplay=document.getElementById("driftDisplay");
 
-    function pad3(deg) {
-      const n = Math.round(deg) % 360;
-      return n.toString().padStart(3, "0");
-    }
+const tcOut=document.getElementById("tcOut"), mcOut=document.getElementById("mcOut"), ccOut=document.getElementById("ccOut");
+const thOut=document.getElementById("thOut"), mhOut=document.getElementById("mhOut"), chOut=document.getElementById("chOut");
+const ttOut=document.getElementById("ttOut"), mtOut=document.getElementById("mtOut"), ctOut=document.getElementById("ctOut");
+const varOut=document.getElementById("varOut"), devOut=document.getElementById("devOut"), wcaDriftOut=document.getElementById("wcaDriftOut");
 
-    function formatSignedDeg(val) {
-      const v = Number(val);
-      const sign = v > 0 ? "+" : v < 0 ? "−" : "±";
-      const absVal = Math.abs(Math.round(v));
-      let dir = "";
-      if (v > 0) dir = " E";
-      if (v < 0) dir = " W";
-      return `${sign}${absVal}°${dir}`;
-    }
+const canvas=document.getElementById("compassCanvas");
+const ctx=canvas.getContext("2d");
 
-    // --- DOM references ------------------------------------------------------
-    const modeRadios = document.querySelectorAll('input[name="mode"]');
-    const modePills = document.querySelectorAll(".pill-group .pill");
+/* ===== scroll sliders ===== */
+function enableScrollSlider(slider){
+  slider.addEventListener("wheel", e=>{
+    e.preventDefault();
+    const step = e.deltaY < 0 ? 1 : -1;
+    slider.value = clamp(Number(slider.value)+step, slider.min, slider.max);
+    slider.dispatchEvent(new Event("input"));
+  });
+}
 
-    const trueTrackRange = document.getElementById("trueTrackRange");
-    const trueTrackInput = document.getElementById("trueTrackInput");
-    const compassHeadingRange = document.getElementById("compassHeadingRange");
-    const compassHeadingInput = document.getElementById("compassHeadingInput");
-    const variationRange = document.getElementById("variationRange");
-    const variationInput = document.getElementById("variationInput");
-    const deviationRange = document.getElementById("deviationRange");
-    const deviationInput = document.getElementById("deviationInput");
+[
+  tcRange, thRange, ttRange, chRange,
+  variationRange, deviationRange, wcaRange
+].forEach(enableScrollSlider);
 
-    const trueTrackOut = document.getElementById("trueTrackOut");
-    const magTrackOut = document.getElementById("magTrackOut");
-    const compassHeadingOut = document.getElementById("compassHeadingOut");
-    const variationOut = document.getElementById("variationOut");
-    const deviationOut = document.getElementById("deviationOut");
-    const relationOut = document.getElementById("relationOut");
+/* ===== sync helpers ===== */
+function bind(rangeEl, numEl, min, max){
+  rangeEl.addEventListener("input",()=>{
+    numEl.value=rangeEl.value; recalc();
+  });
+  numEl.addEventListener("input",()=>{
+    const v=clamp(Number(numEl.value||0),min,max);
+    numEl.value=v; rangeEl.value=v; recalc();
+  });
+}
 
-    const canvas = document.getElementById("compassCanvas");
-    const ctx = canvas.getContext("2d");
+bind(tcRange,tcInput,0,359);
+bind(thRange,thInput,0,359);
+bind(ttRange,ttInput,0,359);
+bind(chRange,chInput,0,359);
+bind(variationRange,variationInput,-30,30);
+bind(deviationRange,deviationInput,-10,10);
+bind(wcaRange,wcaInput,-30,30);
 
-    let mode = "true"; // "true" or "compass"
-    let internalUpdate = false; // om loops te voorkomen
+modeSelect.addEventListener("change",recalc);
 
-    // --- Mode wisselen -------------------------------------------------------
-    modeRadios.forEach((radio) => {
-      radio.addEventListener("change", () => {
-        if (!radio.checked) return;
-        mode = radio.value;
-        updateModeUI();
-        recalcAndRender();
-      });
-    });
+/* ===== hoofd berekening ===== */
+function recalc(){
+  const VAR=Number(variationRange.value);
+  const DEV=Number(deviationRange.value);
+  const WCA=Number(wcaRange.value);
+  const DRIFT = -WCA;
+  driftDisplay.value = DRIFT;
 
-    function updateModeUI() {
-      modePills.forEach((pill) => {
-        const input = pill.querySelector("input");
-        pill.classList.toggle("active", input.checked);
-      });
+  let TC,TH,TT;
 
-      const isTrue = mode === "true";
-      trueTrackRange.disabled = !isTrue;
-      trueTrackInput.disabled = !isTrue;
+  if(modeSelect.value==="TC"){
+    TC=normDeg(Number(tcRange.value));
+    TT=TC;
+    TH=normDeg(TT+WCA);
+  }
+  else if(modeSelect.value==="TH"){
+    TH=normDeg(Number(thRange.value));
+    TT=normDeg(TH-WCA);
+    TC=TT;
+  }
+  else if(modeSelect.value==="TT"){
+    TT=normDeg(Number(ttRange.value));
+    TH=normDeg(TT+WCA);
+    TC=TT;
+  }
+  else if(modeSelect.value==="CH"){
+    const CHin=normDeg(Number(chRange.value));
+    const MH=normDeg(CHin+DEV);
+    TH=normDeg(MH+VAR);
+    TT=normDeg(TH-WCA);
+    TC=TT;
+  }
 
-      compassHeadingRange.disabled = isTrue;
-      compassHeadingInput.disabled = isTrue;
+  const MC=normDeg(TC-VAR);
+  const MH=normDeg(TH-VAR);
+  const MT=normDeg(TT-VAR);
 
-      trueTrackRange.style.opacity = isTrue ? "1" : "0.5";
-      trueTrackInput.style.opacity = isTrue ? "1" : "0.5";
-      compassHeadingRange.style.opacity = isTrue ? "0.5" : "1";
-      compassHeadingInput.style.opacity = isTrue ? "0.5" : "1";
-    }
+  const CC=normDeg(MC-DEV);
+  const CH=normDeg(MH-DEV);
+  const CT=normDeg(MT-DEV);
 
-    // --- Input event handlers ------------------------------------------------
-    function syncRangeAndNumber(rangeEl, numberEl, min, max, cb) {
-      rangeEl.addEventListener("input", () => {
-        if (internalUpdate) return;
-        numberEl.value = rangeEl.value;
-        cb();
-      });
-      numberEl.addEventListener("input", () => {
-        if (internalUpdate) return;
-        const v = clamp(Number(numberEl.value), min, max);
-        numberEl.value = v;
-        rangeEl.value = v;
-        cb();
-      });
-      numberEl.addEventListener("blur", () => {
-        const v = clamp(Number(numberEl.value || rangeEl.min), min, max);
-        numberEl.value = v;
-        rangeEl.value = v;
-        cb();
-      });
-    }
+  tcOut.textContent=pad3(TC)+"°";
+  mcOut.textContent=pad3(MC)+"°";
+  ccOut.textContent=pad3(CC)+"°";
 
-    syncRangeAndNumber(trueTrackRange, trueTrackInput, 0, 359, recalcAndRender);
-    syncRangeAndNumber(
-      compassHeadingRange,
-      compassHeadingInput,
-      0,
-      359,
-      recalcAndRender
-    );
-    syncRangeAndNumber(variationRange, variationInput, -30, 30, recalcAndRender);
-    syncRangeAndNumber(deviationRange, deviationInput, -10, 10, recalcAndRender);
+  thOut.textContent=pad3(TH)+"°";
+  mhOut.textContent=pad3(MH)+"°";
+  chOut.textContent=pad3(CH)+"°";
 
-    // --- Kern-logica: reken alle waarden uit -------------------------------
-    function recalcAndRender() {
-      const variation = Number(variationRange.value); // E +, W −
-      const deviation = Number(deviationRange.value); // E +, W −
+  ttOut.textContent=pad3(TT)+"°";
+  mtOut.textContent=pad3(MT)+"°";
+  ctOut.textContent=pad3(CT)+"°";
 
-      let T, M, C;
+  varOut.textContent=formatVarDev(VAR);
+  devOut.textContent=formatVarDev(DEV);
+  wcaDriftOut.textContent=`WCA ${formatRL(WCA)}, Drift ${formatRL(DRIFT)}`;
 
-      if (mode === "true") {
-        T = normalizeDeg(Number(trueTrackRange.value));
-        // M = T − VAR (E is least)
-        M = normalizeDeg(T - variation);
-        // C = M − DEV (E is least)
-        C = normalizeDeg(M - deviation);
+  drawCompass(TC,TH,TT,VAR,DEV);
+}
 
-        internalUpdate = true;
-        compassHeadingRange.value = C;
-        compassHeadingInput.value = C.toFixed(0);
-        internalUpdate = false;
-      } else {
-        C = normalizeDeg(Number(compassHeadingRange.value));
-        // M = C + DEV
-        M = normalizeDeg(C + deviation);
-        // T = M + VAR
-        T = normalizeDeg(M + variation);
+/* ======= tekenen ====== */
+function drawCompass(TC,TH,TT,VAR,DEV){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const cx=canvas.width/2, cy=canvas.height/2;
+  const r=Math.min(cx,cy)*0.75;
 
-        internalUpdate = true;
-        trueTrackRange.value = T;
-        trueTrackInput.value = T.toFixed(0);
-        internalUpdate = false;
-      }
+  // achtergrond
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
-      // Update tekstuele output
-      trueTrackOut.textContent = pad3(T) + "°";
-      magTrackOut.textContent = pad3(M) + "°";
-      compassHeadingOut.textContent = pad3(C) + "°";
-      variationOut.textContent = formatSignedDeg(variation);
-      deviationOut.textContent = formatSignedDeg(deviation);
+  // cirkel
+  ctx.strokeStyle="#d1d5db";
+  ctx.lineWidth=2;
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
 
-      const relTM = -variation; // van T naar M (T - VAR)
-      const relMC = -deviation; // van M naar C (M - DEV)
-      relationOut.textContent =
-        "T → M: " +
-        formatSignedDeg(relTM) +
-        ", M → C: " +
-        formatSignedDeg(relMC);
+  drawArrow(0,"T","#111827",3,r*1.05);
+  drawArrow(VAR,"M","#ef4444",2,r*0.95);
+  drawArrow(VAR+DEV,"C","#16a34a",2,r*0.85);
 
-      drawCompass(T, M, C);
-    }
+  drawLine(TC,"TC","#6b7280",2,r*0.95);
+  drawLine(TH,"TH","#ffd000",2,r*0.85);
+  drawArrow(TT,"TT","#2563eb",3,r*0.75);
+}
 
-    // --- Visualisatie --------------------------------------------------------
-    function drawCompass(T, M, C) {
-      const w = canvas.width;
-      const h = canvas.height;
-      const cx = w / 2;
-      const cy = h / 2;
-      const radius = Math.min(w, h) * 0.38;
+function drawArrow(deg,label,color,width,len){
+  const cx=canvas.width/2, cy=canvas.height/2;
+  const a=(deg-90)*Math.PI/180;
+  const x=cx+len*Math.cos(a), y=cy+len*Math.sin(a);
 
-      ctx.clearRect(0, 0, w, h);
+  ctx.strokeStyle=color; ctx.lineWidth=width;
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
 
-      // Achtergrond halo
-      const radial = ctx.createRadialGradient(
-        cx,
-        cy * 0.5,
-        10,
-        cx,
-        cy,
-        radius * 1.4
-      );
-      radial.addColorStop(0, "rgba(15,23,42,0.9)");
-      radial.addColorStop(0.5, "rgba(15,23,42,1)");
-      radial.addColorStop(1, "rgba(15,23,42,1)");
-      ctx.fillStyle = radial;
-      ctx.fillRect(0, 0, w, h);
+  // arrow head
+  const head=12;
+  const a1=a+150*Math.PI/180, a2=a-150*Math.PI/180;
+  ctx.beginPath();
+  ctx.moveTo(x,y); ctx.lineTo(x+head*Math.cos(a1),y+head*Math.sin(a1));
+  ctx.moveTo(x,y); ctx.lineTo(x+head*Math.cos(a2),y+head*Math.sin(a2));
+  ctx.stroke();
 
-      // Buitenring
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(148,163,184,0.7)";
-      ctx.lineWidth = 2;
-      ctx.stroke();
+  // label
+  ctx.fillStyle=color;
+  ctx.font="12px system-ui";
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  ctx.fillText(label, cx+(len+20)*Math.cos(a), cy+(len+20)*Math.sin(a));
+}
 
-      // Kleine ticks elke 10°
-      for (let deg = 0; deg < 360; deg += 10) {
-        const angle = ((deg - 90) * Math.PI) / 180; // 0° omhoog
-        const r1 = radius * 0.9;
-        const r2 = radius * 0.96;
-        const x1 = cx + r1 * Math.cos(angle);
-        const y1 = cy + r1 * Math.sin(angle);
-        const x2 = cx + r2 * Math.cos(angle);
-        const y2 = cy + r2 * Math.sin(angle);
+function drawLine(deg,label,color,width,len){
+  const cx=canvas.width/2, cy=canvas.height/2;
+  const a=(deg-90)*Math.PI/180;
+  const x=cx+len*Math.cos(a), y=cy+len*Math.sin(a);
 
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.strokeStyle = "rgba(148,163,184,0.4)";
-        ctx.lineWidth = deg % 30 === 0 ? 2 : 1;
-        ctx.stroke();
-      }
+  ctx.strokeStyle=color; ctx.lineWidth=width;
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
 
-      // Hoofd-richtingen (N/E/S/W)
-      const labels = [
-        { text: "N", deg: 0 },
-        { text: "E", deg: 90 },
-        { text: "S", deg: 180 },
-        { text: "W", deg: 270 },
-      ];
-      ctx.font = "bold 16px system-ui, -apple-system, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = "#e5e7eb";
-      labels.forEach((label) => {
-        const angle = ((label.deg - 90) * Math.PI) / 180;
-        const r = radius * 0.78;
-        const x = cx + r * Math.cos(angle);
-        const y = cy + r * Math.sin(angle);
-        ctx.fillText(label.text, x, y);
-      });
+  ctx.fillStyle=color;
+  ctx.font="12px system-ui";
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  ctx.fillText(label, cx+(len+15)*Math.cos(a), cy+(len+15)*Math.sin(a));
+}
 
-      // True north as arrow
-      drawDirectionLine(0, cx, cy, radius, "#e5e7eb", 2, true);
+/* init */
+recalc();
 
-      // True track (groen)
-      drawDirectionLine(T, cx, cy, radius * 0.95, "#22c55e", 3, false);
-      // Magnetic track (oranje)
-      drawDirectionLine(M, cx, cy, radius * 0.9, "#f97316", 3, false);
-      // Compass heading (cyaan/blauw)
-      drawDirectionLine(C, cx, cy, radius * 0.85, "#38bdf8", 3, false);
-
-      // Centre
-      ctx.beginPath();
-      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
-      ctx.fillStyle = "#e5e7eb";
-      ctx.fill();
-    }
-
-    function drawDirectionLine(
-      deg,
-      cx,
-      cy,
-      length,
-      color,
-      width,
-      arrowHead
-    ) {
-      const angle = ((deg - 90) * Math.PI) / 180; // 0° omhoog
-      const x2 = cx + length * Math.cos(angle);
-      const y2 = cy + length * Math.sin(angle);
-
-      // lijn
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(x2, y2);
-      ctx.strokeStyle = color;
-      ctx.lineWidth = width;
-      ctx.stroke();
-
-      if (arrowHead) {
-        const headLength = 12;
-        const angle1 = angle + (Math.PI / 180) * 150;
-        const angle2 = angle - (Math.PI / 180) * 150;
-        const hx1 = x2 + headLength * Math.cos(angle1);
-        const hy1 = y2 + headLength * Math.sin(angle1);
-        const hx2 = x2 + headLength * Math.cos(angle2);
-        const hy2 = y2 + headLength * Math.sin(angle2);
-
-        ctx.beginPath();
-        ctx.moveTo(x2, y2);
-        ctx.lineTo(hx1, hy1);
-        ctx.moveTo(x2, y2);
-        ctx.lineTo(hx2, hy2);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        ctx.stroke();
-      }
-    }
-
-    // Init
-    updateModeUI();
-    recalcAndRender();
-  </script>
+</script>
 </body>
 </html>
