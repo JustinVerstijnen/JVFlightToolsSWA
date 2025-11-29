@@ -389,8 +389,8 @@ function recalc(){
 
   /* ===== Visuele noordrichtingen ===== */
   const VIS_TRUE_NORTH = 0;
-  const VIS_MAG_NORTH = normDeg(360 - Math.abs(VAR));
-  const VIS_COMP_NORTH = normDeg(VIS_MAG_NORTH - DEV);
+  const VIS_MAG_NORTH = normDeg(VAR);
+  const VIS_COMP_NORTH = normDeg(VIS_MAG_NORTH + DEV);
 
   trueNorthOut.textContent = pad3(VIS_TRUE_NORTH) + "°";
   magNorthOut.textContent = pad3(VIS_MAG_NORTH) + "°";
