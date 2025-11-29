@@ -248,6 +248,14 @@
           <div><div class="value-label">Deviation (DEV)</div><div class="value-number" id="devOut"></div></div>
           <div><div class="value-label">Wind Correction Angle/Drift (WCA/DA)</div><div class="value-number" id="wcaDriftOut"></div></div>
         </div>
+
+        <!-- ★★★★★ NEW BLOCK: NORTH REFERENCES ★★★★★ -->
+        <div class="group-title">North References</div>
+        <div class="grid-three">
+          <div><div class="value-label">True North</div><div class="value-number" id="trueNorthOut"></div></div>
+          <div><div class="value-label">Magnetic North</div><div class="value-number" id="magNorthOut"></div></div>
+          <div><div class="value-label">Compass North</div><div class="value-number" id="compassNorthOut"></div></div>
+        </div>
       </section>
     </div>
 
@@ -281,6 +289,11 @@ const tcOut=document.getElementById("tcOut"), mcOut=document.getElementById("mcO
 const thOut=document.getElementById("thOut"), mhOut=document.getElementById("mhOut"), chOut=document.getElementById("chOut");
 const ttOut=document.getElementById("ttOut"), mtOut=document.getElementById("mtOut"), ctOut=document.getElementById("ctOut");
 const varOut=document.getElementById("varOut"), devOut=document.getElementById("devOut"), wcaDriftOut=document.getElementById("wcaDriftOut");
+
+/* ★ NEW OUTPUT REFS */
+const trueNorthOut=document.getElementById("trueNorthOut");
+const magNorthOut=document.getElementById("magNorthOut");
+const compassNorthOut=document.getElementById("compassNorthOut");
 
 const canvas=document.getElementById("compassCanvas");
 const ctx=canvas.getContext("2d");
@@ -378,6 +391,15 @@ function recalc(){
   devOut.textContent=formatVarDev(DEV);
   wcaDriftOut.textContent=`WCA ${formatRL(WCA)}, Drift ${formatRL(DRIFT)}`;
 
+  /* ★★★★★ NEW NORTH REFERENCE CALCULATION ★★★★★ */
+  const TRUE_NORTH = 0;
+  const MAG_NORTH = normDeg(TRUE_NORTH - VAR);
+  const COMP_NORTH = normDeg(MAG_NORTH - DEV);
+
+  trueNorthOut.textContent = pad3(TRUE_NORTH) + "°";
+  magNorthOut.textContent = pad3(MAG_NORTH + 360) % 360 + "°";
+  compassNorthOut.textContent = pad3(COMP_NORTH + 360) % 360 + "°";
+
   drawCompass(TC,TH,TT,VAR,DEV);
 }
 
@@ -387,11 +409,9 @@ function drawCompass(TC,TH,TT,VAR,DEV){
   const cx=canvas.width/2, cy=canvas.height/2;
   const r=Math.min(cx,cy)*0.75;
 
-  // achtergrond
   ctx.fillStyle="#ffffff";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // cirkel
   ctx.strokeStyle="#d1d5db";
   ctx.lineWidth=2;
   ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
@@ -413,7 +433,6 @@ function drawArrow(deg,label,color,width,len){
   ctx.strokeStyle=color; ctx.lineWidth=width;
   ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
 
-  // arrow head
   const head=12;
   const a1=a+150*Math.PI/180, a2=a-150*Math.PI/180;
   ctx.beginPath();
@@ -421,7 +440,6 @@ function drawArrow(deg,label,color,width,len){
   ctx.moveTo(x,y); ctx.lineTo(x+head*Math.cos(a2),y+head*Math.sin(a2));
   ctx.stroke();
 
-  // label
   ctx.fillStyle=color;
   ctx.font="12px system-ui";
   ctx.textAlign="center"; ctx.textBaseline="middle";
@@ -442,9 +460,7 @@ function drawLine(deg,label,color,width,len){
   ctx.fillText(label, cx+(len+15)*Math.cos(a), cy+(len+15)*Math.sin(a));
 }
 
-/* init */
 recalc();
-
 </script>
 </body>
 </html>
