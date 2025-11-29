@@ -252,9 +252,9 @@
         <!-- North References -->
         <div class="group-title">North References</div>
         <div class="grid-three">
-          <div><div class="value-label">True North</div><div class="value-number" id="trueNorthOut"></div></div>
-          <div><div class="value-label">Magnetic North</div><div class="value-number" id="magNorthOut"></div></div>
-          <div><div class="value-label">Compass North</div><div class="value-number" id="compassNorthOut"></div></div>
+          <div><div class="value-label">True North (Tn)</div><div class="value-number" id="trueNorthOut"></div></div>
+          <div><div class="value-label">Magnetic North (Mn)</div><div class="value-number" id="magNorthOut"></div></div>
+          <div><div class="value-label">Compass North (Cn)</div><div class="value-number" id="compassNorthOut"></div></div>
         </div>
       </section>
     </div>
@@ -416,9 +416,9 @@ function drawCompass(TC,TH,TT,VAR,DEV, VIS_T, VIS_M, VIS_C){
   ctx.lineWidth=2;
   ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
 
-  drawArrow(VIS_T,"T","#111827",3,r*1.05);
-  drawArrow(VIS_M,"M","#ef4444",2,r*0.95);
-  drawArrow(VIS_C,"C","#16a34a",2,r*0.85);
+  drawArrow(VIS_T,"Tn","#111827",3,r*1.05);
+  drawArrow(VIS_M,"Mn","#ef4444",2,r*0.95);
+  drawArrow(VIS_C,"Cn","#16a34a",2,r*0.85);
 
   drawLine(TC,"TC","#6b7280",2,r*0.95);
   drawLine(TH,"TH","#ffd000",2,r*0.85);
