@@ -225,7 +225,7 @@
         <div class="grid-three">
           <div><div class="value-label">True Course (TC)</div><div class="value-number" id="tcOut"></div></div>
           <div><div class="value-label">Magnetic Course (MC)</div><div class="value-number" id="mcOut"></div></div>
-          <div><div class="value-label">Compas Course (CC)</div><div class="value-number" id="ccOut"></div></div>
+          <div><div class="value-label">Compass Course (CC)</div><div class="value-number" id="ccOut"></div></div>
         </div>
 
         <div class="group-title">Heading</div>
@@ -249,7 +249,7 @@
           <div><div class="value-label">Wind Correction Angle/Drift (WCA/DA)</div><div class="value-number" id="wcaDriftOut"></div></div>
         </div>
 
-        <!-- ★★★★★ NEW BLOCK: NORTH REFERENCES ★★★★★ -->
+        <!-- North References -->
         <div class="group-title">North References</div>
         <div class="grid-three">
           <div><div class="value-label">True North</div><div class="value-number" id="trueNorthOut"></div></div>
@@ -259,7 +259,7 @@
       </section>
     </div>
 
-    <!-- Visualisatie onderaan -->
+    <!-- Visualisatie -->
     <section class="card">
       <h2>3. Visualization</h2>
       <canvas id="compassCanvas" width="640" height="640"></canvas>
@@ -267,7 +267,7 @@
   </div>
 
 <script>
-/* ======== helpers ======= */
+/* ======== Helpers ======= */
 function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
 function normDeg(d) { let r = d % 360; if (r < 0) r += 360; return r; }
 function pad3(d){return Math.round(normDeg(d)).toString().padStart(3,'0');}
@@ -290,7 +290,6 @@ const thOut=document.getElementById("thOut"), mhOut=document.getElementById("mhO
 const ttOut=document.getElementById("ttOut"), mtOut=document.getElementById("mtOut"), ctOut=document.getElementById("ctOut");
 const varOut=document.getElementById("varOut"), devOut=document.getElementById("devOut"), wcaDriftOut=document.getElementById("wcaDriftOut");
 
-/* ★ NEW OUTPUT REFS */
 const trueNorthOut=document.getElementById("trueNorthOut");
 const magNorthOut=document.getElementById("magNorthOut");
 const compassNorthOut=document.getElementById("compassNorthOut");
@@ -298,7 +297,7 @@ const compassNorthOut=document.getElementById("compassNorthOut");
 const canvas=document.getElementById("compassCanvas");
 const ctx=canvas.getContext("2d");
 
-/* ===== scroll sliders ===== */
+/* ===== Scroll sliders ===== */
 function enableScrollSlider(slider){
   slider.addEventListener("wheel", e=>{
     e.preventDefault();
@@ -308,12 +307,9 @@ function enableScrollSlider(slider){
   });
 }
 
-[
-  tcRange, thRange, ttRange, chRange,
-  variationRange, deviationRange, wcaRange
-].forEach(enableScrollSlider);
+[ tcRange, thRange, ttRange, chRange, variationRange, deviationRange, wcaRange ].forEach(enableScrollSlider);
 
-/* ===== sync helpers ===== */
+/* Sync helpers */
 function bind(rangeEl, numEl, min, max){
   rangeEl.addEventListener("input",()=>{
     numEl.value=rangeEl.value; recalc();
@@ -334,7 +330,7 @@ bind(wcaRange,wcaInput,-30,30);
 
 modeSelect.addEventListener("change",recalc);
 
-/* ===== hoofd berekening ===== */
+/* ===== Main calculations ===== */
 function recalc(){
   const VAR=Number(variationRange.value);
   const DEV=Number(deviationRange.value);
@@ -391,21 +387,25 @@ function recalc(){
   devOut.textContent=formatVarDev(DEV);
   wcaDriftOut.textContent=`WCA ${formatRL(WCA)}, Drift ${formatRL(DRIFT)}`;
 
-  /* ★★★★★ NEW NORTH REFERENCE CALCULATION ★★★★★ */
-  const TRUE_NORTH = 0;
-  const MAG_NORTH = normDeg(TRUE_NORTH - VAR);
-  const COMP_NORTH = normDeg(MAG_NORTH - DEV);
+  /* ===== Visuele noordrichtingen ===== */
+  const VIS_TRUE_NORTH = 0;
+  const VIS_MAG_NORTH = normDeg(360 - Math.abs(VAR));
+  const VIS_COMP_NORTH = normDeg(VIS_MAG_NORTH - DEV);
 
-  trueNorthOut.textContent = pad3(TRUE_NORTH) + "°";
-  magNorthOut.textContent = pad3(MAG_NORTH + 360) % 360 + "°";
-  compassNorthOut.textContent = pad3(COMP_NORTH + 360) % 360 + "°";
+  trueNorthOut.textContent = pad3(VIS_TRUE_NORTH) + "°";
+  magNorthOut.textContent = pad3(VIS_MAG_NORTH) + "°";
+  compassNorthOut.textContent = pad3(VIS_COMP_NORTH) + "°";
 
-  drawCompass(TC,TH,TT,VAR,DEV);
+  drawCompass(
+    TC, TH, TT, VAR, DEV,
+    VIS_TRUE_NORTH, VIS_MAG_NORTH, VIS_COMP_NORTH
+  );
 }
 
-/* ======= tekenen ====== */
-function drawCompass(TC,TH,TT,VAR,DEV){
+/* ===== Draw Compass ===== */
+function drawCompass(TC,TH,TT,VAR,DEV, VIS_T, VIS_M, VIS_C){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+
   const cx=canvas.width/2, cy=canvas.height/2;
   const r=Math.min(cx,cy)*0.75;
 
@@ -416,9 +416,9 @@ function drawCompass(TC,TH,TT,VAR,DEV){
   ctx.lineWidth=2;
   ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
 
-  drawArrow(0,"T","#111827",3,r*1.05);
-  drawArrow(VAR,"M","#ef4444",2,r*0.95);
-  drawArrow(VAR+DEV,"C","#16a34a",2,r*0.85);
+  drawArrow(VIS_T,"T","#111827",3,r*1.05);
+  drawArrow(VIS_M,"M","#ef4444",2,r*0.95);
+  drawArrow(VIS_C,"C","#16a34a",2,r*0.85);
 
   drawLine(TC,"TC","#6b7280",2,r*0.95);
   drawLine(TH,"TH","#ffd000",2,r*0.85);
