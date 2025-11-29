@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Nav-tool – Course / Heading / Track</title>
+  <title>Course Calculator - justinverstijnen.nl</title>
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -33,7 +33,6 @@
       gap: 2rem;
     }
 
-    /* Layout voor invoer en resultaten naast elkaar */
     .app-row {
       display: flex;
       gap: 2rem;
@@ -151,18 +150,17 @@
 <body>
   <div class="app">
     <header>
-      <h1>Course / Heading / Track calculator</h1>
-      <div class="subtitle">Rekent TTC, TH, TT, VAR, DEV, WCA & drift + visualisatie</div>
+      <h1>Course calculator</h1>
+      <div class="subtitle">With this tool you can calculate your planned course and track and compensate it for wind, drift and such.</div>
     </header>
 
-    <!-- ROW met 2 even hoge kolommen -->
     <div class="app-row">
       <!-- Basis-invoer -->
       <section class="card card-equal">
-        <h2>Basis-invoer</h2>
+        <h2>1. Input</h2>
 
         <div class="row">
-          <label>Welke waarde voer je in?</label>
+          <label>Input</label>
           <select id="modeSelect">
             <option value="TT">True Track (TT)</option>
             <option value="TH">True Heading (TH)</option>
@@ -221,41 +219,41 @@
 
       <!-- Resultaten -->
       <section class="card card-equal">
-        <h2>Resultaten</h2>
+        <h2>2. Results</h2>
 
         <div class="group-title">Course</div>
         <div class="grid-three">
-          <div><div class="value-label">TC</div><div class="value-number" id="tcOut"></div></div>
-          <div><div class="value-label">MC</div><div class="value-number" id="mcOut"></div></div>
-          <div><div class="value-label">CC</div><div class="value-number" id="ccOut"></div></div>
+          <div><div class="value-label">True Course (TC)</div><div class="value-number" id="tcOut"></div></div>
+          <div><div class="value-label">Magnetic Course (MC)</div><div class="value-number" id="mcOut"></div></div>
+          <div><div class="value-label">Compas Course (CC)</div><div class="value-number" id="ccOut"></div></div>
         </div>
 
         <div class="group-title">Heading</div>
         <div class="grid-three">
-          <div><div class="value-label">TH</div><div class="value-number" id="thOut"></div></div>
-          <div><div class="value-label">MH</div><div class="value-number" id="mhOut"></div></div>
-          <div><div class="value-label">CH</div><div class="value-number" id="chOut"></div></div>
+          <div><div class="value-label">True Heading (TH)</div><div class="value-number" id="thOut"></div></div>
+          <div><div class="value-label">Magnetic Heading (MH)</div><div class="value-number" id="mhOut"></div></div>
+          <div><div class="value-label">Compass Heading (CH)</div><div class="value-number" id="chOut"></div></div>
         </div>
 
         <div class="group-title">Track</div>
         <div class="grid-three">
-          <div><div class="value-label">TT</div><div class="value-number" id="ttOut"></div></div>
-          <div><div class="value-label">MT</div><div class="value-number" id="mtOut"></div></div>
-          <div><div class="value-label">CT</div><div class="value-number" id="ctOut"></div></div>
+          <div><div class="value-label">True Track (TT)</div><div class="value-number" id="ttOut"></div></div>
+          <div><div class="value-label">Magnetic Track (MT)</div><div class="value-number" id="mtOut"></div></div>
+          <div><div class="value-label">Compass Track (CT)</div><div class="value-number" id="ctOut"></div></div>
         </div>
 
-        <div class="group-title">Hoeken</div>
+        <div class="group-title">Variables</div>
         <div class="grid-three">
-          <div><div class="value-label">VAR</div><div class="value-number" id="varOut"></div></div>
-          <div><div class="value-label">DEV</div><div class="value-number" id="devOut"></div></div>
-          <div><div class="value-label">WCA/DA</div><div class="value-number" id="wcaDriftOut"></div></div>
+          <div><div class="value-label">Variation (VAR)</div><div class="value-number" id="varOut"></div></div>
+          <div><div class="value-label">Deviation (DEV)</div><div class="value-number" id="devOut"></div></div>
+          <div><div class="value-label">Wind Correction Angle/Drift (WCA/DA)</div><div class="value-number" id="wcaDriftOut"></div></div>
         </div>
       </section>
     </div>
 
     <!-- Visualisatie onderaan -->
     <section class="card">
-      <h2>Visualisatie</h2>
+      <h2>3. Visualization</h2>
       <canvas id="compassCanvas" width="640" height="640"></canvas>
     </section>
   </div>
