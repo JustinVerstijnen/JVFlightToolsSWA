@@ -462,5 +462,40 @@ function drawLine(deg,label,color,width,len){
 
 recalc();
 </script>
+  <!-- Azure Application Insights -->
+<script type="text/javascript">
+!function(T,l,y){
+  var S=T.location,k="script",D="instrumentationKey",C="ingestionEndpoint",
+  R="disableExceptionTracking",E="ai.device.",I="toLowerCase",U="crossOrigin",
+  N="POST",e="appInsightsSDK",t=y.name||"appInsights";
+  (y.name||T[e])&&(T[e]=t);
+  var n=T[t]||function(){
+    var g=arguments;
+    T[t].queue.push(function(){
+      T[t].apply(T[t],g)
+    })
+  };
+  n.queue=[],n.version=2.0;
+  var i=l.createElement(k);
+  i.src=y.src;
+  i.async=!0;
+  i.setAttribute(U,"anonymous");
+  l.getElementsByTagName(k)[0].parentNode.appendChild(i);
+  var o=T[t]=n;
+  o.config=y;
+}(window,document,{
+  src:"https://js.monitor.azure.com/scripts/b/ai.2.min.js",
+  connectionString:"InstrumentationKey=740b5715-7d19-428e-95ab-75b0710ee797;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/;ApplicationId=22eace68-79bd-4576-8cf4-db0e1405d086",
+  disableExceptionTracking:false
+}));
+
+/* ===== PAGINA NAAM (ZELF INVULLEN) ===== */
+var pageName = "Flight Tools - Course Calculator";
+
+/* Page view met expliciete naam */
+appInsights.trackPageView({
+  name: pageName
+});
+</script>
 </body>
 </html>
