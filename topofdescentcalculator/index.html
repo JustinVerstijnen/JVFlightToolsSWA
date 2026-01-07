@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="nl">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Top of Descent Calculator</title>
+
   <style>
     :root{
       --bg1:#0b1020;
       --bg2:#070a14;
       --card:#0f1733cc;
-      --card2:#0f1733;
       --text:#eaf0ff;
       --muted:#aeb9da;
       --line:#26325f;
@@ -22,658 +22,381 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
         radial-gradient(900px 500px at 20% 15%, rgba(121,167,255,.25), transparent 60%),
         radial-gradient(900px 500px at 80% 25%, rgba(139,255,207,.14), transparent 60%),
-        radial-gradient(1200px 800px at 50% 120%, rgba(121,167,255,.12), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       padding:24px;
     }
 
-    .wrap{
-      width:min(920px, 100%);
-    }
+    .wrap{ width:min(920px,100%); }
 
     header{
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
       gap:16px;
       margin-bottom:16px;
     }
-    .title{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    h1{
-      margin:0;
-      font-size: clamp(22px, 3.2vw, 32px);
-      letter-spacing:.2px;
-    }
+
+    h1{ margin:0; font-size:28px; }
+
     .subtitle{
-      margin:0;
-      color:var(--muted);
+      margin:6px 0 0 0;
       font-size:14px;
-      line-height:1.45;
-      max-width: 60ch;
+      color:var(--muted);
+      max-width:60ch;
+    }
+
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(38,50,95,.6);
+      background:rgba(6,9,22,.4);
+      font-size:12px;
     }
 
     .card{
-      background: linear-gradient(180deg, rgba(15,23,51,.82), rgba(10,14,32,.82));
-      border: 1px solid rgba(38,50,95,.75);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .grid{
+      border-radius:var(--radius);
+      border:1px solid rgba(38,50,95,.7);
+      background:rgba(15,23,51,.85);
+      box-shadow:var(--shadow);
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns:1.1fr .9fr;
     }
 
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
+    @media(max-width:850px){
+      .card{ grid-template-columns:1fr; }
+    }
+
+    .pane, .results{
+      padding:18px;
     }
 
     .pane{
-      padding:18px;
-      border-right:1px solid rgba(38,50,95,.55);
-    }
-    @media (max-width: 860px){
-      .pane{ border-right:none; border-bottom:1px solid rgba(38,50,95,.55); }
+      border-right:1px solid rgba(38,50,95,.6);
     }
 
-    .pane h2{
+    @media(max-width:850px){
+      .pane{ border-right:none; border-bottom:1px solid rgba(38,50,95,.6); }
+    }
+
+    h2{
       margin:0 0 12px 0;
-      font-size:14px;
+      font-size:13px;
       text-transform:uppercase;
       letter-spacing:.12em;
       color:var(--muted);
     }
 
-    /* Centered stacked inputs */
     form{
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:10px;
-      padding:6px 0 2px 0;
+      gap:12px;
     }
 
     .field{
-      width:min(520px, 100%);
+      width:min(520px,100%);
       display:flex;
       flex-direction:column;
       gap:6px;
     }
 
-    .labelrow{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:12px;
-    }
+    label{ font-size:13px; color:var(--muted); }
 
-    label{
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .hint{
-      font-size:12px;
-      color:rgba(174,185,218,.82);
-    }
+    .hint{ font-size:12px; color:rgba(174,185,218,.8); }
 
     .control{
       display:grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns:1fr auto;
       gap:10px;
-      align-items:center;
     }
 
-    input[type="number"]{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(38,50,95,.9);
-      background: rgba(6,9,22,.65);
+    input[type=number]{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(38,50,95,.8);
+      background:rgba(6,9,22,.6);
       color:var(--text);
-      outline:none;
       font-size:14px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
-    }
-    input[type="number"]:focus{
-      border-color: rgba(121,167,255,.95);
-      box-shadow:
-        0 0 0 4px rgba(121,167,255,.15),
-        inset 0 0 0 1px rgba(255,255,255,.03);
     }
 
     .unit{
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(38,50,95,.6);
+      background:rgba(6,9,22,.35);
       font-size:12px;
-      color:rgba(174,185,218,.92);
-      padding:10px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(38,50,95,.55);
-      background: rgba(6,9,22,.35);
-      min-width: 70px;
+      min-width:70px;
       text-align:center;
-      user-select:none;
     }
 
     .mode{
-      width:min(520px, 100%);
+      width:min(520px,100%);
       display:flex;
-      gap:10px;
+      gap:16px;
       padding:10px;
-      border-radius: 16px;
-      border:1px solid rgba(38,50,95,.65);
-      background: rgba(6,9,22,.35);
-    }
-    .mode label{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      cursor:pointer;
-      color:var(--text);
+      border-radius:16px;
+      border:1px solid rgba(38,50,95,.6);
+      background:rgba(6,9,22,.35);
       font-size:13px;
     }
-    .mode input{ accent-color: var(--accent); }
 
     .actions{
-      width:min(520px, 100%);
+      width:min(520px,100%);
       display:flex;
       gap:10px;
-      margin-top:6px;
     }
+
     button{
-      appearance:none;
-      border:1px solid rgba(38,50,95,.85);
-      background: rgba(6,9,22,.55);
-      color:var(--text);
-      border-radius: 16px;
-      padding:11px 12px;
-      font-weight:600;
-      font-size:14px;
-      cursor:pointer;
-      transition: transform .06s ease, border-color .12s ease, background .12s ease;
       flex:1;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(38,50,95,.8);
+      background:rgba(6,9,22,.6);
+      color:var(--text);
+      font-weight:600;
+      cursor:pointer;
     }
-    button:hover{
-      border-color: rgba(121,167,255,.95);
-      background: rgba(14,22,46,.65);
-    }
-    button:active{ transform: translateY(1px); }
 
     .primary{
-      border-color: rgba(121,167,255,.9);
-      background: linear-gradient(180deg, rgba(121,167,255,.22), rgba(121,167,255,.10));
-    }
-    .primary:hover{
-      border-color: rgba(139,255,207,.85);
-      background: linear-gradient(180deg, rgba(139,255,207,.18), rgba(121,167,255,.10));
-    }
-
-    /* Results */
-    .results{
-      padding:18px;
-    }
-    .results h2{
-      margin:0 0 12px 0;
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      color:var(--muted);
+      border-color:rgba(121,167,255,.9);
+      background:linear-gradient(180deg, rgba(121,167,255,.25), rgba(121,167,255,.1));
     }
 
     .summary{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns:1fr 1fr;
       gap:12px;
     }
-    @media (max-width: 420px){
-      .summary{ grid-template-columns: 1fr; }
+
+    @media(max-width:420px){
+      .summary{ grid-template-columns:1fr; }
     }
 
     .tile{
-      border:1px solid rgba(38,50,95,.65);
-      border-radius: 18px;
-      background: rgba(6,9,22,.35);
       padding:14px;
-      min-height: 86px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:6px;
+      border-radius:18px;
+      border:1px solid rgba(38,50,95,.6);
+      background:rgba(6,9,22,.35);
     }
+
     .k{
       font-size:12px;
       color:rgba(174,185,218,.9);
-      letter-spacing:.02em;
-    }
-    .v{
-      font-size:22px;
-      font-weight:750;
-      letter-spacing:.2px;
-    }
-    .v small{
-      font-size:12px;
-      font-weight:650;
-      color:rgba(234,240,255,.85);
-      margin-left:6px;
     }
 
-    .details{
-      margin-top:12px;
-      border:1px solid rgba(38,50,95,.55);
-      border-radius: 18px;
-      background: rgba(6,9,22,.28);
-      padding:12px 14px;
-      color:rgba(234,240,255,.88);
-      font-size:13px;
-      line-height:1.45;
-    }
-    .details code{
-      background: rgba(121,167,255,.12);
-      border:1px solid rgba(121,167,255,.22);
-      padding:2px 6px;
-      border-radius: 10px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12px;
-      color: rgba(234,240,255,.92);
-      white-space:nowrap;
+    .v{
+      font-size:22px;
+      font-weight:700;
     }
 
     .warn{
       margin-top:12px;
-      border:1px solid rgba(255,107,138,.45);
-      background: rgba(255,107,138,.10);
-      border-radius: 16px;
-      padding:10px 12px;
-      color: rgba(255,214,223,.95);
-      font-size:13px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(255,107,138,.5);
+      background:rgba(255,107,138,.12);
       display:none;
+      font-size:13px;
     }
+
     .warn.show{ display:block; }
 
-    .footerNote{
-      margin-top:10px;
-      color:rgba(174,185,218,.85);
-      font-size:12px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(38,50,95,.65);
-      background: rgba(6,9,22,.35);
-      color: rgba(234,240,255,.9);
-      font-size:12px;
-      user-select:none;
-      white-space:nowrap;
+    .details{
+      margin-top:12px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(38,50,95,.6);
+      background:rgba(6,9,22,.3);
+      font-size:13px;
+      line-height:1.45;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="title">
-        <h1>Top of Descent</h1>
-        <p class="subtitle">
-          Snelle TOD-berekening met “rules of thumb”. Vul je hoogtes, snelheden en wind in en krijg onderin de <b>Top</b> (afstand tot start daling) en de <b>geschatte daaltijd</b>.
-        </p>
-      </div>
-      <div class="pill" title="Tailwind = positief, Headwind = negatief">
-        ✈️ Wind: + = tailwind, − = headwind
-      </div>
-    </header>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Top of Descent</h1>
+    <p class="subtitle">
+      Simple Top of Descent calculator using common rules of thumb.
+      Enter your altitudes, speeds and wind to estimate TOD distance and descent time.
+    </p>
+  </div>
+  <div class="pill">✈️ Wind: + tailwind / − headwind</div>
+</header>
 
-    <div class="card grid">
-      <section class="pane">
-        <h2>Invoer</h2>
+<div class="card">
+<section class="pane">
+<h2>Inputs</h2>
 
-        <form id="todForm" autocomplete="off">
-          <div class="field">
-            <div class="labelrow">
-              <label for="startAlt">Start hoogte</label>
-              <span class="hint">bijv. cruise altitude</span>
-            </div>
-            <div class="control">
-              <input id="startAlt" type="number" inputmode="decimal" min="0" step="10" value="35000" />
-              <div class="unit">ft</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="labelrow">
-              <label for="endAlt">Doel hoogte</label>
-              <span class="hint">bijv. STAR/IAF hoogte</span>
-            </div>
-            <div class="control">
-              <input id="endAlt" type="number" inputmode="decimal" min="0" step="10" value="3000" />
-              <div class="unit">ft</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="labelrow">
-              <label for="startSpd">Snelheid start</label>
-              <span class="hint">IAS/GS benadering (kn)</span>
-            </div>
-            <div class="control">
-              <input id="startSpd" type="number" inputmode="decimal" min="0" step="1" value="280" />
-              <div class="unit">kt</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="labelrow">
-              <label for="endSpd">Snelheid doel</label>
-              <span class="hint">bijv. 210–240kt</span>
-            </div>
-            <div class="control">
-              <input id="endSpd" type="number" inputmode="decimal" min="0" step="1" value="220" />
-              <div class="unit">kt</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="labelrow">
-              <label for="wind">Wind component</label>
-              <span class="hint">tailwind + / headwind −</span>
-            </div>
-            <div class="control">
-              <input id="wind" type="number" inputmode="decimal" step="1" value="0" />
-              <div class="unit">kt</div>
-            </div>
-          </div>
-
-          <div class="mode" role="group" aria-label="Berekenmodus">
-            <label>
-              <input type="radio" name="mode" value="glide" checked />
-              Glide slope (°)
-            </label>
-            <label>
-              <input type="radio" name="mode" value="vs" />
-              Vertical speed (fpm)
-            </label>
-          </div>
-
-          <div class="field" id="glideField">
-            <div class="labelrow">
-              <label for="glide">Glide slope</label>
-              <span class="hint">standaard is 3°</span>
-            </div>
-            <div class="control">
-              <input id="glide" type="number" inputmode="decimal" min="0.1" step="0.1" value="3.0" />
-              <div class="unit">°</div>
-            </div>
-          </div>
-
-          <div class="field" id="vsField" style="display:none;">
-            <div class="labelrow">
-              <label for="vs">Vertical speed</label>
-              <span class="hint">bijv. 1800–2500 fpm</span>
-            </div>
-            <div class="control">
-              <input id="vs" type="number" inputmode="decimal" min="100" step="50" value="2000" />
-              <div class="unit">fpm</div>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="primary" type="submit">Bereken</button>
-            <button type="button" id="resetBtn">Reset</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="results">
-        <h2>Overzicht</h2>
-
-        <div class="summary">
-          <div class="tile">
-            <div class="k">Top (afstand tot TOD)</div>
-            <div class="v" id="outTod">— <small>NM</small></div>
-          </div>
-
-          <div class="tile">
-            <div class="k">Geschatte daaltijd</div>
-            <div class="v" id="outTime">— <small>min</small></div>
-          </div>
-
-          <div class="tile">
-            <div class="k">Benodigde vertical speed</div>
-            <div class="v" id="outVs">— <small>fpm</small></div>
-          </div>
-
-          <div class="tile">
-            <div class="k">Gemiddelde groundspeed (schatting)</div>
-            <div class="v" id="outGs">— <small>kt</small></div>
-          </div>
-        </div>
-
-        <div class="warn" id="warnBox"></div>
-
-        <div class="details" id="detailBox">
-          <div><b>Wat wordt meegenomen</b></div>
-          <div>• Hoogteverschil → basisafstand via <code>tan(glide)</code> en 1 NM ≈ <code>6076 ft</code></div>
-          <div>• Snelheidsreductie → <code>1 NM per 10 kt</code> snelheidsafname (rule of thumb)</div>
-          <div>• Windcorrectie → <code>1 NM per 10 kt</code> (tailwind + / headwind −)</div>
-          <div class="footerNote">
-            Let op: dit is een benadering. Voor echte procedures/constraints blijf je charts/FMS leidend gebruiken.
-          </div>
-        </div>
-      </section>
+<form id="todForm">
+  <div class="field">
+    <label>Start altitude <span class="hint">(cruise)</span></label>
+    <div class="control">
+      <input id="startAlt" type="number" value="35000">
+      <div class="unit">ft</div>
     </div>
   </div>
 
-  <script>
-    // Helpers
-    const ftPerNm = 6076.12;
+  <div class="field">
+    <label>Target altitude <span class="hint">(STAR / IAF)</span></label>
+    <div class="control">
+      <input id="endAlt" type="number" value="3000">
+      <div class="unit">ft</div>
+    </div>
+  </div>
 
-    function clampNumber(n) {
-      return Number.isFinite(n) ? n : NaN;
-    }
+  <div class="field">
+    <label>Start speed <span class="hint">(knots)</span></label>
+    <div class="control">
+      <input id="startSpd" type="number" value="280">
+      <div class="unit">kt</div>
+    </div>
+  </div>
 
-    function round1(n){ return Math.round(n * 10) / 10; }
-    function round0(n){ return Math.round(n); }
+  <div class="field">
+    <label>Target speed</label>
+    <div class="control">
+      <input id="endSpd" type="number" value="220">
+      <div class="unit">kt</div>
+    </div>
+  </div>
 
-    function toNum(id){
-      const el = document.getElementById(id);
-      return clampNumber(parseFloat(el.value));
-    }
+  <div class="field">
+    <label>Wind component</label>
+    <div class="control">
+      <input id="wind" type="number" value="0">
+      <div class="unit">kt</div>
+    </div>
+  </div>
 
-    function setText(id, text){
-      document.getElementById(id).textContent = text;
-    }
+  <div class="mode">
+    <label><input type="radio" name="mode" value="glide" checked> Glide slope</label>
+    <label><input type="radio" name="mode" value="vs"> Vertical speed</label>
+  </div>
 
-    function showWarn(msg){
-      const w = document.getElementById("warnBox");
-      if (!msg){
-        w.classList.remove("show");
-        w.textContent = "";
-        return;
-      }
-      w.textContent = msg;
-      w.classList.add("show");
-    }
+  <div class="field" id="glideField">
+    <label>Glide slope</label>
+    <div class="control">
+      <input id="glide" type="number" value="3.0" step="0.1">
+      <div class="unit">°</div>
+    </div>
+  </div>
 
-    function getMode(){
-      return document.querySelector('input[name="mode"]:checked')?.value || "glide";
-    }
+  <div class="field" id="vsField" style="display:none">
+    <label>Vertical speed</label>
+    <div class="control">
+      <input id="vs" type="number" value="2000">
+      <div class="unit">fpm</div>
+    </div>
+  </div>
 
-    function syncModeUI(){
-      const mode = getMode();
-      document.getElementById("glideField").style.display = (mode === "glide") ? "" : "none";
-      document.getElementById("vsField").style.display    = (mode === "vs") ? "" : "none";
-    }
+  <div class="actions">
+    <button class="primary">Calculate</button>
+    <button type="button" id="resetBtn">Reset</button>
+  </div>
+</form>
+</section>
 
-    // Core calculations
-    function calc(){
-      showWarn("");
+<section class="results">
+<h2>Overview</h2>
 
-      const startAlt = toNum("startAlt");
-      const endAlt   = toNum("endAlt");
-      const startSpd = toNum("startSpd");
-      const endSpd   = toNum("endSpd");
-      const wind     = toNum("wind");     // + tailwind, - headwind
-      const mode     = getMode();
+<div class="summary">
+  <div class="tile">
+    <div class="k">Top of Descent distance</div>
+    <div class="v" id="outTod">— NM</div>
+  </div>
+  <div class="tile">
+    <div class="k">Estimated descent time</div>
+    <div class="v" id="outTime">— min</div>
+  </div>
+  <div class="tile">
+    <div class="k">Required vertical speed</div>
+    <div class="v" id="outVs">— fpm</div>
+  </div>
+  <div class="tile">
+    <div class="k">Estimated ground speed</div>
+    <div class="v" id="outGs">— kt</div>
+  </div>
+</div>
 
-      if ([startAlt,endAlt,startSpd,endSpd,wind].some(v => !Number.isFinite(v))){
-        showWarn("Vul alle velden in met geldige getallen.");
-        return null;
-      }
+<div class="warn" id="warnBox"></div>
 
-      const altDiff = startAlt - endAlt; // ft
-      if (!(altDiff > 0)){
-        showWarn("Start hoogte moet hoger zijn dan doel hoogte.");
-        return null;
-      }
+<div class="details">
+<b>Assumptions</b><br>
+• Altitude loss → distance using glide angle and 1 NM ≈ 6076 ft<br>
+• Deceleration → 1 NM per 10 kt speed reduction<br>
+• Wind correction → 1 NM per 10 kt (tailwind + / headwind −)<br><br>
+<b>This is an estimate.</b> Always follow charts, FMS and operational procedures.
+</div>
 
-      // Average airspeed estimate (kn) and GS estimate with wind.
-      // This is an approximation: we treat input speeds as a proxy for GS.
-      const avgSpd = (startSpd + endSpd) / 2;
-      const gsEst = Math.max(60, avgSpd + wind); // keep it reasonable; never below 60kt
+</section>
+</div>
+</div>
 
-      // Rule of thumb distances
-      const decelNm = Math.max(0, (startSpd - endSpd) / 10); // 1 NM per 10 kt reduction
-      const windNm  = wind / 10; // + tailwind => start earlier => more distance; - headwind => less distance
+<script>
+const ftPerNm = 6076.12;
 
-      let todNm = NaN;
-      let timeMin = NaN;
-      let vsFpm = NaN;
+function get(id){ return parseFloat(document.getElementById(id).value); }
 
-      if (mode === "glide"){
-        const glideDeg = toNum("glide");
-        if (!Number.isFinite(glideDeg) || !(glideDeg > 0)){
-          showWarn("Glide slope moet > 0 zijn.");
-          return null;
-        }
+function calc(){
+  const startAlt=get("startAlt"), endAlt=get("endAlt");
+  const startSpd=get("startSpd"), endSpd=get("endSpd");
+  const wind=get("wind");
+  if(endAlt>=startAlt) return warn("Target altitude must be lower than start altitude");
 
-        const glideRad = glideDeg * Math.PI / 180;
+  const altDiff=startAlt-endAlt;
+  const avgSpd=(startSpd+endSpd)/2;
+  const gs=Math.max(60, avgSpd+wind);
 
-        // Base distance from trigonometry:
-        // tan(glide) = opposite/adjacent = altDiff / (todNm * ftPerNm)
-        // => todNm_base = altDiff / (tan(glide) * ftPerNm)
-        const baseNm = altDiff / (Math.tan(glideRad) * ftPerNm);
+  const decelNm=(startSpd-endSpd)/10;
+  const windNm=wind/10;
 
-        todNm = baseNm + decelNm + windNm;
+  let todNm, timeMin, vs;
+  const mode=document.querySelector("input[name=mode]:checked").value;
 
-        if (!(todNm > 0)){
-          showWarn("De berekende TOD-afstand komt niet positief uit. Check je inputs (wind/snelheden).");
-          return null;
-        }
+  if(mode==="glide"){
+    const glide=get("glide")*Math.PI/180;
+    todNm=altDiff/(Math.tan(glide)*ftPerNm)+decelNm+windNm;
+    timeMin=(todNm/gs)*60;
+    vs=altDiff/timeMin;
+  }else{
+    vs=get("vs");
+    timeMin=altDiff/vs;
+    todNm=gs*(timeMin/60)+decelNm+windNm;
+  }
 
-        // Time based on distance and estimated ground speed
-        timeMin = (todNm / gsEst) * 60;
+  out("outTod",todNm.toFixed(1)+" NM");
+  out("outTime",timeMin.toFixed(1)+" min");
+  out("outVs",Math.round(vs)+" fpm");
+  out("outGs",Math.round(gs)+" kt");
+  warn("");
+}
 
-        // VS from altitude over time (and matches the same glide/GS relationship)
-        vsFpm = altDiff / timeMin;
+function out(id,val){ document.getElementById(id).textContent=val; }
+function warn(msg){
+  const w=document.getElementById("warnBox");
+  w.textContent=msg;
+  w.classList.toggle("show",!!msg);
+}
 
-      } else {
-        const vsInput = toNum("vs");
-        if (!Number.isFinite(vsInput) || !(vsInput > 0)){
-          showWarn("Vertical speed moet > 0 zijn.");
-          return null;
-        }
-
-        vsFpm = vsInput;
-
-        // time from altitude and VS
-        timeMin = altDiff / vsFpm;
-
-        // distance = GS (nm/h) * time (h)
-        const baseNm = gsEst * (timeMin / 60);
-        todNm = baseNm + decelNm + windNm;
-
-        if (!(todNm > 0)){
-          showWarn("De berekende TOD-afstand komt niet positief uit. Check je inputs (wind/snelheden/VS).");
-          return null;
-        }
-      }
-
-      return {
-        todNm,
-        timeMin,
-        vsFpm,
-        gsEst,
-        decelNm,
-        windNm,
-        altDiff
-      };
-    }
-
-    function render(result){
-      if (!result){
-        setText("outTod", "—");
-        setText("outTime", "—");
-        setText("outVs", "—");
-        setText("outGs", "—");
-        return;
-      }
-
-      // Display
-      setText("outTod", `${round1(result.todNm)} NM`);
-      setText("outTime", `${round1(result.timeMin)} min`);
-      setText("outVs", `${round0(result.vsFpm)} fpm`);
-      setText("outGs", `${round0(result.gsEst)} kt`);
-
-      // Gentle warnings (not blocking)
-      if (result.vsFpm > 3500){
-        showWarn("Let op: de benodigde vertical speed is vrij hoog. Dit kan oncomfortabel of onrealistisch zijn voor sommige toestellen/situaties.");
-      } else if (result.vsFpm < 500){
-        showWarn("Let op: de benodigde vertical speed is erg laag. Mogelijk is je groundspeed/wind-inschatting niet passend.");
-      }
-    }
-
-    // Wire up
-    document.getElementById("todForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      render(calc());
-    });
-
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      // Defaults
-      document.getElementById("startAlt").value = 35000;
-      document.getElementById("endAlt").value = 3000;
-      document.getElementById("startSpd").value = 280;
-      document.getElementById("endSpd").value = 220;
-      document.getElementById("wind").value = 0;
-      document.querySelector('input[name="mode"][value="glide"]').checked = true;
-      document.getElementById("glide").value = 3.0;
-      document.getElementById("vs").value = 2000;
-      syncModeUI();
-      render(calc());
-    });
-
-    document.querySelectorAll('input[name="mode"]').forEach(r => {
-      r.addEventListener("change", () => {
-        syncModeUI();
-        render(calc());
-      });
-    });
-
-    // Live update on input change (optional but nice)
-    ["startAlt","endAlt","startSpd","endSpd","wind","glide","vs"].forEach(id => {
-      document.getElementById(id).addEventListener("input", () => render(calc()));
-    });
-
-    // Initial
-    syncModeUI();
-    render(calc());
-  </script>
+document.getElementById("todForm").onsubmit=e=>{e.preventDefault();calc();};
+document.getElementById("resetBtn").onclick=()=>location.reload();
+document.querySelectorAll("input[name=mode]").forEach(r=>r.onchange=()=>{
+  glideField.style.display=r.value==="glide"?"":"none";
+  vsField.style.display=r.value==="vs"?"":"none";
+});
+</script>
 </body>
 </html>
