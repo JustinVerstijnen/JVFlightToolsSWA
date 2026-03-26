@@ -132,6 +132,33 @@
       margin-top: 0.6rem;
     }
 
+    .summary-table {
+      margin-top: 1rem;
+      overflow-x: auto;
+    }
+    .summary-table table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-variant-numeric: tabular-nums;
+    }
+    .summary-table th,
+    .summary-table td {
+      border: 1px solid #e5e7eb;
+      padding: 0.55rem 0.4rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .summary-table th {
+      background: #f3f4f6;
+      color: #374151;
+      font-weight: 600;
+    }
+    .summary-table td {
+      background: #ffffff;
+      color: #111827;
+    }
+
     canvas {
       width: 100%;
       max-width: 640px;
@@ -249,6 +276,34 @@
           <div><div class="value-label">Wind Correction Angle/Drift (WCA/DA)</div><div class="value-number" id="wcaDriftOut"></div></div>
         </div>
 
+        <div class="group-title">Quick Reference</div>
+        <div class="summary-table">
+          <table>
+            <thead>
+              <tr>
+                <th>C (Compass)</th>
+                <th>D (Deviation)</th>
+                <th>M (Magnetic)</th>
+                <th>V (Variation)</th>
+                <th>T (True Heading)</th>
+                <th>Dr (Drift)</th>
+                <th>Tr (True Track)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="quickCOut"></td>
+                <td id="quickDOut"></td>
+                <td id="quickMOut"></td>
+                <td id="quickVOut"></td>
+                <td id="quickTOut"></td>
+                <td id="quickDrOut"></td>
+                <td id="quickTrOut"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- North References -->
         <div class="group-title">North References</div>
         <div class="grid-three">
@@ -293,6 +348,14 @@ const varOut=document.getElementById("varOut"), devOut=document.getElementById("
 const trueNorthOut=document.getElementById("trueNorthOut");
 const magNorthOut=document.getElementById("magNorthOut");
 const compassNorthOut=document.getElementById("compassNorthOut");
+
+const quickCOut=document.getElementById("quickCOut");
+const quickDOut=document.getElementById("quickDOut");
+const quickMOut=document.getElementById("quickMOut");
+const quickVOut=document.getElementById("quickVOut");
+const quickTOut=document.getElementById("quickTOut");
+const quickDrOut=document.getElementById("quickDrOut");
+const quickTrOut=document.getElementById("quickTrOut");
 
 const canvas=document.getElementById("compassCanvas");
 const ctx=canvas.getContext("2d");
@@ -386,6 +449,14 @@ function recalc(){
   varOut.textContent=formatVarDev(VAR);
   devOut.textContent=formatVarDev(DEV);
   wcaDriftOut.textContent=`WCA ${formatRL(WCA)}, Drift ${formatRL(DRIFT)}`;
+
+  quickCOut.textContent = pad3(CT) + "°";
+  quickDOut.textContent = formatVarDev(DEV);
+  quickMOut.textContent = pad3(MT) + "°";
+  quickVOut.textContent = formatVarDev(VAR);
+  quickTOut.textContent = pad3(TH) + "°";
+  quickDrOut.textContent = formatRL(DRIFT);
+  quickTrOut.textContent = pad3(TT) + "°";
 
   /* ===== Visuele noordrichtingen ===== */
   const VIS_TRUE_NORTH = 0;
