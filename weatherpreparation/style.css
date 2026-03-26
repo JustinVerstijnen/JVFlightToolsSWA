@@ -1,7 +1,6 @@
 :root {
   --bg: #eef6ff;
-  --panel: rgba(255, 255, 255, 0.9);
-  --panel-strong: #ffffff;
+  --panel: rgba(255, 255, 255, 0.96);
   --text: #0f172a;
   --muted: #475569;
   --line: rgba(148, 163, 184, 0.22);
@@ -121,36 +120,12 @@ body {
 main {
   max-width: 980px;
   margin: 0 auto;
-  padding: 24px 16px 40px;
-}
-
-.intro-card {
-  background: var(--panel);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 20px 22px;
-  box-shadow: var(--shadow);
-  margin-top: -28px;
-  position: relative;
-  z-index: 3;
-}
-
-.intro-card h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
-.intro-card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
+  padding: 22px 16px 40px;
 }
 
 .weather-list {
   display: grid;
   gap: 18px;
-  margin-top: 22px;
 }
 
 .weather-card {
@@ -230,27 +205,53 @@ main {
 .metar-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .metar-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  min-width: 84px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #eff6ff;
-  color: #1e3a8a;
-  font-weight: 700;
-  border: 1px solid rgba(59, 130, 246, 0.18);
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f8fbff;
+  color: #0f172a;
+  border: 1px solid rgba(59, 130, 246, 0.16);
   cursor: pointer;
 }
 
 .metar-item:hover {
-  background: #dbeafe;
+  background: #eff6ff;
+}
+
+.metar-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.metar-code {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #1e3a8a;
+}
+
+.metar-external {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.metar-text {
+  color: var(--muted);
+  line-height: 1.5;
+  word-break: break-word;
+  font-size: 14px;
+}
+
+.metar-text.is-loading {
+  font-style: italic;
 }
 
 @media (max-width: 680px) {
