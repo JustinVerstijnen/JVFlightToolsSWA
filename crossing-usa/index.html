@@ -1,0 +1,4731 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7de437d5051f05bcbcdfc33eec0ee05f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7de437d5051f05bcbcdfc33eec0ee05f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7de437d5051f05bcbcdfc33eec0ee05f = L.map(
+                "map_7de437d5051f05bcbcdfc33eec0ee05f",
+                {
+                    center: [41.52643655913978, -112.52403225806452],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_fca994396dd4e9122746a55cb69817a6 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_fca994396dd4e9122746a55cb69817a6.addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var poly_line_82d30c07c63d69aaa1c59f5035f2edc1 = L.polyline(
+                [[61.1744, -149.9964], [62.3205, -150.0937], [63.7326, -148.9106], [64.8151, -147.8563], [63.9945, -145.7216], [63.3295, -142.9538], [62.9613, -141.9291], [62.41, -140.868], [61.3711, -139.0406], [60.7892, -137.5461], [60.7096, -135.0673], [59.4601, -135.3167], [58.3549, -134.5763], [56.8017, -132.9453], [55.3556, -131.7137], [54.2861, -130.4447], [54.4685, -128.5762], [54.8247, -127.1828], [54.3764, -125.9513], [53.8894, -122.6789], [52.1831, -122.0542], [50.7022, -120.4444], [49.1528, -121.9389], [49.0253, -122.3606], [48.6469, -123.4258], [47.5299, -122.3019], [46.158, -123.8787], [44.5804, -124.0579], [43.4171, -124.246], [41.7802, -124.2365], [40.9781, -124.1086], [40.5539, -124.1327], [39.262, -123.7537], [38.509, -122.8129], [37.5134, -122.5011], [37.5109, -120.0396], [37.6241, -118.8378], [36.5883, -118.0528], [35.4336, -119.0568], [34.7411, -118.2187], [34.2098, -118.4899], [35.6588, -117.8295], [36.273, -116.515], [35.9728, -115.1344], [35.9904, -113.8166], [35.9524, -112.1469], [36.9261, -111.4484], [37.0167, -110.2007], [37.5833, -109.4833], [38.755, -109.7548], [37.9538, -107.9085], [38.5339, -106.9331], [39.2232, -106.8688], [39.6426, -106.9177], [39.5701, -104.8493], [41.1557, -104.8118], [42.0532, -102.8038], [43.7333, -103.617], [44.0453, -103.0574], [42.8376, -103.0954], [41.1013, -102.9853], [40.1756, -103.222], [39.2748, -103.6664], [38.0697, -102.6885], [36.6851, -101.5078], [35.2194, -101.7059], [34.1681, -101.717], [33.6636, -101.8228], [32.4674, -100.4666], [32.4113, -99.6819], [32.7816, -98.0602], [32.9686, -96.8364], [31.6113, -97.2305], [30.3975, -97.5664], [29.5337, -98.4698], [29.7045, -98.0422], [29.2543, -96.1544], [29.6073, -95.1588], [29.2653, -94.8604], [30.1261, -93.2233], [30.5332, -91.1496], [30.0424, -90.0283], [30.4073, -89.0701], [30.6912, -88.2428], [30.4734, -87.1866], [30.3583, -85.7956], [29.7275, -85.0275], [29.6355, -83.1048], [29.1726, -82.2242], [28.2898, -81.4371], [27.4975, -80.3726], [26.593, -80.0851], [25.6479, -80.4328]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            poly_line_82d30c07c63d69aaa1c59f5035f2edc1.bindTooltip(
+                `<div>
+                     MSFS 2024 C208 Alaska → Miami route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_20fd56917a1ffee89e238a6d22197d3e = L.marker(
+                [61.1744, -149.9964],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_f460950e32351538a45b755ac8faa786 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "play",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ca143ec93dba83e56bc5ecf81f757c0e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8d5cd39a15f67729b3e55e9c4fee6311 = $(`<div id="html_8d5cd39a15f67729b3e55e9c4fee6311" style="width: 100.0%; height: 100.0%;">     <b>Stop 1: PANC</b><br>     Anchorage<br>     <i>Start Alaska / Cook Inlet</i><br>     Lat/Lon: 61.17440, -149.99640     </div>`)[0];
+                popup_ca143ec93dba83e56bc5ecf81f757c0e.setContent(html_8d5cd39a15f67729b3e55e9c4fee6311);
+            
+        
+
+        marker_20fd56917a1ffee89e238a6d22197d3e.bindPopup(popup_ca143ec93dba83e56bc5ecf81f757c0e)
+        ;
+
+        
+    
+    
+            marker_20fd56917a1ffee89e238a6d22197d3e.bindTooltip(
+                `<div>
+                     1. PANC – Start Alaska / Cook Inlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_20fd56917a1ffee89e238a6d22197d3e.setIcon(icon_f460950e32351538a45b755ac8faa786);
+            
+    
+            var marker_b3c234fc88ff32cb7ef9cbf93cacdc21 = L.marker(
+                [62.3205, -150.0937],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_5e64ed165fc527ad115384a9b31c3713 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3660a3b4504b4e8daef7b648b9a3cfb9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c72a5f32dbb5fb227c4e2b912e97c102 = $(`<div id="html_c72a5f32dbb5fb227c4e2b912e97c102" style="width: 100.0%; height: 100.0%;">     <b>Stop 2: PATK</b><br>     Talkeetna<br>     <i>Denali-aanloop</i><br>     Lat/Lon: 62.32050, -150.09370     </div>`)[0];
+                popup_3660a3b4504b4e8daef7b648b9a3cfb9.setContent(html_c72a5f32dbb5fb227c4e2b912e97c102);
+            
+        
+
+        marker_b3c234fc88ff32cb7ef9cbf93cacdc21.bindPopup(popup_3660a3b4504b4e8daef7b648b9a3cfb9)
+        ;
+
+        
+    
+    
+            marker_b3c234fc88ff32cb7ef9cbf93cacdc21.bindTooltip(
+                `<div>
+                     2. PATK – Denali-aanloop
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3c234fc88ff32cb7ef9cbf93cacdc21.setIcon(icon_5e64ed165fc527ad115384a9b31c3713);
+            
+    
+            var marker_57ad469e8b028b339ee07a48e55802bc = L.marker(
+                [63.7326, -148.9106],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e889a1c1a6c0e28d25f494c1179e9cb7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2b05e901a3e5162703866cf060e3660e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_73b6e3508d2946e5faa69cd1741a1ca2 = $(`<div id="html_73b6e3508d2946e5faa69cd1741a1ca2" style="width: 100.0%; height: 100.0%;">     <b>Stop 3: PAIN</b><br>     McKinley National Park<br>     <i>Denali National Park</i><br>     Lat/Lon: 63.73260, -148.91060     </div>`)[0];
+                popup_2b05e901a3e5162703866cf060e3660e.setContent(html_73b6e3508d2946e5faa69cd1741a1ca2);
+            
+        
+
+        marker_57ad469e8b028b339ee07a48e55802bc.bindPopup(popup_2b05e901a3e5162703866cf060e3660e)
+        ;
+
+        
+    
+    
+            marker_57ad469e8b028b339ee07a48e55802bc.bindTooltip(
+                `<div>
+                     3. PAIN – Denali National Park
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_57ad469e8b028b339ee07a48e55802bc.setIcon(icon_e889a1c1a6c0e28d25f494c1179e9cb7);
+            
+    
+            var marker_fa0a39df7ec9d9a61563cffb66d9d1fe = L.marker(
+                [64.8151, -147.8563],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_2e5ecc8cabc5cf1b9f8ba3cbd6274254 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_65ad8661c75287010e970a9853c845d4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_de9d864e3eebd467c296ce1ae6ca6a7c = $(`<div id="html_de9d864e3eebd467c296ce1ae6ca6a7c" style="width: 100.0%; height: 100.0%;">     <b>Stop 4: PAFA</b><br>     Fairbanks<br>     <i>Interior Alaska</i><br>     Lat/Lon: 64.81510, -147.85630     </div>`)[0];
+                popup_65ad8661c75287010e970a9853c845d4.setContent(html_de9d864e3eebd467c296ce1ae6ca6a7c);
+            
+        
+
+        marker_fa0a39df7ec9d9a61563cffb66d9d1fe.bindPopup(popup_65ad8661c75287010e970a9853c845d4)
+        ;
+
+        
+    
+    
+            marker_fa0a39df7ec9d9a61563cffb66d9d1fe.bindTooltip(
+                `<div>
+                     4. PAFA – Interior Alaska
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fa0a39df7ec9d9a61563cffb66d9d1fe.setIcon(icon_2e5ecc8cabc5cf1b9f8ba3cbd6274254);
+            
+    
+            var marker_ae641214acbe96aaefbd29a0df7dc2a9 = L.marker(
+                [63.9945, -145.7216],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d1aea6b30e1fa8cfbad255ad26f50263 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_af408c05d9e444995b1d6a5516faa1b6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7525f1af4793f0a511f88a88b88ad0f4 = $(`<div id="html_7525f1af4793f0a511f88a88b88ad0f4" style="width: 100.0%; height: 100.0%;">     <b>Stop 5: PABI</b><br>     Allen AAF / Big Delta<br>     <i>Alaska Range / Delta Junction</i><br>     Lat/Lon: 63.99450, -145.72160     </div>`)[0];
+                popup_af408c05d9e444995b1d6a5516faa1b6.setContent(html_7525f1af4793f0a511f88a88b88ad0f4);
+            
+        
+
+        marker_ae641214acbe96aaefbd29a0df7dc2a9.bindPopup(popup_af408c05d9e444995b1d6a5516faa1b6)
+        ;
+
+        
+    
+    
+            marker_ae641214acbe96aaefbd29a0df7dc2a9.bindTooltip(
+                `<div>
+                     5. PABI – Alaska Range / Delta Junction
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ae641214acbe96aaefbd29a0df7dc2a9.setIcon(icon_d1aea6b30e1fa8cfbad255ad26f50263);
+            
+    
+            var marker_81b36968d290e5b0a5bd669d9b347643 = L.marker(
+                [63.3295, -142.9538],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_1d266c67b8be5dbac85802b7f0e2a584 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eb7e7edb2b6a88c7c1aa7b21c86fea99 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0f01659df6af3aafe2d48976d8ae9dbc = $(`<div id="html_0f01659df6af3aafe2d48976d8ae9dbc" style="width: 100.0%; height: 100.0%;">     <b>Stop 6: PFTO</b><br>     Tok Junction<br>     <i>Alaska Highway</i><br>     Lat/Lon: 63.32950, -142.95380     </div>`)[0];
+                popup_eb7e7edb2b6a88c7c1aa7b21c86fea99.setContent(html_0f01659df6af3aafe2d48976d8ae9dbc);
+            
+        
+
+        marker_81b36968d290e5b0a5bd669d9b347643.bindPopup(popup_eb7e7edb2b6a88c7c1aa7b21c86fea99)
+        ;
+
+        
+    
+    
+            marker_81b36968d290e5b0a5bd669d9b347643.bindTooltip(
+                `<div>
+                     6. PFTO – Alaska Highway
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_81b36968d290e5b0a5bd669d9b347643.setIcon(icon_1d266c67b8be5dbac85802b7f0e2a584);
+            
+    
+            var marker_0ea1c43925281ac8834ac8ba05b4be7a = L.marker(
+                [62.9613, -141.9291],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_412a743a07a36630cd9fbf6b75c7b53f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_67920c35db4ef212cbddfa437744b150 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_166e3c46c5fdefe4c7febc8cd5abe623 = $(`<div id="html_166e3c46c5fdefe4c7febc8cd5abe623" style="width: 100.0%; height: 100.0%;">     <b>Stop 7: PAOR</b><br>     Northway<br>     <i>Alaska Highway / grens Yukon</i><br>     Lat/Lon: 62.96130, -141.92910     </div>`)[0];
+                popup_67920c35db4ef212cbddfa437744b150.setContent(html_166e3c46c5fdefe4c7febc8cd5abe623);
+            
+        
+
+        marker_0ea1c43925281ac8834ac8ba05b4be7a.bindPopup(popup_67920c35db4ef212cbddfa437744b150)
+        ;
+
+        
+    
+    
+            marker_0ea1c43925281ac8834ac8ba05b4be7a.bindTooltip(
+                `<div>
+                     7. PAOR – Alaska Highway / grens Yukon
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0ea1c43925281ac8834ac8ba05b4be7a.setIcon(icon_412a743a07a36630cd9fbf6b75c7b53f);
+            
+    
+            var marker_c20eb66704115f3d58baf66a4425c3e0 = L.marker(
+                [62.41, -140.868],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_93d336a7b5a7da88eb4adb3583583f95 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ebd6d77ddaa1b646e63422fcaca55f3e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1a78263e625d35a114eb7b6a2cfe3044 = $(`<div id="html_1a78263e625d35a114eb7b6a2cfe3044" style="width: 100.0%; height: 100.0%;">     <b>Stop 8: CYXQ</b><br>     Beaver Creek<br>     <i>Canada transit - Yukon</i><br>     Lat/Lon: 62.41000, -140.86800     </div>`)[0];
+                popup_ebd6d77ddaa1b646e63422fcaca55f3e.setContent(html_1a78263e625d35a114eb7b6a2cfe3044);
+            
+        
+
+        marker_c20eb66704115f3d58baf66a4425c3e0.bindPopup(popup_ebd6d77ddaa1b646e63422fcaca55f3e)
+        ;
+
+        
+    
+    
+            marker_c20eb66704115f3d58baf66a4425c3e0.bindTooltip(
+                `<div>
+                     8. CYXQ – Canada transit - Yukon
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c20eb66704115f3d58baf66a4425c3e0.setIcon(icon_93d336a7b5a7da88eb4adb3583583f95);
+            
+    
+            var marker_4fa94dc3a0d58668535705bd7dfad8d9 = L.marker(
+                [61.3711, -139.0406],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_137842c6db6bc3e9d126eda206e69328 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e997b3d00fae10d00edb061a33b8b5e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b0635c849a512a4c33f6e5adf01d971 = $(`<div id="html_0b0635c849a512a4c33f6e5adf01d971" style="width: 100.0%; height: 100.0%;">     <b>Stop 9: CYDB</b><br>     Burwash<br>     <i>Kluane Lake / St. Elias</i><br>     Lat/Lon: 61.37110, -139.04060     </div>`)[0];
+                popup_e997b3d00fae10d00edb061a33b8b5e9.setContent(html_0b0635c849a512a4c33f6e5adf01d971);
+            
+        
+
+        marker_4fa94dc3a0d58668535705bd7dfad8d9.bindPopup(popup_e997b3d00fae10d00edb061a33b8b5e9)
+        ;
+
+        
+    
+    
+            marker_4fa94dc3a0d58668535705bd7dfad8d9.bindTooltip(
+                `<div>
+                     9. CYDB – Kluane Lake / St. Elias
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4fa94dc3a0d58668535705bd7dfad8d9.setIcon(icon_137842c6db6bc3e9d126eda206e69328);
+            
+    
+            var marker_3eb86b57c2c8b7d8344d9cf08dda054c = L.marker(
+                [60.7892, -137.5461],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_ec5bdb754024869bdecffd05daad009b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_182a05a66048194cfb527e46af539f92 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cec3186025849ee6751ba929d9810d1d = $(`<div id="html_cec3186025849ee6751ba929d9810d1d" style="width: 100.0%; height: 100.0%;">     <b>Stop 10: CYHT</b><br>     Haines Junction<br>     <i>Kluane NP</i><br>     Lat/Lon: 60.78920, -137.54610     </div>`)[0];
+                popup_182a05a66048194cfb527e46af539f92.setContent(html_cec3186025849ee6751ba929d9810d1d);
+            
+        
+
+        marker_3eb86b57c2c8b7d8344d9cf08dda054c.bindPopup(popup_182a05a66048194cfb527e46af539f92)
+        ;
+
+        
+    
+    
+            marker_3eb86b57c2c8b7d8344d9cf08dda054c.bindTooltip(
+                `<div>
+                     10. CYHT – Kluane NP
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3eb86b57c2c8b7d8344d9cf08dda054c.setIcon(icon_ec5bdb754024869bdecffd05daad009b);
+            
+    
+            var marker_d196e3ead433fdc07268cb48f554f339 = L.marker(
+                [60.7096, -135.0673],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_fc118804db059cf4d5f76429ed9e63d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a50f6018b707228a4cc760a09eb74755 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_90be33b0f9c7d5eae2d2238f274ab7a7 = $(`<div id="html_90be33b0f9c7d5eae2d2238f274ab7a7" style="width: 100.0%; height: 100.0%;">     <b>Stop 11: CYXY</b><br>     Whitehorse<br>     <i>Yukon hub</i><br>     Lat/Lon: 60.70960, -135.06730     </div>`)[0];
+                popup_a50f6018b707228a4cc760a09eb74755.setContent(html_90be33b0f9c7d5eae2d2238f274ab7a7);
+            
+        
+
+        marker_d196e3ead433fdc07268cb48f554f339.bindPopup(popup_a50f6018b707228a4cc760a09eb74755)
+        ;
+
+        
+    
+    
+            marker_d196e3ead433fdc07268cb48f554f339.bindTooltip(
+                `<div>
+                     11. CYXY – Yukon hub
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d196e3ead433fdc07268cb48f554f339.setIcon(icon_fc118804db059cf4d5f76429ed9e63d8);
+            
+    
+            var marker_244d2b6074ece625574a82827ff3eaf2 = L.marker(
+                [59.4601, -135.3167],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_355c1bd91f36059d121cd87ef2076228 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e6a77dcf0f28dbc253e32ad75ca4ebd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2c6f103b928b0fa7cf37dc59cccec598 = $(`<div id="html_2c6f103b928b0fa7cf37dc59cccec598" style="width: 100.0%; height: 100.0%;">     <b>Stop 12: PAGS</b><br>     Skagway<br>     <i>Fjordroute naar Alaska Panhandle</i><br>     Lat/Lon: 59.46010, -135.31670     </div>`)[0];
+                popup_8e6a77dcf0f28dbc253e32ad75ca4ebd.setContent(html_2c6f103b928b0fa7cf37dc59cccec598);
+            
+        
+
+        marker_244d2b6074ece625574a82827ff3eaf2.bindPopup(popup_8e6a77dcf0f28dbc253e32ad75ca4ebd)
+        ;
+
+        
+    
+    
+            marker_244d2b6074ece625574a82827ff3eaf2.bindTooltip(
+                `<div>
+                     12. PAGS – Fjordroute naar Alaska Panhandle
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_244d2b6074ece625574a82827ff3eaf2.setIcon(icon_355c1bd91f36059d121cd87ef2076228);
+            
+    
+            var marker_c21e39bec790cab7753eb90b632ec75e = L.marker(
+                [58.3549, -134.5763],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_8be2f13415291ff5f98eb8cd9743ce43 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_653987cde44aa23278868d587f398f6d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e1b4072e53b469a39d225395b72b451a = $(`<div id="html_e1b4072e53b469a39d225395b72b451a" style="width: 100.0%; height: 100.0%;">     <b>Stop 13: PAJN</b><br>     Juneau<br>     <i>Glaciers / Inside Passage</i><br>     Lat/Lon: 58.35490, -134.57630     </div>`)[0];
+                popup_653987cde44aa23278868d587f398f6d.setContent(html_e1b4072e53b469a39d225395b72b451a);
+            
+        
+
+        marker_c21e39bec790cab7753eb90b632ec75e.bindPopup(popup_653987cde44aa23278868d587f398f6d)
+        ;
+
+        
+    
+    
+            marker_c21e39bec790cab7753eb90b632ec75e.bindTooltip(
+                `<div>
+                     13. PAJN – Glaciers / Inside Passage
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c21e39bec790cab7753eb90b632ec75e.setIcon(icon_8be2f13415291ff5f98eb8cd9743ce43);
+            
+    
+            var marker_bb0d901bb3f5f6fe4f8a777843ce58cd = L.marker(
+                [56.8017, -132.9453],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_24f3a14e0259924d7e777f5439200cda = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6f0f47bba1dd8193bbb77c89590d6d0e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6c7eae96d73a0c67dc84e8673bc81836 = $(`<div id="html_6c7eae96d73a0c67dc84e8673bc81836" style="width: 100.0%; height: 100.0%;">     <b>Stop 14: PAPG</b><br>     Petersburg<br>     <i>Inside Passage</i><br>     Lat/Lon: 56.80170, -132.94530     </div>`)[0];
+                popup_6f0f47bba1dd8193bbb77c89590d6d0e.setContent(html_6c7eae96d73a0c67dc84e8673bc81836);
+            
+        
+
+        marker_bb0d901bb3f5f6fe4f8a777843ce58cd.bindPopup(popup_6f0f47bba1dd8193bbb77c89590d6d0e)
+        ;
+
+        
+    
+    
+            marker_bb0d901bb3f5f6fe4f8a777843ce58cd.bindTooltip(
+                `<div>
+                     14. PAPG – Inside Passage
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bb0d901bb3f5f6fe4f8a777843ce58cd.setIcon(icon_24f3a14e0259924d7e777f5439200cda);
+            
+    
+            var marker_7c3ca0119431d15e73c5b4a8a765829e = L.marker(
+                [55.3556, -131.7137],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e324f96321d356a1f2d03ad039852d05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_47cfeb96ead4793ce4c66512ca981282 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f58876cf6d8a5a4ca8e757c5e46738c8 = $(`<div id="html_f58876cf6d8a5a4ca8e757c5e46738c8" style="width: 100.0%; height: 100.0%;">     <b>Stop 15: PAKT</b><br>     Ketchikan<br>     <i>Misty Fjords / Inside Passage</i><br>     Lat/Lon: 55.35560, -131.71370     </div>`)[0];
+                popup_47cfeb96ead4793ce4c66512ca981282.setContent(html_f58876cf6d8a5a4ca8e757c5e46738c8);
+            
+        
+
+        marker_7c3ca0119431d15e73c5b4a8a765829e.bindPopup(popup_47cfeb96ead4793ce4c66512ca981282)
+        ;
+
+        
+    
+    
+            marker_7c3ca0119431d15e73c5b4a8a765829e.bindTooltip(
+                `<div>
+                     15. PAKT – Misty Fjords / Inside Passage
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7c3ca0119431d15e73c5b4a8a765829e.setIcon(icon_e324f96321d356a1f2d03ad039852d05);
+            
+    
+            var marker_28ed7faef24911bf11f1fb1c1e4468e0 = L.marker(
+                [54.2861, -130.4447],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_bea977245913ff98363dd7b4fc0df6d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d704a0252f79da2aff30bd0913f06ce8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d89d20a52834f8edb66b6440cde014ee = $(`<div id="html_d89d20a52834f8edb66b6440cde014ee" style="width: 100.0%; height: 100.0%;">     <b>Stop 16: CYPR</b><br>     Prince Rupert<br>     <i>BC coast transit</i><br>     Lat/Lon: 54.28610, -130.44470     </div>`)[0];
+                popup_d704a0252f79da2aff30bd0913f06ce8.setContent(html_d89d20a52834f8edb66b6440cde014ee);
+            
+        
+
+        marker_28ed7faef24911bf11f1fb1c1e4468e0.bindPopup(popup_d704a0252f79da2aff30bd0913f06ce8)
+        ;
+
+        
+    
+    
+            marker_28ed7faef24911bf11f1fb1c1e4468e0.bindTooltip(
+                `<div>
+                     16. CYPR – BC coast transit
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_28ed7faef24911bf11f1fb1c1e4468e0.setIcon(icon_bea977245913ff98363dd7b4fc0df6d6);
+            
+    
+            var marker_e57687f6415ee6e3a53a203663d4a404 = L.marker(
+                [54.4685, -128.5762],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_396a95ffe3bbe0f79bf8d746768721fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3ad759c3702d8f59392752582705a70f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2d9e71c577d4cd0870ee3e4e6ff23073 = $(`<div id="html_2d9e71c577d4cd0870ee3e4e6ff23073" style="width: 100.0%; height: 100.0%;">     <b>Stop 17: CYXT</b><br>     Terrace<br>     <i>Skeena Valley / BC transit</i><br>     Lat/Lon: 54.46850, -128.57620     </div>`)[0];
+                popup_3ad759c3702d8f59392752582705a70f.setContent(html_2d9e71c577d4cd0870ee3e4e6ff23073);
+            
+        
+
+        marker_e57687f6415ee6e3a53a203663d4a404.bindPopup(popup_3ad759c3702d8f59392752582705a70f)
+        ;
+
+        
+    
+    
+            marker_e57687f6415ee6e3a53a203663d4a404.bindTooltip(
+                `<div>
+                     17. CYXT – Skeena Valley / BC transit
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e57687f6415ee6e3a53a203663d4a404.setIcon(icon_396a95ffe3bbe0f79bf8d746768721fd);
+            
+    
+            var marker_cc935bb85b8dc79ca8a4e59f0e14537e = L.marker(
+                [54.8247, -127.1828],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_77e04c5d15f3f1e403719accb69bdfad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b0875a38705ccf64200257bc4847aac3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_80bed9364ddfbbe3bb4d35b0e489e0b7 = $(`<div id="html_80bed9364ddfbbe3bb4d35b0e489e0b7" style="width: 100.0%; height: 100.0%;">     <b>Stop 18: CYYD</b><br>     Smithers<br>     <i>Coast Mountains / BC transit</i><br>     Lat/Lon: 54.82470, -127.18280     </div>`)[0];
+                popup_b0875a38705ccf64200257bc4847aac3.setContent(html_80bed9364ddfbbe3bb4d35b0e489e0b7);
+            
+        
+
+        marker_cc935bb85b8dc79ca8a4e59f0e14537e.bindPopup(popup_b0875a38705ccf64200257bc4847aac3)
+        ;
+
+        
+    
+    
+            marker_cc935bb85b8dc79ca8a4e59f0e14537e.bindTooltip(
+                `<div>
+                     18. CYYD – Coast Mountains / BC transit
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cc935bb85b8dc79ca8a4e59f0e14537e.setIcon(icon_77e04c5d15f3f1e403719accb69bdfad);
+            
+    
+            var marker_5392ddb18542e81dfeb6d32d3706852c = L.marker(
+                [54.3764, -125.9513],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d7f37243f4ab4490f07a6dfc4b11b558 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_44754aa3ea40f8479d05b43338259e08 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e13b57fbcd2fc428a0b1278773336e45 = $(`<div id="html_e13b57fbcd2fc428a0b1278773336e45" style="width: 100.0%; height: 100.0%;">     <b>Stop 19: CYPZ</b><br>     Burns Lake<br>     <i>BC interior lakes</i><br>     Lat/Lon: 54.37640, -125.95130     </div>`)[0];
+                popup_44754aa3ea40f8479d05b43338259e08.setContent(html_e13b57fbcd2fc428a0b1278773336e45);
+            
+        
+
+        marker_5392ddb18542e81dfeb6d32d3706852c.bindPopup(popup_44754aa3ea40f8479d05b43338259e08)
+        ;
+
+        
+    
+    
+            marker_5392ddb18542e81dfeb6d32d3706852c.bindTooltip(
+                `<div>
+                     19. CYPZ – BC interior lakes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5392ddb18542e81dfeb6d32d3706852c.setIcon(icon_d7f37243f4ab4490f07a6dfc4b11b558);
+            
+    
+            var marker_c3726454307e1985dbf5450bb012965e = L.marker(
+                [53.8894, -122.6789],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_9245be477836259209b67ce9b0ac64d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42b4d5bf0e48c1e0cf3b93b832f4480f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a6c787801668c50e7483af425d704317 = $(`<div id="html_a6c787801668c50e7483af425d704317" style="width: 100.0%; height: 100.0%;">     <b>Stop 20: CYXS</b><br>     Prince George<br>     <i>Fraser Plateau</i><br>     Lat/Lon: 53.88940, -122.67890     </div>`)[0];
+                popup_42b4d5bf0e48c1e0cf3b93b832f4480f.setContent(html_a6c787801668c50e7483af425d704317);
+            
+        
+
+        marker_c3726454307e1985dbf5450bb012965e.bindPopup(popup_42b4d5bf0e48c1e0cf3b93b832f4480f)
+        ;
+
+        
+    
+    
+            marker_c3726454307e1985dbf5450bb012965e.bindTooltip(
+                `<div>
+                     20. CYXS – Fraser Plateau
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c3726454307e1985dbf5450bb012965e.setIcon(icon_9245be477836259209b67ce9b0ac64d9);
+            
+    
+            var marker_2f389b352abee03323f0aac87bac2c89 = L.marker(
+                [52.1831, -122.0542],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_597b66be9907b10abec2123e08d1de46 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c929c2089b0b945f469c6a6918e1502b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_50b1380650c56da8ef1d56d0a1e2a4c9 = $(`<div id="html_50b1380650c56da8ef1d56d0a1e2a4c9" style="width: 100.0%; height: 100.0%;">     <b>Stop 21: CYWL</b><br>     Williams Lake<br>     <i>Cariboo region</i><br>     Lat/Lon: 52.18310, -122.05420     </div>`)[0];
+                popup_c929c2089b0b945f469c6a6918e1502b.setContent(html_50b1380650c56da8ef1d56d0a1e2a4c9);
+            
+        
+
+        marker_2f389b352abee03323f0aac87bac2c89.bindPopup(popup_c929c2089b0b945f469c6a6918e1502b)
+        ;
+
+        
+    
+    
+            marker_2f389b352abee03323f0aac87bac2c89.bindTooltip(
+                `<div>
+                     21. CYWL – Cariboo region
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2f389b352abee03323f0aac87bac2c89.setIcon(icon_597b66be9907b10abec2123e08d1de46);
+            
+    
+            var marker_c5796b6d320232cef67e4a349b6f45f1 = L.marker(
+                [50.7022, -120.4444],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_8fc564f6dc11617b967483c9f6ab3f45 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0942cbe6d0218baaa6cde84a301b46d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cd8b83dfeea6925887a963c5095decbe = $(`<div id="html_cd8b83dfeea6925887a963c5095decbe" style="width: 100.0%; height: 100.0%;">     <b>Stop 22: CYKA</b><br>     Kamloops<br>     <i>Thompson River / BC interior</i><br>     Lat/Lon: 50.70220, -120.44440     </div>`)[0];
+                popup_0942cbe6d0218baaa6cde84a301b46d8.setContent(html_cd8b83dfeea6925887a963c5095decbe);
+            
+        
+
+        marker_c5796b6d320232cef67e4a349b6f45f1.bindPopup(popup_0942cbe6d0218baaa6cde84a301b46d8)
+        ;
+
+        
+    
+    
+            marker_c5796b6d320232cef67e4a349b6f45f1.bindTooltip(
+                `<div>
+                     22. CYKA – Thompson River / BC interior
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c5796b6d320232cef67e4a349b6f45f1.setIcon(icon_8fc564f6dc11617b967483c9f6ab3f45);
+            
+    
+            var marker_aa1db03c01c69c23a368348c2930cc83 = L.marker(
+                [49.1528, -121.9389],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_360f9c962f13587e6457ecd12b9e84b2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_715a1b09d23aeb9ae26355c3c71625ec = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ab99ecc6f8f570d10e31a4966278a463 = $(`<div id="html_ab99ecc6f8f570d10e31a4966278a463" style="width: 100.0%; height: 100.0%;">     <b>Stop 23: CYCW</b><br>     Chilliwack<br>     <i>Fraser Canyon / Vancouver approach</i><br>     Lat/Lon: 49.15280, -121.93890     </div>`)[0];
+                popup_715a1b09d23aeb9ae26355c3c71625ec.setContent(html_ab99ecc6f8f570d10e31a4966278a463);
+            
+        
+
+        marker_aa1db03c01c69c23a368348c2930cc83.bindPopup(popup_715a1b09d23aeb9ae26355c3c71625ec)
+        ;
+
+        
+    
+    
+            marker_aa1db03c01c69c23a368348c2930cc83.bindTooltip(
+                `<div>
+                     23. CYCW – Fraser Canyon / Vancouver approach
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aa1db03c01c69c23a368348c2930cc83.setIcon(icon_360f9c962f13587e6457ecd12b9e84b2);
+            
+    
+            var marker_16e56775b93d0b797f3cc95a6201b79b = L.marker(
+                [49.0253, -122.3606],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_1f01d2f589530482f6eb50dedcd629db = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5c47b08b69bb3a128c52dc55719ecec8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9b6f1ecbd4334a918f9bb4b1fc3231d4 = $(`<div id="html_9b6f1ecbd4334a918f9bb4b1fc3231d4" style="width: 100.0%; height: 100.0%;">     <b>Stop 24: CYXX</b><br>     Abbotsford<br>     <i>Fraser Valley / Vancouver area</i><br>     Lat/Lon: 49.02530, -122.36060     </div>`)[0];
+                popup_5c47b08b69bb3a128c52dc55719ecec8.setContent(html_9b6f1ecbd4334a918f9bb4b1fc3231d4);
+            
+        
+
+        marker_16e56775b93d0b797f3cc95a6201b79b.bindPopup(popup_5c47b08b69bb3a128c52dc55719ecec8)
+        ;
+
+        
+    
+    
+            marker_16e56775b93d0b797f3cc95a6201b79b.bindTooltip(
+                `<div>
+                     24. CYXX – Fraser Valley / Vancouver area
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_16e56775b93d0b797f3cc95a6201b79b.setIcon(icon_1f01d2f589530482f6eb50dedcd629db);
+            
+    
+            var marker_ef95725e2154083aa8b3f417c5abf4a0 = L.marker(
+                [48.6469, -123.4258],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_4f6b53f2a99533647f1b4d4f2f5c1d89 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_972524863bba9ed92860c782ed575ffd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ea382ad9fada3bd08b029867804769da = $(`<div id="html_ea382ad9fada3bd08b029867804769da" style="width: 100.0%; height: 100.0%;">     <b>Stop 25: CYYJ</b><br>     Victoria<br>     <i>Vancouver Island zuid</i><br>     Lat/Lon: 48.64690, -123.42580     </div>`)[0];
+                popup_972524863bba9ed92860c782ed575ffd.setContent(html_ea382ad9fada3bd08b029867804769da);
+            
+        
+
+        marker_ef95725e2154083aa8b3f417c5abf4a0.bindPopup(popup_972524863bba9ed92860c782ed575ffd)
+        ;
+
+        
+    
+    
+            marker_ef95725e2154083aa8b3f417c5abf4a0.bindTooltip(
+                `<div>
+                     25. CYYJ – Vancouver Island zuid
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ef95725e2154083aa8b3f417c5abf4a0.setIcon(icon_4f6b53f2a99533647f1b4d4f2f5c1d89);
+            
+    
+            var marker_6b7651acf04bc953b8b57e3a885fbe00 = L.marker(
+                [47.5299, -122.3019],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_5bdc89794b7f4443acf9c1b56c939098 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e6db53c8efc73cc60012e6fcf5527b28 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74228973d53ec59c10e6cb92773aa7d1 = $(`<div id="html_74228973d53ec59c10e6cb92773aa7d1" style="width: 100.0%; height: 100.0%;">     <b>Stop 26: KBFI</b><br>     Seattle Boeing Field<br>     <i>Seattle / Puget Sound</i><br>     Lat/Lon: 47.52990, -122.30190     </div>`)[0];
+                popup_e6db53c8efc73cc60012e6fcf5527b28.setContent(html_74228973d53ec59c10e6cb92773aa7d1);
+            
+        
+
+        marker_6b7651acf04bc953b8b57e3a885fbe00.bindPopup(popup_e6db53c8efc73cc60012e6fcf5527b28)
+        ;
+
+        
+    
+    
+            marker_6b7651acf04bc953b8b57e3a885fbe00.bindTooltip(
+                `<div>
+                     26. KBFI – Seattle / Puget Sound
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b7651acf04bc953b8b57e3a885fbe00.setIcon(icon_5bdc89794b7f4443acf9c1b56c939098);
+            
+    
+            var marker_e5d053cfdeaeb845cad35217c67b60ea = L.marker(
+                [46.158, -123.8787],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_43ea4822b5df45875eb532000ba485d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_75b5b001428598ae6c49484d799bd787 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0530885005dd916ec74603ffdda91f9f = $(`<div id="html_0530885005dd916ec74603ffdda91f9f" style="width: 100.0%; height: 100.0%;">     <b>Stop 27: KAST</b><br>     Astoria<br>     <i>Columbia River / Oregon Coast</i><br>     Lat/Lon: 46.15800, -123.87870     </div>`)[0];
+                popup_75b5b001428598ae6c49484d799bd787.setContent(html_0530885005dd916ec74603ffdda91f9f);
+            
+        
+
+        marker_e5d053cfdeaeb845cad35217c67b60ea.bindPopup(popup_75b5b001428598ae6c49484d799bd787)
+        ;
+
+        
+    
+    
+            marker_e5d053cfdeaeb845cad35217c67b60ea.bindTooltip(
+                `<div>
+                     27. KAST – Columbia River / Oregon Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e5d053cfdeaeb845cad35217c67b60ea.setIcon(icon_43ea4822b5df45875eb532000ba485d1);
+            
+    
+            var marker_3cac528cbdf7ccb8e58026c131472111 = L.marker(
+                [44.5804, -124.0579],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_ee2e45f4c8b5b576febf1e4d8801a205 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cdc3d341fdebe66f15a3ea906497a41a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_555201eda901540f7e65c772a22d937d = $(`<div id="html_555201eda901540f7e65c772a22d937d" style="width: 100.0%; height: 100.0%;">     <b>Stop 28: KONP</b><br>     Newport Municipal<br>     <i>Oregon Coast</i><br>     Lat/Lon: 44.58040, -124.05790     </div>`)[0];
+                popup_cdc3d341fdebe66f15a3ea906497a41a.setContent(html_555201eda901540f7e65c772a22d937d);
+            
+        
+
+        marker_3cac528cbdf7ccb8e58026c131472111.bindPopup(popup_cdc3d341fdebe66f15a3ea906497a41a)
+        ;
+
+        
+    
+    
+            marker_3cac528cbdf7ccb8e58026c131472111.bindTooltip(
+                `<div>
+                     28. KONP – Oregon Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3cac528cbdf7ccb8e58026c131472111.setIcon(icon_ee2e45f4c8b5b576febf1e4d8801a205);
+            
+    
+            var marker_2898168a606a725d97d87d15fe17fe89 = L.marker(
+                [43.4171, -124.246],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_680f6f6f1ab8188733d3b4d95c275591 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9e896e5215cc4f19ed6220b37551e4d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f40714685836472176398f9f8ba1807 = $(`<div id="html_7f40714685836472176398f9f8ba1807" style="width: 100.0%; height: 100.0%;">     <b>Stop 29: KOTH</b><br>     North Bend/Coos Bay<br>     <i>Oregon dunes / coast</i><br>     Lat/Lon: 43.41710, -124.24600     </div>`)[0];
+                popup_9e896e5215cc4f19ed6220b37551e4d8.setContent(html_7f40714685836472176398f9f8ba1807);
+            
+        
+
+        marker_2898168a606a725d97d87d15fe17fe89.bindPopup(popup_9e896e5215cc4f19ed6220b37551e4d8)
+        ;
+
+        
+    
+    
+            marker_2898168a606a725d97d87d15fe17fe89.bindTooltip(
+                `<div>
+                     29. KOTH – Oregon dunes / coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2898168a606a725d97d87d15fe17fe89.setIcon(icon_680f6f6f1ab8188733d3b4d95c275591);
+            
+    
+            var marker_84ed7e25f4b8774ffa22e8d9b2ca2adb = L.marker(
+                [41.7802, -124.2365],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_aeb43ffd0beb0d852502e1380bada7c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_51c6a112f7c6122da3d8addd3ff09034 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c9be948d97dd67939f24f2014ffebc3e = $(`<div id="html_c9be948d97dd67939f24f2014ffebc3e" style="width: 100.0%; height: 100.0%;">     <b>Stop 30: KCEC</b><br>     Crescent City<br>     <i>Redwoods north coast</i><br>     Lat/Lon: 41.78020, -124.23650     </div>`)[0];
+                popup_51c6a112f7c6122da3d8addd3ff09034.setContent(html_c9be948d97dd67939f24f2014ffebc3e);
+            
+        
+
+        marker_84ed7e25f4b8774ffa22e8d9b2ca2adb.bindPopup(popup_51c6a112f7c6122da3d8addd3ff09034)
+        ;
+
+        
+    
+    
+            marker_84ed7e25f4b8774ffa22e8d9b2ca2adb.bindTooltip(
+                `<div>
+                     30. KCEC – Redwoods north coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_84ed7e25f4b8774ffa22e8d9b2ca2adb.setIcon(icon_aeb43ffd0beb0d852502e1380bada7c5);
+            
+    
+            var marker_b8cbcd062acb073927a704a54f4c6ae9 = L.marker(
+                [40.9781, -124.1086],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_ddd153b0b7da4cbbd28c21622e34bb34 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_36da729d08a9c88499a84fed8dcb1be6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6f273d15cd0b620f8a0f2b331badfe12 = $(`<div id="html_6f273d15cd0b620f8a0f2b331badfe12" style="width: 100.0%; height: 100.0%;">     <b>Stop 31: KACV</b><br>     Arcata/Eureka<br>     <i>Redwood Coast</i><br>     Lat/Lon: 40.97810, -124.10860     </div>`)[0];
+                popup_36da729d08a9c88499a84fed8dcb1be6.setContent(html_6f273d15cd0b620f8a0f2b331badfe12);
+            
+        
+
+        marker_b8cbcd062acb073927a704a54f4c6ae9.bindPopup(popup_36da729d08a9c88499a84fed8dcb1be6)
+        ;
+
+        
+    
+    
+            marker_b8cbcd062acb073927a704a54f4c6ae9.bindTooltip(
+                `<div>
+                     31. KACV – Redwood Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b8cbcd062acb073927a704a54f4c6ae9.setIcon(icon_ddd153b0b7da4cbbd28c21622e34bb34);
+            
+    
+            var marker_50ebf1fcf113b1fd031535be9be0b735 = L.marker(
+                [40.5539, -124.1327],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_2e0ca658cf1dc03ac7dc6717f564b2db = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8eb60d6b4718d641d2b7a6ea81d4bd91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df0d4418f6d6939d7f4680b85794452c = $(`<div id="html_df0d4418f6d6939d7f4680b85794452c" style="width: 100.0%; height: 100.0%;">     <b>Stop 32: KFOT</b><br>     Rohnerville/Fortuna<br>     <i>California coast relay</i><br>     Lat/Lon: 40.55390, -124.13270     </div>`)[0];
+                popup_8eb60d6b4718d641d2b7a6ea81d4bd91.setContent(html_df0d4418f6d6939d7f4680b85794452c);
+            
+        
+
+        marker_50ebf1fcf113b1fd031535be9be0b735.bindPopup(popup_8eb60d6b4718d641d2b7a6ea81d4bd91)
+        ;
+
+        
+    
+    
+            marker_50ebf1fcf113b1fd031535be9be0b735.bindTooltip(
+                `<div>
+                     32. KFOT – California coast relay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_50ebf1fcf113b1fd031535be9be0b735.setIcon(icon_2e0ca658cf1dc03ac7dc6717f564b2db);
+            
+    
+            var marker_e0c43d9f4134edbe7ce99ce1510b6941 = L.marker(
+                [39.262, -123.7537],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_64b3ef7434c23459e09441559fd73489 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_013e2293c66d63aed0a1d00c167cf3f5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_02a21d6bada9f886fff1b8b99dc669a8 = $(`<div id="html_02a21d6bada9f886fff1b8b99dc669a8" style="width: 100.0%; height: 100.0%;">     <b>Stop 33: KLLR</b><br>     Little River<br>     <i>Mendocino Coast</i><br>     Lat/Lon: 39.26200, -123.75370     </div>`)[0];
+                popup_013e2293c66d63aed0a1d00c167cf3f5.setContent(html_02a21d6bada9f886fff1b8b99dc669a8);
+            
+        
+
+        marker_e0c43d9f4134edbe7ce99ce1510b6941.bindPopup(popup_013e2293c66d63aed0a1d00c167cf3f5)
+        ;
+
+        
+    
+    
+            marker_e0c43d9f4134edbe7ce99ce1510b6941.bindTooltip(
+                `<div>
+                     33. KLLR – Mendocino Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e0c43d9f4134edbe7ce99ce1510b6941.setIcon(icon_64b3ef7434c23459e09441559fd73489);
+            
+    
+            var marker_a6ef5555d97764dbcd3f3a67ffd97bfd = L.marker(
+                [38.509, -122.8129],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_68a6b4a58b661ea4e0216a195402043d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_57f4ce35d9ed5357d766bac79a722346 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dcf9dae141477f9f72dc41726ddccd74 = $(`<div id="html_dcf9dae141477f9f72dc41726ddccd74" style="width: 100.0%; height: 100.0%;">     <b>Stop 34: KSTS</b><br>     Charles M. Schulz Sonoma County<br>     <i>Wine Country / Golden Gate aanloop</i><br>     Lat/Lon: 38.50900, -122.81290     </div>`)[0];
+                popup_57f4ce35d9ed5357d766bac79a722346.setContent(html_dcf9dae141477f9f72dc41726ddccd74);
+            
+        
+
+        marker_a6ef5555d97764dbcd3f3a67ffd97bfd.bindPopup(popup_57f4ce35d9ed5357d766bac79a722346)
+        ;
+
+        
+    
+    
+            marker_a6ef5555d97764dbcd3f3a67ffd97bfd.bindTooltip(
+                `<div>
+                     34. KSTS – Wine Country / Golden Gate aanloop
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a6ef5555d97764dbcd3f3a67ffd97bfd.setIcon(icon_68a6b4a58b661ea4e0216a195402043d);
+            
+    
+            var marker_a5ada7ac93203d22157d043179dd97e4 = L.marker(
+                [37.5134, -122.5011],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_6498c2e9f7a18c5a4456abeeedbfa9e1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_99ed8ea60dd0dbb12ad0dff6ebfa908d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_523ee2ef61d308c93f218fc81c18020d = $(`<div id="html_523ee2ef61d308c93f218fc81c18020d" style="width: 100.0%; height: 100.0%;">     <b>Stop 35: KHAF</b><br>     Half Moon Bay<br>     <i>San Francisco / Golden Gate</i><br>     Lat/Lon: 37.51340, -122.50110     </div>`)[0];
+                popup_99ed8ea60dd0dbb12ad0dff6ebfa908d.setContent(html_523ee2ef61d308c93f218fc81c18020d);
+            
+        
+
+        marker_a5ada7ac93203d22157d043179dd97e4.bindPopup(popup_99ed8ea60dd0dbb12ad0dff6ebfa908d)
+        ;
+
+        
+    
+    
+            marker_a5ada7ac93203d22157d043179dd97e4.bindTooltip(
+                `<div>
+                     35. KHAF – San Francisco / Golden Gate
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a5ada7ac93203d22157d043179dd97e4.setIcon(icon_6498c2e9f7a18c5a4456abeeedbfa9e1);
+            
+    
+            var marker_1cec6c4ac0be70781edc15117c2ffac9 = L.marker(
+                [37.5109, -120.0396],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_8fc2166809ee04c8692d838f9877264a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5a360585ebcdee83b9fe2d935e85a5d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ad06e59132adb93d1a561ae5b45c6f35 = $(`<div id="html_ad06e59132adb93d1a561ae5b45c6f35" style="width: 100.0%; height: 100.0%;">     <b>Stop 36: KMPI</b><br>     Mariposa-Yosemite<br>     <i>Yosemite gateway</i><br>     Lat/Lon: 37.51090, -120.03960     </div>`)[0];
+                popup_e5a360585ebcdee83b9fe2d935e85a5d.setContent(html_ad06e59132adb93d1a561ae5b45c6f35);
+            
+        
+
+        marker_1cec6c4ac0be70781edc15117c2ffac9.bindPopup(popup_e5a360585ebcdee83b9fe2d935e85a5d)
+        ;
+
+        
+    
+    
+            marker_1cec6c4ac0be70781edc15117c2ffac9.bindTooltip(
+                `<div>
+                     36. KMPI – Yosemite gateway
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1cec6c4ac0be70781edc15117c2ffac9.setIcon(icon_8fc2166809ee04c8692d838f9877264a);
+            
+    
+            var marker_3c4371f4081c13606b7a598bf12e7537 = L.marker(
+                [37.6241, -118.8378],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_290438f6780c2e002111ba079b39007f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bdd8c4edb9ce30e0b35373d3ae8abbcb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a20a96277615579d9aecea95f7075be3 = $(`<div id="html_a20a96277615579d9aecea95f7075be3" style="width: 100.0%; height: 100.0%;">     <b>Stop 37: KMMH</b><br>     Mammoth Yosemite<br>     <i>Sierra Nevada</i><br>     Lat/Lon: 37.62410, -118.83780     </div>`)[0];
+                popup_bdd8c4edb9ce30e0b35373d3ae8abbcb.setContent(html_a20a96277615579d9aecea95f7075be3);
+            
+        
+
+        marker_3c4371f4081c13606b7a598bf12e7537.bindPopup(popup_bdd8c4edb9ce30e0b35373d3ae8abbcb)
+        ;
+
+        
+    
+    
+            marker_3c4371f4081c13606b7a598bf12e7537.bindTooltip(
+                `<div>
+                     37. KMMH – Sierra Nevada
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3c4371f4081c13606b7a598bf12e7537.setIcon(icon_290438f6780c2e002111ba079b39007f);
+            
+    
+            var marker_45516ed9ec28b1c6bb1975f62a46fd2b = L.marker(
+                [36.5883, -118.0528],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_68ceac724f116637962d014cc5058f49 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2ea2cce75c9cb9efad2f0492a5a9671b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e2877d655bfb6d6a4714f32d2f340ec9 = $(`<div id="html_e2877d655bfb6d6a4714f32d2f340ec9" style="width: 100.0%; height: 100.0%;">     <b>Stop 38: O26</b><br>     Lone Pine<br>     <i>Eastern Sierra / Mt Whitney</i><br>     Lat/Lon: 36.58830, -118.05280     </div>`)[0];
+                popup_2ea2cce75c9cb9efad2f0492a5a9671b.setContent(html_e2877d655bfb6d6a4714f32d2f340ec9);
+            
+        
+
+        marker_45516ed9ec28b1c6bb1975f62a46fd2b.bindPopup(popup_2ea2cce75c9cb9efad2f0492a5a9671b)
+        ;
+
+        
+    
+    
+            marker_45516ed9ec28b1c6bb1975f62a46fd2b.bindTooltip(
+                `<div>
+                     38. O26 – Eastern Sierra / Mt Whitney
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_45516ed9ec28b1c6bb1975f62a46fd2b.setIcon(icon_68ceac724f116637962d014cc5058f49);
+            
+    
+            var marker_6860fa7172387813351abe12e59dd5bc = L.marker(
+                [35.4336, -119.0568],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_044adb26f055ddd60cec270d8b3237a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f636faef88419b2427dfc568c1a853d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e5c2a0938f4d34bebc73599ff5a499d6 = $(`<div id="html_e5c2a0938f4d34bebc73599ff5a499d6" style="width: 100.0%; height: 100.0%;">     <b>Stop 39: KBFL</b><br>     Bakersfield<br>     <i>Central Valley</i><br>     Lat/Lon: 35.43360, -119.05680     </div>`)[0];
+                popup_f636faef88419b2427dfc568c1a853d9.setContent(html_e5c2a0938f4d34bebc73599ff5a499d6);
+            
+        
+
+        marker_6860fa7172387813351abe12e59dd5bc.bindPopup(popup_f636faef88419b2427dfc568c1a853d9)
+        ;
+
+        
+    
+    
+            marker_6860fa7172387813351abe12e59dd5bc.bindTooltip(
+                `<div>
+                     39. KBFL – Central Valley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6860fa7172387813351abe12e59dd5bc.setIcon(icon_044adb26f055ddd60cec270d8b3237a2);
+            
+    
+            var marker_979769b898614a6b674b9869eba58888 = L.marker(
+                [34.7411, -118.2187],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d116c45f4a198c219e6e4d29cf48fe22 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cab2b566caa029c8611422e659481a32 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_da5d3b93faa185687538acb5c22b54ba = $(`<div id="html_da5d3b93faa185687538acb5c22b54ba" style="width: 100.0%; height: 100.0%;">     <b>Stop 40: KWJF</b><br>     Lancaster / Gen. Fox<br>     <i>Mojave Desert</i><br>     Lat/Lon: 34.74110, -118.21870     </div>`)[0];
+                popup_cab2b566caa029c8611422e659481a32.setContent(html_da5d3b93faa185687538acb5c22b54ba);
+            
+        
+
+        marker_979769b898614a6b674b9869eba58888.bindPopup(popup_cab2b566caa029c8611422e659481a32)
+        ;
+
+        
+    
+    
+            marker_979769b898614a6b674b9869eba58888.bindTooltip(
+                `<div>
+                     40. KWJF – Mojave Desert
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_979769b898614a6b674b9869eba58888.setIcon(icon_d116c45f4a198c219e6e4d29cf48fe22);
+            
+    
+            var marker_37ac4bc590316e54abadae1f9560b3ce = L.marker(
+                [34.2098, -118.4899],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e4f36b8a2ffc160e7cd58b884cd288ca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1a79197f579155cfa2695ab2d5f9cc0f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0acce63e969ae83f11278f0393c9de20 = $(`<div id="html_0acce63e969ae83f11278f0393c9de20" style="width: 100.0%; height: 100.0%;">     <b>Stop 41: KVNY</b><br>     Van Nuys<br>     <i>Los Angeles hotspot</i><br>     Lat/Lon: 34.20980, -118.48990     </div>`)[0];
+                popup_1a79197f579155cfa2695ab2d5f9cc0f.setContent(html_0acce63e969ae83f11278f0393c9de20);
+            
+        
+
+        marker_37ac4bc590316e54abadae1f9560b3ce.bindPopup(popup_1a79197f579155cfa2695ab2d5f9cc0f)
+        ;
+
+        
+    
+    
+            marker_37ac4bc590316e54abadae1f9560b3ce.bindTooltip(
+                `<div>
+                     41. KVNY – Los Angeles hotspot
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_37ac4bc590316e54abadae1f9560b3ce.setIcon(icon_e4f36b8a2ffc160e7cd58b884cd288ca);
+            
+    
+            var marker_a89bd09920bd02e4fde33e4e12654f3e = L.marker(
+                [35.6588, -117.8295],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_1abffe4a67b872b3f9003c855cce9f62 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_37bfbd0d3922066484397046569cc187 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a7f197275dbc59eba08c5980857112a1 = $(`<div id="html_a7f197275dbc59eba08c5980857112a1" style="width: 100.0%; height: 100.0%;">     <b>Stop 42: KIYK</b><br>     Inyokern<br>     <i>Mojave / Sierra oostzijde</i><br>     Lat/Lon: 35.65880, -117.82950     </div>`)[0];
+                popup_37bfbd0d3922066484397046569cc187.setContent(html_a7f197275dbc59eba08c5980857112a1);
+            
+        
+
+        marker_a89bd09920bd02e4fde33e4e12654f3e.bindPopup(popup_37bfbd0d3922066484397046569cc187)
+        ;
+
+        
+    
+    
+            marker_a89bd09920bd02e4fde33e4e12654f3e.bindTooltip(
+                `<div>
+                     42. KIYK – Mojave / Sierra oostzijde
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a89bd09920bd02e4fde33e4e12654f3e.setIcon(icon_1abffe4a67b872b3f9003c855cce9f62);
+            
+    
+            var marker_388efa681c29cfe45ff2ba1a925a1cc1 = L.marker(
+                [36.273, -116.515],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_cbc7a64583f690d8035b5b4ba05d9080 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_40950a9ccf0683bd6574510131b0646e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2d4e511c11373731bafd886de61fb968 = $(`<div id="html_2d4e511c11373731bafd886de61fb968" style="width: 100.0%; height: 100.0%;">     <b>Stop 43: L06</b><br>     Furnace Creek<br>     <i>Death Valley</i><br>     Lat/Lon: 36.27300, -116.51500     </div>`)[0];
+                popup_40950a9ccf0683bd6574510131b0646e.setContent(html_2d4e511c11373731bafd886de61fb968);
+            
+        
+
+        marker_388efa681c29cfe45ff2ba1a925a1cc1.bindPopup(popup_40950a9ccf0683bd6574510131b0646e)
+        ;
+
+        
+    
+    
+            marker_388efa681c29cfe45ff2ba1a925a1cc1.bindTooltip(
+                `<div>
+                     43. L06 – Death Valley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_388efa681c29cfe45ff2ba1a925a1cc1.setIcon(icon_cbc7a64583f690d8035b5b4ba05d9080);
+            
+    
+            var marker_8c5dd6fc9e9dbcac11072bfb4e6bb70a = L.marker(
+                [35.9728, -115.1344],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_6cd1b60805c2d8ba0822cb55bdf0668c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f0c001251be7f7efb328590aaad45e31 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0d57389b2ad35c21b1432dd1a32b376f = $(`<div id="html_0d57389b2ad35c21b1432dd1a32b376f" style="width: 100.0%; height: 100.0%;">     <b>Stop 44: KHND</b><br>     Henderson Exec.<br>     <i>Las Vegas hotspot</i><br>     Lat/Lon: 35.97280, -115.13440     </div>`)[0];
+                popup_f0c001251be7f7efb328590aaad45e31.setContent(html_0d57389b2ad35c21b1432dd1a32b376f);
+            
+        
+
+        marker_8c5dd6fc9e9dbcac11072bfb4e6bb70a.bindPopup(popup_f0c001251be7f7efb328590aaad45e31)
+        ;
+
+        
+    
+    
+            marker_8c5dd6fc9e9dbcac11072bfb4e6bb70a.bindTooltip(
+                `<div>
+                     44. KHND – Las Vegas hotspot
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c5dd6fc9e9dbcac11072bfb4e6bb70a.setIcon(icon_6cd1b60805c2d8ba0822cb55bdf0668c);
+            
+    
+            var marker_f74af34b4fb65306d58ce735b5685a77 = L.marker(
+                [35.9904, -113.8166],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_9d36c22cb040dd9f6d3d3e61d9e0127d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_77e04bed8906b6bbb13d1b624bd9ca29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0498045ce447772640fbdbc552a807bf = $(`<div id="html_0498045ce447772640fbdbc552a807bf" style="width: 100.0%; height: 100.0%;">     <b>Stop 45: 1G4</b><br>     Grand Canyon West<br>     <i>Grand Canyon West / Skywalk</i><br>     Lat/Lon: 35.99040, -113.81660     </div>`)[0];
+                popup_77e04bed8906b6bbb13d1b624bd9ca29.setContent(html_0498045ce447772640fbdbc552a807bf);
+            
+        
+
+        marker_f74af34b4fb65306d58ce735b5685a77.bindPopup(popup_77e04bed8906b6bbb13d1b624bd9ca29)
+        ;
+
+        
+    
+    
+            marker_f74af34b4fb65306d58ce735b5685a77.bindTooltip(
+                `<div>
+                     45. 1G4 – Grand Canyon West / Skywalk
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f74af34b4fb65306d58ce735b5685a77.setIcon(icon_9d36c22cb040dd9f6d3d3e61d9e0127d);
+            
+    
+            var marker_920faa4f23e5feecb2de1ddd3bccf823 = L.marker(
+                [35.9524, -112.1469],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_109fa225cc6316e07d99014990c2257d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e164e9e95440f5b7106e998d794b25af = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_36664c272b1ebb9a5cd31fbf5d803585 = $(`<div id="html_36664c272b1ebb9a5cd31fbf5d803585" style="width: 100.0%; height: 100.0%;">     <b>Stop 46: KGCN</b><br>     Grand Canyon Natl Park<br>     <i>Grand Canyon</i><br>     Lat/Lon: 35.95240, -112.14690     </div>`)[0];
+                popup_e164e9e95440f5b7106e998d794b25af.setContent(html_36664c272b1ebb9a5cd31fbf5d803585);
+            
+        
+
+        marker_920faa4f23e5feecb2de1ddd3bccf823.bindPopup(popup_e164e9e95440f5b7106e998d794b25af)
+        ;
+
+        
+    
+    
+            marker_920faa4f23e5feecb2de1ddd3bccf823.bindTooltip(
+                `<div>
+                     46. KGCN – Grand Canyon
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_920faa4f23e5feecb2de1ddd3bccf823.setIcon(icon_109fa225cc6316e07d99014990c2257d);
+            
+    
+            var marker_01633f8eb06c9fdf4f43b607a9f3a2f6 = L.marker(
+                [36.9261, -111.4484],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_c3d4d769391b3352aae84023cb95da16 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_24cd0abcd5cd07cde252522639aead47 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_edf5891054221fe4444ce2f92a78da1a = $(`<div id="html_edf5891054221fe4444ce2f92a78da1a" style="width: 100.0%; height: 100.0%;">     <b>Stop 47: KPGA</b><br>     Page Municipal<br>     <i>Lake Powell / Horseshoe Bend</i><br>     Lat/Lon: 36.92610, -111.44840     </div>`)[0];
+                popup_24cd0abcd5cd07cde252522639aead47.setContent(html_edf5891054221fe4444ce2f92a78da1a);
+            
+        
+
+        marker_01633f8eb06c9fdf4f43b607a9f3a2f6.bindPopup(popup_24cd0abcd5cd07cde252522639aead47)
+        ;
+
+        
+    
+    
+            marker_01633f8eb06c9fdf4f43b607a9f3a2f6.bindTooltip(
+                `<div>
+                     47. KPGA – Lake Powell / Horseshoe Bend
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_01633f8eb06c9fdf4f43b607a9f3a2f6.setIcon(icon_c3d4d769391b3352aae84023cb95da16);
+            
+    
+            var marker_8c038492ca38f09b6a21e6cc8bc439ac = L.marker(
+                [37.0167, -110.2007],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_1ad027d560c1ff2f57ed21c3957fe451 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4ceb04cc98a9a3549fc44ab6cd46950b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_82f02250da97c179ef3bd55f75b10fd9 = $(`<div id="html_82f02250da97c179ef3bd55f75b10fd9" style="width: 100.0%; height: 100.0%;">     <b>Stop 48: UT25</b><br>     Monument Valley<br>     <i>Monument Valley</i><br>     Lat/Lon: 37.01670, -110.20070     </div>`)[0];
+                popup_4ceb04cc98a9a3549fc44ab6cd46950b.setContent(html_82f02250da97c179ef3bd55f75b10fd9);
+            
+        
+
+        marker_8c038492ca38f09b6a21e6cc8bc439ac.bindPopup(popup_4ceb04cc98a9a3549fc44ab6cd46950b)
+        ;
+
+        
+    
+    
+            marker_8c038492ca38f09b6a21e6cc8bc439ac.bindTooltip(
+                `<div>
+                     48. UT25 – Monument Valley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c038492ca38f09b6a21e6cc8bc439ac.setIcon(icon_1ad027d560c1ff2f57ed21c3957fe451);
+            
+    
+            var marker_20e519b439c176002584554a6b733d06 = L.marker(
+                [37.5833, -109.4833],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_1331c77a07cea79a82df80b58814368c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f1213b681864c347dda298962cdf480 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9fac1e82d2492c19ee9f85502e322400 = $(`<div id="html_9fac1e82d2492c19ee9f85502e322400" style="width: 100.0%; height: 100.0%;">     <b>Stop 49: KBDG</b><br>     Blanding Municipal<br>     <i>Four Corners approach</i><br>     Lat/Lon: 37.58330, -109.48330     </div>`)[0];
+                popup_3f1213b681864c347dda298962cdf480.setContent(html_9fac1e82d2492c19ee9f85502e322400);
+            
+        
+
+        marker_20e519b439c176002584554a6b733d06.bindPopup(popup_3f1213b681864c347dda298962cdf480)
+        ;
+
+        
+    
+    
+            marker_20e519b439c176002584554a6b733d06.bindTooltip(
+                `<div>
+                     49. KBDG – Four Corners approach
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_20e519b439c176002584554a6b733d06.setIcon(icon_1331c77a07cea79a82df80b58814368c);
+            
+    
+            var marker_dd418a98d31bbd9b74a7ef79188279e5 = L.marker(
+                [38.755, -109.7548],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d9a3f36f872c30c56a74dee5101ea1c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_462ecf82b8b4e37c200e41e89eb9643b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_07a3a2a2f22ad846b5e0497c17ab275a = $(`<div id="html_07a3a2a2f22ad846b5e0497c17ab275a" style="width: 100.0%; height: 100.0%;">     <b>Stop 50: KCNY</b><br>     Canyonlands Regional<br>     <i>Moab / Arches / Canyonlands</i><br>     Lat/Lon: 38.75500, -109.75480     </div>`)[0];
+                popup_462ecf82b8b4e37c200e41e89eb9643b.setContent(html_07a3a2a2f22ad846b5e0497c17ab275a);
+            
+        
+
+        marker_dd418a98d31bbd9b74a7ef79188279e5.bindPopup(popup_462ecf82b8b4e37c200e41e89eb9643b)
+        ;
+
+        
+    
+    
+            marker_dd418a98d31bbd9b74a7ef79188279e5.bindTooltip(
+                `<div>
+                     50. KCNY – Moab / Arches / Canyonlands
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dd418a98d31bbd9b74a7ef79188279e5.setIcon(icon_d9a3f36f872c30c56a74dee5101ea1c4);
+            
+    
+            var marker_92cc6d5dc53d6ae06a3750f9cc68cc7a = L.marker(
+                [37.9538, -107.9085],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_da579877153eb9275bef3b65d361d642 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_92790471cd4ca2e4ec2873eed6911ea5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fa43b1843fb8090632f30af7cde87c80 = $(`<div id="html_fa43b1843fb8090632f30af7cde87c80" style="width: 100.0%; height: 100.0%;">     <b>Stop 51: KTEX</b><br>     Telluride Regional<br>     <i>San Juan Mountains</i><br>     Lat/Lon: 37.95380, -107.90850     </div>`)[0];
+                popup_92790471cd4ca2e4ec2873eed6911ea5.setContent(html_fa43b1843fb8090632f30af7cde87c80);
+            
+        
+
+        marker_92cc6d5dc53d6ae06a3750f9cc68cc7a.bindPopup(popup_92790471cd4ca2e4ec2873eed6911ea5)
+        ;
+
+        
+    
+    
+            marker_92cc6d5dc53d6ae06a3750f9cc68cc7a.bindTooltip(
+                `<div>
+                     51. KTEX – San Juan Mountains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_92cc6d5dc53d6ae06a3750f9cc68cc7a.setIcon(icon_da579877153eb9275bef3b65d361d642);
+            
+    
+            var marker_fac331c48400600ff69311c3c46a8c12 = L.marker(
+                [38.5339, -106.9331],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_0e431aabdbb96998bb9f4451274823a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b6a739b60950ce82cc07f8735192266 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2131ad878bec7bc245850616b135c1ad = $(`<div id="html_2131ad878bec7bc245850616b135c1ad" style="width: 100.0%; height: 100.0%;">     <b>Stop 52: KGUC</b><br>     Gunnison-Crested Butte<br>     <i>Rocky Mountains</i><br>     Lat/Lon: 38.53390, -106.93310     </div>`)[0];
+                popup_9b6a739b60950ce82cc07f8735192266.setContent(html_2131ad878bec7bc245850616b135c1ad);
+            
+        
+
+        marker_fac331c48400600ff69311c3c46a8c12.bindPopup(popup_9b6a739b60950ce82cc07f8735192266)
+        ;
+
+        
+    
+    
+            marker_fac331c48400600ff69311c3c46a8c12.bindTooltip(
+                `<div>
+                     52. KGUC – Rocky Mountains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fac331c48400600ff69311c3c46a8c12.setIcon(icon_0e431aabdbb96998bb9f4451274823a8);
+            
+    
+            var marker_338259910ca9c3ff7ca32f74c9fb1926 = L.marker(
+                [39.2232, -106.8688],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_576a9a5d68db699c213d6e0d1256de29 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_796537e28ec6940223f99595489d0398 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ea3f98121aae44741d7112293d864aab = $(`<div id="html_ea3f98121aae44741d7112293d864aab" style="width: 100.0%; height: 100.0%;">     <b>Stop 53: KASE</b><br>     Aspen-Pitkin County<br>     <i>Aspen / high Rockies</i><br>     Lat/Lon: 39.22320, -106.86880     </div>`)[0];
+                popup_796537e28ec6940223f99595489d0398.setContent(html_ea3f98121aae44741d7112293d864aab);
+            
+        
+
+        marker_338259910ca9c3ff7ca32f74c9fb1926.bindPopup(popup_796537e28ec6940223f99595489d0398)
+        ;
+
+        
+    
+    
+            marker_338259910ca9c3ff7ca32f74c9fb1926.bindTooltip(
+                `<div>
+                     53. KASE – Aspen / high Rockies
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_338259910ca9c3ff7ca32f74c9fb1926.setIcon(icon_576a9a5d68db699c213d6e0d1256de29);
+            
+    
+            var marker_7f240071697d99a83b181ca199e57fcc = L.marker(
+                [39.6426, -106.9177],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_28f5900a117d30bdad83874cc66fd8d4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1fa3bc19c846ba74159702f6574caba2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a5012b95f3a1b3b9480607774952f2ec = $(`<div id="html_a5012b95f3a1b3b9480607774952f2ec" style="width: 100.0%; height: 100.0%;">     <b>Stop 54: KEGE</b><br>     Eagle County<br>     <i>Vail / Rockies</i><br>     Lat/Lon: 39.64260, -106.91770     </div>`)[0];
+                popup_1fa3bc19c846ba74159702f6574caba2.setContent(html_a5012b95f3a1b3b9480607774952f2ec);
+            
+        
+
+        marker_7f240071697d99a83b181ca199e57fcc.bindPopup(popup_1fa3bc19c846ba74159702f6574caba2)
+        ;
+
+        
+    
+    
+            marker_7f240071697d99a83b181ca199e57fcc.bindTooltip(
+                `<div>
+                     54. KEGE – Vail / Rockies
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7f240071697d99a83b181ca199e57fcc.setIcon(icon_28f5900a117d30bdad83874cc66fd8d4);
+            
+    
+            var marker_2201fdf98f051203082a5d1fe8eb10f1 = L.marker(
+                [39.5701, -104.8493],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e576fbddb893e126965177d206dd2d71 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_18ad04632b868dd03b1397cca349c506 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d5743881bdaf33fce0439f5387665c72 = $(`<div id="html_d5743881bdaf33fce0439f5387665c72" style="width: 100.0%; height: 100.0%;">     <b>Stop 55: KAPA</b><br>     Centennial<br>     <i>Denver / Front Range</i><br>     Lat/Lon: 39.57010, -104.84930     </div>`)[0];
+                popup_18ad04632b868dd03b1397cca349c506.setContent(html_d5743881bdaf33fce0439f5387665c72);
+            
+        
+
+        marker_2201fdf98f051203082a5d1fe8eb10f1.bindPopup(popup_18ad04632b868dd03b1397cca349c506)
+        ;
+
+        
+    
+    
+            marker_2201fdf98f051203082a5d1fe8eb10f1.bindTooltip(
+                `<div>
+                     55. KAPA – Denver / Front Range
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2201fdf98f051203082a5d1fe8eb10f1.setIcon(icon_e576fbddb893e126965177d206dd2d71);
+            
+    
+            var marker_1b65f47a86fb0fc87aca31de49451fb9 = L.marker(
+                [41.1557, -104.8118],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_7f621fea1f535e83f24130260eced8e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0b9c4c5ced726b0292a93e967c5ef9d4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_622906025186e6ed66d962d0d1bd415e = $(`<div id="html_622906025186e6ed66d962d0d1bd415e" style="width: 100.0%; height: 100.0%;">     <b>Stop 56: KCYS</b><br>     Cheyenne<br>     <i>High Plains</i><br>     Lat/Lon: 41.15570, -104.81180     </div>`)[0];
+                popup_0b9c4c5ced726b0292a93e967c5ef9d4.setContent(html_622906025186e6ed66d962d0d1bd415e);
+            
+        
+
+        marker_1b65f47a86fb0fc87aca31de49451fb9.bindPopup(popup_0b9c4c5ced726b0292a93e967c5ef9d4)
+        ;
+
+        
+    
+    
+            marker_1b65f47a86fb0fc87aca31de49451fb9.bindTooltip(
+                `<div>
+                     56. KCYS – High Plains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1b65f47a86fb0fc87aca31de49451fb9.setIcon(icon_7f621fea1f535e83f24130260eced8e3);
+            
+    
+            var marker_e58b79808049338f8c52679663b75708 = L.marker(
+                [42.0532, -102.8038],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e4816292475d52ed177cec0531b0a9ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c2997b24269de17c3fb1cffa93544348 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a8be340370b2a4ac599105122e53dda4 = $(`<div id="html_a8be340370b2a4ac599105122e53dda4" style="width: 100.0%; height: 100.0%;">     <b>Stop 57: KAIA</b><br>     Alliance Municipal<br>     <i>Nebraska Sandhills</i><br>     Lat/Lon: 42.05320, -102.80380     </div>`)[0];
+                popup_c2997b24269de17c3fb1cffa93544348.setContent(html_a8be340370b2a4ac599105122e53dda4);
+            
+        
+
+        marker_e58b79808049338f8c52679663b75708.bindPopup(popup_c2997b24269de17c3fb1cffa93544348)
+        ;
+
+        
+    
+    
+            marker_e58b79808049338f8c52679663b75708.bindTooltip(
+                `<div>
+                     57. KAIA – Nebraska Sandhills
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e58b79808049338f8c52679663b75708.setIcon(icon_e4816292475d52ed177cec0531b0a9ff);
+            
+    
+            var marker_24e49816b203fc115e614d87c7ae02b4 = L.marker(
+                [43.7333, -103.617],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_bfc3d7ebcc3dcf57f8f6393d80706c53 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f67bcd4854cdde2ba6337cd43c0c563b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e29ea881bf1944e22ac82d688547f204 = $(`<div id="html_e29ea881bf1944e22ac82d688547f204" style="width: 100.0%; height: 100.0%;">     <b>Stop 58: KCUT</b><br>     Custer County<br>     <i>Mount Rushmore / Black Hills</i><br>     Lat/Lon: 43.73330, -103.61700     </div>`)[0];
+                popup_f67bcd4854cdde2ba6337cd43c0c563b.setContent(html_e29ea881bf1944e22ac82d688547f204);
+            
+        
+
+        marker_24e49816b203fc115e614d87c7ae02b4.bindPopup(popup_f67bcd4854cdde2ba6337cd43c0c563b)
+        ;
+
+        
+    
+    
+            marker_24e49816b203fc115e614d87c7ae02b4.bindTooltip(
+                `<div>
+                     58. KCUT – Mount Rushmore / Black Hills
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_24e49816b203fc115e614d87c7ae02b4.setIcon(icon_bfc3d7ebcc3dcf57f8f6393d80706c53);
+            
+    
+            var marker_b32162482a7a9f29a9220a5e0a8e940b = L.marker(
+                [44.0453, -103.0574],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_3b8db379727ed1831737195ffa285871 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5f838a3f0815e926c809859a15f38c7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e7e1602b8a31b917b87a912e78da2710 = $(`<div id="html_e7e1602b8a31b917b87a912e78da2710" style="width: 100.0%; height: 100.0%;">     <b>Stop 59: KRAP</b><br>     Rapid City Regional<br>     <i>Badlands / Black Hills</i><br>     Lat/Lon: 44.04530, -103.05740     </div>`)[0];
+                popup_e5f838a3f0815e926c809859a15f38c7.setContent(html_e7e1602b8a31b917b87a912e78da2710);
+            
+        
+
+        marker_b32162482a7a9f29a9220a5e0a8e940b.bindPopup(popup_e5f838a3f0815e926c809859a15f38c7)
+        ;
+
+        
+    
+    
+            marker_b32162482a7a9f29a9220a5e0a8e940b.bindTooltip(
+                `<div>
+                     59. KRAP – Badlands / Black Hills
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b32162482a7a9f29a9220a5e0a8e940b.setIcon(icon_3b8db379727ed1831737195ffa285871);
+            
+    
+            var marker_f671bca66254e7aa6be225190d8fabc4 = L.marker(
+                [42.8376, -103.0954],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_f2bcc3b9e489112e8bb8102ee1b54015 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cf0bdd37dc6e916f4216b0d4dffa8018 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3be7bc191f1e69b7c0ea015209b686ac = $(`<div id="html_3be7bc191f1e69b7c0ea015209b686ac" style="width: 100.0%; height: 100.0%;">     <b>Stop 60: KCDR</b><br>     Chadron Municipal<br>     <i>Pine Ridge / Nebraska</i><br>     Lat/Lon: 42.83760, -103.09540     </div>`)[0];
+                popup_cf0bdd37dc6e916f4216b0d4dffa8018.setContent(html_3be7bc191f1e69b7c0ea015209b686ac);
+            
+        
+
+        marker_f671bca66254e7aa6be225190d8fabc4.bindPopup(popup_cf0bdd37dc6e916f4216b0d4dffa8018)
+        ;
+
+        
+    
+    
+            marker_f671bca66254e7aa6be225190d8fabc4.bindTooltip(
+                `<div>
+                     60. KCDR – Pine Ridge / Nebraska
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f671bca66254e7aa6be225190d8fabc4.setIcon(icon_f2bcc3b9e489112e8bb8102ee1b54015);
+            
+    
+            var marker_5f12e04f8b45f1e88fcee2674328921b = L.marker(
+                [41.1013, -102.9853],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_356cf5fad9ca27dbb51bc04bebdbb397 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa714e4e2645974e428016416383420b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_49e6c4f8b7f403b38412f247aa63d50a = $(`<div id="html_49e6c4f8b7f403b38412f247aa63d50a" style="width: 100.0%; height: 100.0%;">     <b>Stop 61: KSNY</b><br>     Sidney Municipal<br>     <i>Nebraska Panhandle</i><br>     Lat/Lon: 41.10130, -102.98530     </div>`)[0];
+                popup_aa714e4e2645974e428016416383420b.setContent(html_49e6c4f8b7f403b38412f247aa63d50a);
+            
+        
+
+        marker_5f12e04f8b45f1e88fcee2674328921b.bindPopup(popup_aa714e4e2645974e428016416383420b)
+        ;
+
+        
+    
+    
+            marker_5f12e04f8b45f1e88fcee2674328921b.bindTooltip(
+                `<div>
+                     61. KSNY – Nebraska Panhandle
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5f12e04f8b45f1e88fcee2674328921b.setIcon(icon_356cf5fad9ca27dbb51bc04bebdbb397);
+            
+    
+            var marker_d8be18ff18dc95cc98cc18fe68314936 = L.marker(
+                [40.1756, -103.222],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_56eaba122830db6ad4eaa613a2972979 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6b4b3c2754ec7c03c844a1ee7bee5555 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d6479396afbdeb8838cbfa6478c7e2a3 = $(`<div id="html_d6479396afbdeb8838cbfa6478c7e2a3" style="width: 100.0%; height: 100.0%;">     <b>Stop 62: KAKO</b><br>     Colorado Plains Regional<br>     <i>Eastern Colorado</i><br>     Lat/Lon: 40.17560, -103.22200     </div>`)[0];
+                popup_6b4b3c2754ec7c03c844a1ee7bee5555.setContent(html_d6479396afbdeb8838cbfa6478c7e2a3);
+            
+        
+
+        marker_d8be18ff18dc95cc98cc18fe68314936.bindPopup(popup_6b4b3c2754ec7c03c844a1ee7bee5555)
+        ;
+
+        
+    
+    
+            marker_d8be18ff18dc95cc98cc18fe68314936.bindTooltip(
+                `<div>
+                     62. KAKO – Eastern Colorado
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d8be18ff18dc95cc98cc18fe68314936.setIcon(icon_56eaba122830db6ad4eaa613a2972979);
+            
+    
+            var marker_cb6d9897177d035e2446504ca7b8a065 = L.marker(
+                [39.2748, -103.6664],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_59e818555cd508d5fe7cd5770806ec4c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b40309eb8da393a43d1c8d60e1e7da46 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c1def257ec0bd6afc38caa35795f69aa = $(`<div id="html_c1def257ec0bd6afc38caa35795f69aa" style="width: 100.0%; height: 100.0%;">     <b>Stop 63: KLIC</b><br>     Limon Municipal<br>     <i>Colorado plains</i><br>     Lat/Lon: 39.27480, -103.66640     </div>`)[0];
+                popup_b40309eb8da393a43d1c8d60e1e7da46.setContent(html_c1def257ec0bd6afc38caa35795f69aa);
+            
+        
+
+        marker_cb6d9897177d035e2446504ca7b8a065.bindPopup(popup_b40309eb8da393a43d1c8d60e1e7da46)
+        ;
+
+        
+    
+    
+            marker_cb6d9897177d035e2446504ca7b8a065.bindTooltip(
+                `<div>
+                     63. KLIC – Colorado plains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cb6d9897177d035e2446504ca7b8a065.setIcon(icon_59e818555cd508d5fe7cd5770806ec4c);
+            
+    
+            var marker_79303f75c61b1eae2ff097862bfcd0af = L.marker(
+                [38.0697, -102.6885],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_33477798d5255ef89f02054885e09b04 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fccb54d4a07affc00eb579b149fb5975 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df00e9e6bd00287c1a4b9904be078d70 = $(`<div id="html_df00e9e6bd00287c1a4b9904be078d70" style="width: 100.0%; height: 100.0%;">     <b>Stop 64: KLAA</b><br>     Lamar Municipal<br>     <i>SE Colorado</i><br>     Lat/Lon: 38.06970, -102.68850     </div>`)[0];
+                popup_fccb54d4a07affc00eb579b149fb5975.setContent(html_df00e9e6bd00287c1a4b9904be078d70);
+            
+        
+
+        marker_79303f75c61b1eae2ff097862bfcd0af.bindPopup(popup_fccb54d4a07affc00eb579b149fb5975)
+        ;
+
+        
+    
+    
+            marker_79303f75c61b1eae2ff097862bfcd0af.bindTooltip(
+                `<div>
+                     64. KLAA – SE Colorado
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_79303f75c61b1eae2ff097862bfcd0af.setIcon(icon_33477798d5255ef89f02054885e09b04);
+            
+    
+            var marker_53c0c077e332e6abfb9a93097b998dbe = L.marker(
+                [36.6851, -101.5078],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_26c052ba4d6e8799d70859165c9a761c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0324990e7b33d9833c8644568cf08e7a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_65844f6dd8d30a56b46c669cc592a623 = $(`<div id="html_65844f6dd8d30a56b46c669cc592a623" style="width: 100.0%; height: 100.0%;">     <b>Stop 65: KGUY</b><br>     Guymon Municipal<br>     <i>Oklahoma Panhandle</i><br>     Lat/Lon: 36.68510, -101.50780     </div>`)[0];
+                popup_0324990e7b33d9833c8644568cf08e7a.setContent(html_65844f6dd8d30a56b46c669cc592a623);
+            
+        
+
+        marker_53c0c077e332e6abfb9a93097b998dbe.bindPopup(popup_0324990e7b33d9833c8644568cf08e7a)
+        ;
+
+        
+    
+    
+            marker_53c0c077e332e6abfb9a93097b998dbe.bindTooltip(
+                `<div>
+                     65. KGUY – Oklahoma Panhandle
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53c0c077e332e6abfb9a93097b998dbe.setIcon(icon_26c052ba4d6e8799d70859165c9a761c);
+            
+    
+            var marker_7819d7feb62fec9c1e1c5fb10cb4ef31 = L.marker(
+                [35.2194, -101.7059],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_574946397c69f3b8e73c488ffb323770 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e6148abbcf05a9761215568e31fde410 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5cf750b0232678481d06e0169c0c402e = $(`<div id="html_5cf750b0232678481d06e0169c0c402e" style="width: 100.0%; height: 100.0%;">     <b>Stop 66: KAMA</b><br>     Amarillo<br>     <i>Texas Panhandle / Palo Duro</i><br>     Lat/Lon: 35.21940, -101.70590     </div>`)[0];
+                popup_e6148abbcf05a9761215568e31fde410.setContent(html_5cf750b0232678481d06e0169c0c402e);
+            
+        
+
+        marker_7819d7feb62fec9c1e1c5fb10cb4ef31.bindPopup(popup_e6148abbcf05a9761215568e31fde410)
+        ;
+
+        
+    
+    
+            marker_7819d7feb62fec9c1e1c5fb10cb4ef31.bindTooltip(
+                `<div>
+                     66. KAMA – Texas Panhandle / Palo Duro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7819d7feb62fec9c1e1c5fb10cb4ef31.setIcon(icon_574946397c69f3b8e73c488ffb323770);
+            
+    
+            var marker_9347be8d73ad31b5e59fc86ac12e9bb1 = L.marker(
+                [34.1681, -101.717],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d69f94e381399e3261420467c3027ea7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7b787304f9d0571d755df4523a1ccd42 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_10d1dfd8a53940f09b868349be422836 = $(`<div id="html_10d1dfd8a53940f09b868349be422836" style="width: 100.0%; height: 100.0%;">     <b>Stop 67: KPVW</b><br>     Plainview/Hale County<br>     <i>Texas plains</i><br>     Lat/Lon: 34.16810, -101.71700     </div>`)[0];
+                popup_7b787304f9d0571d755df4523a1ccd42.setContent(html_10d1dfd8a53940f09b868349be422836);
+            
+        
+
+        marker_9347be8d73ad31b5e59fc86ac12e9bb1.bindPopup(popup_7b787304f9d0571d755df4523a1ccd42)
+        ;
+
+        
+    
+    
+            marker_9347be8d73ad31b5e59fc86ac12e9bb1.bindTooltip(
+                `<div>
+                     67. KPVW – Texas plains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9347be8d73ad31b5e59fc86ac12e9bb1.setIcon(icon_d69f94e381399e3261420467c3027ea7);
+            
+    
+            var marker_c597d560250f5046c18962420f23e93f = L.marker(
+                [33.6636, -101.8228],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_86b01c3af39d4cbf160e4cee792b6b7f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1566c6e0c9e2f1902e632f14876392dd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e50895f58363f96fce61e5d2cae1c6ba = $(`<div id="html_e50895f58363f96fce61e5d2cae1c6ba" style="width: 100.0%; height: 100.0%;">     <b>Stop 68: KLBB</b><br>     Lubbock<br>     <i>West Texas</i><br>     Lat/Lon: 33.66360, -101.82280     </div>`)[0];
+                popup_1566c6e0c9e2f1902e632f14876392dd.setContent(html_e50895f58363f96fce61e5d2cae1c6ba);
+            
+        
+
+        marker_c597d560250f5046c18962420f23e93f.bindPopup(popup_1566c6e0c9e2f1902e632f14876392dd)
+        ;
+
+        
+    
+    
+            marker_c597d560250f5046c18962420f23e93f.bindTooltip(
+                `<div>
+                     68. KLBB – West Texas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c597d560250f5046c18962420f23e93f.setIcon(icon_86b01c3af39d4cbf160e4cee792b6b7f);
+            
+    
+            var marker_9f19537380eba294d7dfb6116335fbc8 = L.marker(
+                [32.4674, -100.4666],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_31da0173ab5a13a008eb4b5059b36aa1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f90f0f78688a743a0b6c60e22673706 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_92977bdd11f0ebc8b967e2396a0f0606 = $(`<div id="html_92977bdd11f0ebc8b967e2396a0f0606" style="width: 100.0%; height: 100.0%;">     <b>Stop 69: KSWW</b><br>     Sweetwater / Avenger Field<br>     <i>West Texas relay</i><br>     Lat/Lon: 32.46740, -100.46660     </div>`)[0];
+                popup_9f90f0f78688a743a0b6c60e22673706.setContent(html_92977bdd11f0ebc8b967e2396a0f0606);
+            
+        
+
+        marker_9f19537380eba294d7dfb6116335fbc8.bindPopup(popup_9f90f0f78688a743a0b6c60e22673706)
+        ;
+
+        
+    
+    
+            marker_9f19537380eba294d7dfb6116335fbc8.bindTooltip(
+                `<div>
+                     69. KSWW – West Texas relay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9f19537380eba294d7dfb6116335fbc8.setIcon(icon_31da0173ab5a13a008eb4b5059b36aa1);
+            
+    
+            var marker_62fee5b684e582c6db02b25e87e94b06 = L.marker(
+                [32.4113, -99.6819],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_b693789e6820dce2623a183ced57e867 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_edbd024f2eaf16963846885d3ada5b56 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2f1c0e7102804b1e64a70bbd1ed65e49 = $(`<div id="html_2f1c0e7102804b1e64a70bbd1ed65e49" style="width: 100.0%; height: 100.0%;">     <b>Stop 70: KABI</b><br>     Abilene Regional<br>     <i>Central/West Texas</i><br>     Lat/Lon: 32.41130, -99.68190     </div>`)[0];
+                popup_edbd024f2eaf16963846885d3ada5b56.setContent(html_2f1c0e7102804b1e64a70bbd1ed65e49);
+            
+        
+
+        marker_62fee5b684e582c6db02b25e87e94b06.bindPopup(popup_edbd024f2eaf16963846885d3ada5b56)
+        ;
+
+        
+    
+    
+            marker_62fee5b684e582c6db02b25e87e94b06.bindTooltip(
+                `<div>
+                     70. KABI – Central/West Texas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62fee5b684e582c6db02b25e87e94b06.setIcon(icon_b693789e6820dce2623a183ced57e867);
+            
+    
+            var marker_892c254cedb3e84ad3c9f3dce91d6da6 = L.marker(
+                [32.7816, -98.0602],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_c69c6fbafb4f3aa4af974f0d82758e8a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_df06211a2a40aedabca121c915e4901e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ab1185991bb1d9383dada32e65a29d3d = $(`<div id="html_ab1185991bb1d9383dada32e65a29d3d" style="width: 100.0%; height: 100.0%;">     <b>Stop 71: KMWL</b><br>     Mineral Wells<br>     <i>Brazos / North Texas</i><br>     Lat/Lon: 32.78160, -98.06020     </div>`)[0];
+                popup_df06211a2a40aedabca121c915e4901e.setContent(html_ab1185991bb1d9383dada32e65a29d3d);
+            
+        
+
+        marker_892c254cedb3e84ad3c9f3dce91d6da6.bindPopup(popup_df06211a2a40aedabca121c915e4901e)
+        ;
+
+        
+    
+    
+            marker_892c254cedb3e84ad3c9f3dce91d6da6.bindTooltip(
+                `<div>
+                     71. KMWL – Brazos / North Texas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_892c254cedb3e84ad3c9f3dce91d6da6.setIcon(icon_c69c6fbafb4f3aa4af974f0d82758e8a);
+            
+    
+            var marker_61048d43b489767857692128586a90c3 = L.marker(
+                [32.9686, -96.8364],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_3556e35843c9def20386cd81774c055b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2c7b180f2b940a96e555c864ed360b20 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d5ad96a8487931d6ee019fde018c6cb0 = $(`<div id="html_d5ad96a8487931d6ee019fde018c6cb0" style="width: 100.0%; height: 100.0%;">     <b>Stop 72: KADS</b><br>     Addison<br>     <i>Dallas skyline / North Dallas</i><br>     Lat/Lon: 32.96860, -96.83640     </div>`)[0];
+                popup_2c7b180f2b940a96e555c864ed360b20.setContent(html_d5ad96a8487931d6ee019fde018c6cb0);
+            
+        
+
+        marker_61048d43b489767857692128586a90c3.bindPopup(popup_2c7b180f2b940a96e555c864ed360b20)
+        ;
+
+        
+    
+    
+            marker_61048d43b489767857692128586a90c3.bindTooltip(
+                `<div>
+                     72. KADS – Dallas skyline / North Dallas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_61048d43b489767857692128586a90c3.setIcon(icon_3556e35843c9def20386cd81774c055b);
+            
+    
+            var marker_6217efc9df74c1d210f3c222b36f3d47 = L.marker(
+                [31.6113, -97.2305],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_24d0264546d83811998148cd64f77452 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2a0b63ae7ebad3cbb00bdaa2390514d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3da25ce4d0844edbcdc8344280603b7d = $(`<div id="html_3da25ce4d0844edbcdc8344280603b7d" style="width: 100.0%; height: 100.0%;">     <b>Stop 73: KACT</b><br>     Waco Regional<br>     <i>Waco / Brazos River</i><br>     Lat/Lon: 31.61130, -97.23050     </div>`)[0];
+                popup_2a0b63ae7ebad3cbb00bdaa2390514d8.setContent(html_3da25ce4d0844edbcdc8344280603b7d);
+            
+        
+
+        marker_6217efc9df74c1d210f3c222b36f3d47.bindPopup(popup_2a0b63ae7ebad3cbb00bdaa2390514d8)
+        ;
+
+        
+    
+    
+            marker_6217efc9df74c1d210f3c222b36f3d47.bindTooltip(
+                `<div>
+                     73. KACT – Waco / Brazos River
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6217efc9df74c1d210f3c222b36f3d47.setIcon(icon_24d0264546d83811998148cd64f77452);
+            
+    
+            var marker_babea5cf20559158984c577852c363e6 = L.marker(
+                [30.3975, -97.5664],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_b73114c43adad19751a2994fd574054e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9d641e54297d9ae81690a1e61c19fb18 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df3dfcadd85daa41b2c23a56e1727a7a = $(`<div id="html_df3dfcadd85daa41b2c23a56e1727a7a" style="width: 100.0%; height: 100.0%;">     <b>Stop 74: KEDC</b><br>     Austin Executive<br>     <i>Austin</i><br>     Lat/Lon: 30.39750, -97.56640     </div>`)[0];
+                popup_9d641e54297d9ae81690a1e61c19fb18.setContent(html_df3dfcadd85daa41b2c23a56e1727a7a);
+            
+        
+
+        marker_babea5cf20559158984c577852c363e6.bindPopup(popup_9d641e54297d9ae81690a1e61c19fb18)
+        ;
+
+        
+    
+    
+            marker_babea5cf20559158984c577852c363e6.bindTooltip(
+                `<div>
+                     74. KEDC – Austin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_babea5cf20559158984c577852c363e6.setIcon(icon_b73114c43adad19751a2994fd574054e);
+            
+    
+            var marker_8c0db47f9365c5e5f2c8e45e5262f765 = L.marker(
+                [29.5337, -98.4698],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_415bd5ff990a15f476ee848cb46fc400 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cb381cf52e0a66fb0a3b78bbde9143cd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bbe447bee5fec0d0231ecba0ca7a8e6c = $(`<div id="html_bbe447bee5fec0d0231ecba0ca7a8e6c" style="width: 100.0%; height: 100.0%;">     <b>Stop 75: KSAT</b><br>     San Antonio<br>     <i>San Antonio / Alamo</i><br>     Lat/Lon: 29.53370, -98.46980     </div>`)[0];
+                popup_cb381cf52e0a66fb0a3b78bbde9143cd.setContent(html_bbe447bee5fec0d0231ecba0ca7a8e6c);
+            
+        
+
+        marker_8c0db47f9365c5e5f2c8e45e5262f765.bindPopup(popup_cb381cf52e0a66fb0a3b78bbde9143cd)
+        ;
+
+        
+    
+    
+            marker_8c0db47f9365c5e5f2c8e45e5262f765.bindTooltip(
+                `<div>
+                     75. KSAT – San Antonio / Alamo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c0db47f9365c5e5f2c8e45e5262f765.setIcon(icon_415bd5ff990a15f476ee848cb46fc400);
+            
+    
+            var marker_eb6f124010a8c092b1ddfc793e257696 = L.marker(
+                [29.7045, -98.0422],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_a404a3e7c6cc097a3e070aaf46d450f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d06f902a991d24659e55202c77c603c0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_afcccc67f846655a768d58c2bfc0ea77 = $(`<div id="html_afcccc67f846655a768d58c2bfc0ea77" style="width: 100.0%; height: 100.0%;">     <b>Stop 76: KBAZ</b><br>     New Braunfels<br>     <i>Texas Hill Country relay</i><br>     Lat/Lon: 29.70450, -98.04220     </div>`)[0];
+                popup_d06f902a991d24659e55202c77c603c0.setContent(html_afcccc67f846655a768d58c2bfc0ea77);
+            
+        
+
+        marker_eb6f124010a8c092b1ddfc793e257696.bindPopup(popup_d06f902a991d24659e55202c77c603c0)
+        ;
+
+        
+    
+    
+            marker_eb6f124010a8c092b1ddfc793e257696.bindTooltip(
+                `<div>
+                     76. KBAZ – Texas Hill Country relay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eb6f124010a8c092b1ddfc793e257696.setIcon(icon_a404a3e7c6cc097a3e070aaf46d450f1);
+            
+    
+            var marker_c7b44d79ffb4265de5d8e08e2525148a = L.marker(
+                [29.2543, -96.1544],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_39bc182219a63472e3fed27fb1b90bdf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_89593f554cd1ae86cf4d40f15dac25ad = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_60b4ccdf927111da41562b7c7c74cb92 = $(`<div id="html_60b4ccdf927111da41562b7c7c74cb92" style="width: 100.0%; height: 100.0%;">     <b>Stop 77: KARM</b><br>     Wharton Regional<br>     <i>Brazos/Gulf plains</i><br>     Lat/Lon: 29.25430, -96.15440     </div>`)[0];
+                popup_89593f554cd1ae86cf4d40f15dac25ad.setContent(html_60b4ccdf927111da41562b7c7c74cb92);
+            
+        
+
+        marker_c7b44d79ffb4265de5d8e08e2525148a.bindPopup(popup_89593f554cd1ae86cf4d40f15dac25ad)
+        ;
+
+        
+    
+    
+            marker_c7b44d79ffb4265de5d8e08e2525148a.bindTooltip(
+                `<div>
+                     77. KARM – Brazos/Gulf plains
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c7b44d79ffb4265de5d8e08e2525148a.setIcon(icon_39bc182219a63472e3fed27fb1b90bdf);
+            
+    
+            var marker_18d417f7d8e7c5c62d306aba85f65547 = L.marker(
+                [29.6073, -95.1588],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_9c0548128167cf03e13a9dd7ec89eb07 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ac26dc0fcbc58fd22a710da013deab82 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98acb42ec75dc4c1c078ad382dc2f9e4 = $(`<div id="html_98acb42ec75dc4c1c078ad382dc2f9e4" style="width: 100.0%; height: 100.0%;">     <b>Stop 78: KEFD</b><br>     Houston Ellington<br>     <i>Houston / NASA area</i><br>     Lat/Lon: 29.60730, -95.15880     </div>`)[0];
+                popup_ac26dc0fcbc58fd22a710da013deab82.setContent(html_98acb42ec75dc4c1c078ad382dc2f9e4);
+            
+        
+
+        marker_18d417f7d8e7c5c62d306aba85f65547.bindPopup(popup_ac26dc0fcbc58fd22a710da013deab82)
+        ;
+
+        
+    
+    
+            marker_18d417f7d8e7c5c62d306aba85f65547.bindTooltip(
+                `<div>
+                     78. KEFD – Houston / NASA area
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_18d417f7d8e7c5c62d306aba85f65547.setIcon(icon_9c0548128167cf03e13a9dd7ec89eb07);
+            
+    
+            var marker_4962a681f52cbea2083db6b35d4cebc3 = L.marker(
+                [29.2653, -94.8604],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_54e1aacf00c83978403bde076b2293b2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fd285f3ef448b21aca1474db0cf4b355 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c7ef6d1d44dc8808d60d5d0e71375ad6 = $(`<div id="html_c7ef6d1d44dc8808d60d5d0e71375ad6" style="width: 100.0%; height: 100.0%;">     <b>Stop 79: KGLS</b><br>     Galveston<br>     <i>Gulf Coast</i><br>     Lat/Lon: 29.26530, -94.86040     </div>`)[0];
+                popup_fd285f3ef448b21aca1474db0cf4b355.setContent(html_c7ef6d1d44dc8808d60d5d0e71375ad6);
+            
+        
+
+        marker_4962a681f52cbea2083db6b35d4cebc3.bindPopup(popup_fd285f3ef448b21aca1474db0cf4b355)
+        ;
+
+        
+    
+    
+            marker_4962a681f52cbea2083db6b35d4cebc3.bindTooltip(
+                `<div>
+                     79. KGLS – Gulf Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4962a681f52cbea2083db6b35d4cebc3.setIcon(icon_54e1aacf00c83978403bde076b2293b2);
+            
+    
+            var marker_4917d00b32df2899a48de25f931ca4f3 = L.marker(
+                [30.1261, -93.2233],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_37d317a970fffef16508a02fbfef8aa3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d79a5565c190704506dd1f5508fa0f13 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e2fff4efce905b21e28c11917dc34544 = $(`<div id="html_e2fff4efce905b21e28c11917dc34544" style="width: 100.0%; height: 100.0%;">     <b>Stop 80: KLCH</b><br>     Lake Charles<br>     <i>Louisiana coast</i><br>     Lat/Lon: 30.12610, -93.22330     </div>`)[0];
+                popup_d79a5565c190704506dd1f5508fa0f13.setContent(html_e2fff4efce905b21e28c11917dc34544);
+            
+        
+
+        marker_4917d00b32df2899a48de25f931ca4f3.bindPopup(popup_d79a5565c190704506dd1f5508fa0f13)
+        ;
+
+        
+    
+    
+            marker_4917d00b32df2899a48de25f931ca4f3.bindTooltip(
+                `<div>
+                     80. KLCH – Louisiana coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4917d00b32df2899a48de25f931ca4f3.setIcon(icon_37d317a970fffef16508a02fbfef8aa3);
+            
+    
+            var marker_6d9f91afcafd8a345707485a49924c83 = L.marker(
+                [30.5332, -91.1496],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_e90c29edd4066e5eea96765d5ae23efe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c3974c1b3bb563b2f17e4ff3f1b49eef = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_46ac42d61391da306c6d16ba1bfa1128 = $(`<div id="html_46ac42d61391da306c6d16ba1bfa1128" style="width: 100.0%; height: 100.0%;">     <b>Stop 81: KBTR</b><br>     Baton Rouge<br>     <i>Mississippi River</i><br>     Lat/Lon: 30.53320, -91.14960     </div>`)[0];
+                popup_c3974c1b3bb563b2f17e4ff3f1b49eef.setContent(html_46ac42d61391da306c6d16ba1bfa1128);
+            
+        
+
+        marker_6d9f91afcafd8a345707485a49924c83.bindPopup(popup_c3974c1b3bb563b2f17e4ff3f1b49eef)
+        ;
+
+        
+    
+    
+            marker_6d9f91afcafd8a345707485a49924c83.bindTooltip(
+                `<div>
+                     81. KBTR – Mississippi River
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6d9f91afcafd8a345707485a49924c83.setIcon(icon_e90c29edd4066e5eea96765d5ae23efe);
+            
+    
+            var marker_cd8bc942f452c10262c7f9e727630025 = L.marker(
+                [30.0424, -90.0283],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_9503ae8d281e01afec5c1f2565f26606 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_046ebd49c39cd9e86c28126f474b3fef = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2c2ddf66a6e5e71aa399d42046fbc1ad = $(`<div id="html_2c2ddf66a6e5e71aa399d42046fbc1ad" style="width: 100.0%; height: 100.0%;">     <b>Stop 82: KNEW</b><br>     New Orleans Lakefront<br>     <i>New Orleans</i><br>     Lat/Lon: 30.04240, -90.02830     </div>`)[0];
+                popup_046ebd49c39cd9e86c28126f474b3fef.setContent(html_2c2ddf66a6e5e71aa399d42046fbc1ad);
+            
+        
+
+        marker_cd8bc942f452c10262c7f9e727630025.bindPopup(popup_046ebd49c39cd9e86c28126f474b3fef)
+        ;
+
+        
+    
+    
+            marker_cd8bc942f452c10262c7f9e727630025.bindTooltip(
+                `<div>
+                     82. KNEW – New Orleans
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cd8bc942f452c10262c7f9e727630025.setIcon(icon_9503ae8d281e01afec5c1f2565f26606);
+            
+    
+            var marker_30ba0127e0f21b017832c9b0ca859fbd = L.marker(
+                [30.4073, -89.0701],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d331f14ddbefd37d096b158d081224c3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f390bf9b8057d51b393d85fa5b731e0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cb0f1cc94113cc08a58f8b96e375227c = $(`<div id="html_cb0f1cc94113cc08a58f8b96e375227c" style="width: 100.0%; height: 100.0%;">     <b>Stop 83: KGPT</b><br>     Gulfport-Biloxi<br>     <i>Gulf beaches</i><br>     Lat/Lon: 30.40730, -89.07010     </div>`)[0];
+                popup_3f390bf9b8057d51b393d85fa5b731e0.setContent(html_cb0f1cc94113cc08a58f8b96e375227c);
+            
+        
+
+        marker_30ba0127e0f21b017832c9b0ca859fbd.bindPopup(popup_3f390bf9b8057d51b393d85fa5b731e0)
+        ;
+
+        
+    
+    
+            marker_30ba0127e0f21b017832c9b0ca859fbd.bindTooltip(
+                `<div>
+                     83. KGPT – Gulf beaches
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_30ba0127e0f21b017832c9b0ca859fbd.setIcon(icon_d331f14ddbefd37d096b158d081224c3);
+            
+    
+            var marker_acc3713da23f158dcf8fc51a7da2a325 = L.marker(
+                [30.6912, -88.2428],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_d2fa6d36c1ef123e62ccbf1ef771f6d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a5a4e6e2828ef9305a3e69dca3e6d110 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9029c14441f2779b29da5dbb9df48572 = $(`<div id="html_9029c14441f2779b29da5dbb9df48572" style="width: 100.0%; height: 100.0%;">     <b>Stop 84: KMOB</b><br>     Mobile Regional<br>     <i>Mobile Bay</i><br>     Lat/Lon: 30.69120, -88.24280     </div>`)[0];
+                popup_a5a4e6e2828ef9305a3e69dca3e6d110.setContent(html_9029c14441f2779b29da5dbb9df48572);
+            
+        
+
+        marker_acc3713da23f158dcf8fc51a7da2a325.bindPopup(popup_a5a4e6e2828ef9305a3e69dca3e6d110)
+        ;
+
+        
+    
+    
+            marker_acc3713da23f158dcf8fc51a7da2a325.bindTooltip(
+                `<div>
+                     84. KMOB – Mobile Bay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_acc3713da23f158dcf8fc51a7da2a325.setIcon(icon_d2fa6d36c1ef123e62ccbf1ef771f6d9);
+            
+    
+            var marker_27f8703431d717b73486b26e27c6624c = L.marker(
+                [30.4734, -87.1866],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_60db089eecfddfe9d1680fb935c665dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6c45daa5dfcb4238ac4b20b9b3fdf31c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fffbf20c1423964d5f57a7fe78415618 = $(`<div id="html_fffbf20c1423964d5f57a7fe78415618" style="width: 100.0%; height: 100.0%;">     <b>Stop 85: KPNS</b><br>     Pensacola<br>     <i>Florida Panhandle</i><br>     Lat/Lon: 30.47340, -87.18660     </div>`)[0];
+                popup_6c45daa5dfcb4238ac4b20b9b3fdf31c.setContent(html_fffbf20c1423964d5f57a7fe78415618);
+            
+        
+
+        marker_27f8703431d717b73486b26e27c6624c.bindPopup(popup_6c45daa5dfcb4238ac4b20b9b3fdf31c)
+        ;
+
+        
+    
+    
+            marker_27f8703431d717b73486b26e27c6624c.bindTooltip(
+                `<div>
+                     85. KPNS – Florida Panhandle
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_27f8703431d717b73486b26e27c6624c.setIcon(icon_60db089eecfddfe9d1680fb935c665dd);
+            
+    
+            var marker_aba013bfd6e47430beed10c17567e404 = L.marker(
+                [30.3583, -85.7956],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_987c5ecf682a7ec8b4287ac588183dde = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9bb7cbedb0d53ed58b34f029057b93d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0564fceb4b7f73ad3670579e69b21cdf = $(`<div id="html_0564fceb4b7f73ad3670579e69b21cdf" style="width: 100.0%; height: 100.0%;">     <b>Stop 86: KECP</b><br>     NW Florida Beaches<br>     <i>Panama City Beach</i><br>     Lat/Lon: 30.35830, -85.79560     </div>`)[0];
+                popup_a9bb7cbedb0d53ed58b34f029057b93d.setContent(html_0564fceb4b7f73ad3670579e69b21cdf);
+            
+        
+
+        marker_aba013bfd6e47430beed10c17567e404.bindPopup(popup_a9bb7cbedb0d53ed58b34f029057b93d)
+        ;
+
+        
+    
+    
+            marker_aba013bfd6e47430beed10c17567e404.bindTooltip(
+                `<div>
+                     86. KECP – Panama City Beach
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aba013bfd6e47430beed10c17567e404.setIcon(icon_987c5ecf682a7ec8b4287ac588183dde);
+            
+    
+            var marker_e9291de1eee90bc82c4997761c8d64d4 = L.marker(
+                [29.7275, -85.0275],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_8463e5425baff9fb2d7c1be95bd9d59b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b19e34948846c0b7072ca34c1ea7b7e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_57c70bd6f3596c24cef9fab029aa944c = $(`<div id="html_57c70bd6f3596c24cef9fab029aa944c" style="width: 100.0%; height: 100.0%;">     <b>Stop 87: KAAF</b><br>     Apalachicola<br>     <i>Forgotten Coast</i><br>     Lat/Lon: 29.72750, -85.02750     </div>`)[0];
+                popup_3b19e34948846c0b7072ca34c1ea7b7e.setContent(html_57c70bd6f3596c24cef9fab029aa944c);
+            
+        
+
+        marker_e9291de1eee90bc82c4997761c8d64d4.bindPopup(popup_3b19e34948846c0b7072ca34c1ea7b7e)
+        ;
+
+        
+    
+    
+            marker_e9291de1eee90bc82c4997761c8d64d4.bindTooltip(
+                `<div>
+                     87. KAAF – Forgotten Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e9291de1eee90bc82c4997761c8d64d4.setIcon(icon_8463e5425baff9fb2d7c1be95bd9d59b);
+            
+    
+            var marker_86a23231d31b5691649c29d5366c5609 = L.marker(
+                [29.6355, -83.1048],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_62eb895dc2e8617d3fd76ead8bee33f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd1360aa0e65ae99bfb2deacfef2307a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8bdff6411e629157f35f5784d938c29d = $(`<div id="html_8bdff6411e629157f35f5784d938c29d" style="width: 100.0%; height: 100.0%;">     <b>Stop 88: KCTY</b><br>     Cross City<br>     <i>Big Bend Florida</i><br>     Lat/Lon: 29.63550, -83.10480     </div>`)[0];
+                popup_dd1360aa0e65ae99bfb2deacfef2307a.setContent(html_8bdff6411e629157f35f5784d938c29d);
+            
+        
+
+        marker_86a23231d31b5691649c29d5366c5609.bindPopup(popup_dd1360aa0e65ae99bfb2deacfef2307a)
+        ;
+
+        
+    
+    
+            marker_86a23231d31b5691649c29d5366c5609.bindTooltip(
+                `<div>
+                     88. KCTY – Big Bend Florida
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86a23231d31b5691649c29d5366c5609.setIcon(icon_62eb895dc2e8617d3fd76ead8bee33f0);
+            
+    
+            var marker_0a41d127523f083899d689ca6d4edcea = L.marker(
+                [29.1726, -82.2242],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_0af92b01717460e11cc53a8dcf25652c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eed0810809d3d92d1383f9b3e8b8619c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0fa2b322043eb5114aabb8d2e92ed2b2 = $(`<div id="html_0fa2b322043eb5114aabb8d2e92ed2b2" style="width: 100.0%; height: 100.0%;">     <b>Stop 89: KOCF</b><br>     Ocala<br>     <i>Central Florida</i><br>     Lat/Lon: 29.17260, -82.22420     </div>`)[0];
+                popup_eed0810809d3d92d1383f9b3e8b8619c.setContent(html_0fa2b322043eb5114aabb8d2e92ed2b2);
+            
+        
+
+        marker_0a41d127523f083899d689ca6d4edcea.bindPopup(popup_eed0810809d3d92d1383f9b3e8b8619c)
+        ;
+
+        
+    
+    
+            marker_0a41d127523f083899d689ca6d4edcea.bindTooltip(
+                `<div>
+                     89. KOCF – Central Florida
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0a41d127523f083899d689ca6d4edcea.setIcon(icon_0af92b01717460e11cc53a8dcf25652c);
+            
+    
+            var marker_faaa510bd138ee25e6bbe763a8e072f0 = L.marker(
+                [28.2898, -81.4371],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_f9c6253abf00c1fcb7f388df7b9470b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_32b24ad61fc4e41f981e36288c13862b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3f095ad11c9d119ef63c578f492fa491 = $(`<div id="html_3f095ad11c9d119ef63c578f492fa491" style="width: 100.0%; height: 100.0%;">     <b>Stop 90: KISM</b><br>     Kissimmee Gateway<br>     <i>Orlando / lakes</i><br>     Lat/Lon: 28.28980, -81.43710     </div>`)[0];
+                popup_32b24ad61fc4e41f981e36288c13862b.setContent(html_3f095ad11c9d119ef63c578f492fa491);
+            
+        
+
+        marker_faaa510bd138ee25e6bbe763a8e072f0.bindPopup(popup_32b24ad61fc4e41f981e36288c13862b)
+        ;
+
+        
+    
+    
+            marker_faaa510bd138ee25e6bbe763a8e072f0.bindTooltip(
+                `<div>
+                     90. KISM – Orlando / lakes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_faaa510bd138ee25e6bbe763a8e072f0.setIcon(icon_f9c6253abf00c1fcb7f388df7b9470b5);
+            
+    
+            var marker_dc10555db01a2a45a95fdbd88f5a909d = L.marker(
+                [27.4975, -80.3726],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_eab3eea3173253d7e2e1b8beb4ad9f4b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9452f1860114bd22b1d32f492b622ce = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e171f753032df26bc6c368dab4268ea8 = $(`<div id="html_e171f753032df26bc6c368dab4268ea8" style="width: 100.0%; height: 100.0%;">     <b>Stop 91: KFPR</b><br>     Treasure Coast Intl<br>     <i>Atlantic coast</i><br>     Lat/Lon: 27.49750, -80.37260     </div>`)[0];
+                popup_a9452f1860114bd22b1d32f492b622ce.setContent(html_e171f753032df26bc6c368dab4268ea8);
+            
+        
+
+        marker_dc10555db01a2a45a95fdbd88f5a909d.bindPopup(popup_a9452f1860114bd22b1d32f492b622ce)
+        ;
+
+        
+    
+    
+            marker_dc10555db01a2a45a95fdbd88f5a909d.bindTooltip(
+                `<div>
+                     91. KFPR – Atlantic coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dc10555db01a2a45a95fdbd88f5a909d.setIcon(icon_eab3eea3173253d7e2e1b8beb4ad9f4b);
+            
+    
+            var marker_597428ff19111f9b9ba7eded274d6d2f = L.marker(
+                [26.593, -80.0851],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_35d67314bc2c7d3a40e9829198d570bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a3f278c07d60b9e14f1a65b7aea2c806 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_216b68caba7cb694533996a221defa29 = $(`<div id="html_216b68caba7cb694533996a221defa29" style="width: 100.0%; height: 100.0%;">     <b>Stop 92: KLNA</b><br>     Palm Beach County Park<br>     <i>Palm Beach coast</i><br>     Lat/Lon: 26.59300, -80.08510     </div>`)[0];
+                popup_a3f278c07d60b9e14f1a65b7aea2c806.setContent(html_216b68caba7cb694533996a221defa29);
+            
+        
+
+        marker_597428ff19111f9b9ba7eded274d6d2f.bindPopup(popup_a3f278c07d60b9e14f1a65b7aea2c806)
+        ;
+
+        
+    
+    
+            marker_597428ff19111f9b9ba7eded274d6d2f.bindTooltip(
+                `<div>
+                     92. KLNA – Palm Beach coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_597428ff19111f9b9ba7eded274d6d2f.setIcon(icon_35d67314bc2c7d3a40e9829198d570bc);
+            
+    
+            var marker_4b1b2326843a443d75f7c02f65ff70e6 = L.marker(
+                [25.6479, -80.4328],
+                {
+}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            var icon_179a41eebb6729af3a8665523c6d027e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "flag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3d5c0f0ae1503f477c4e29c757dc51d2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_018bc796565dca45d236499a52c9b34d = $(`<div id="html_018bc796565dca45d236499a52c9b34d" style="width: 100.0%; height: 100.0%;">     <b>Stop 93: KTMB</b><br>     Miami Executive<br>     <i>Finish Miami</i><br>     Lat/Lon: 25.64790, -80.43280     </div>`)[0];
+                popup_3d5c0f0ae1503f477c4e29c757dc51d2.setContent(html_018bc796565dca45d236499a52c9b34d);
+            
+        
+
+        marker_4b1b2326843a443d75f7c02f65ff70e6.bindPopup(popup_3d5c0f0ae1503f477c4e29c757dc51d2)
+        ;
+
+        
+    
+    
+            marker_4b1b2326843a443d75f7c02f65ff70e6.bindTooltip(
+                `<div>
+                     93. KTMB – Finish Miami
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b1b2326843a443d75f7c02f65ff70e6.setIcon(icon_179a41eebb6729af3a8665523c6d027e);
+            
+    
+            var circle_marker_e81d5c391c5d79b17322fcf8f3936c7b = L.circleMarker(
+                [60.7096, -135.0673],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_e81d5c391c5d79b17322fcf8f3936c7b.bindTooltip(
+                `<div>
+                     Leg 10: CYHT→CYXY (27.3 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a4fae91e3fe20a23a0e4a3d6728067f6 = L.circleMarker(
+                [52.1831, -122.0542],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_a4fae91e3fe20a23a0e4a3d6728067f6.bindTooltip(
+                `<div>
+                     Leg 20: CYXS→CYWL (39.3 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7b7cf5f3df1bbcee7d6093a9cbee15e9 = L.circleMarker(
+                [40.9781, -124.1086],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_7b7cf5f3df1bbcee7d6093a9cbee15e9.bindTooltip(
+                `<div>
+                     Leg 30: KCEC→KACV (18.2 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ee597f61a3bb3ab0c7cb343a492037f8 = L.circleMarker(
+                [34.2098, -118.4899],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_ee597f61a3bb3ab0c7cb343a492037f8.bindTooltip(
+                `<div>
+                     Leg 40: KWJF→KVNY (13.0 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4bafb2de9c2bdfc52662627a47edc5e4 = L.circleMarker(
+                [37.9538, -107.9085],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_4bafb2de9c2bdfc52662627a47edc5e4.bindTooltip(
+                `<div>
+                     Leg 50: KCNY→KTEX (37.3 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb0596e12f9bc3dadeee92c59c5ac61b = L.circleMarker(
+                [41.1013, -102.9853],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_fb0596e12f9bc3dadeee92c59c5ac61b.bindTooltip(
+                `<div>
+                     Leg 60: KCDR→KSNY (39.1 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c722bf3574e4ab89e4560cea56f876d6 = L.circleMarker(
+                [32.7816, -98.0602],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_c722bf3574e4ab89e4560cea56f876d6.bindTooltip(
+                `<div>
+                     Leg 70: KABI→KMWL (31.9 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a44fa0d116e2fa841e3c66db96015b0 = L.circleMarker(
+                [30.5332, -91.1496],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_2a44fa0d116e2fa841e3c66db96015b0.bindTooltip(
+                `<div>
+                     Leg 80: KLCH→KBTR (41.3 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0911511806703fb06b567c4da53e2130 = L.circleMarker(
+                [27.4975, -80.3726],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "black", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_7de437d5051f05bcbcdfc33eec0ee05f);
+        
+    
+            circle_marker_0911511806703fb06b567c4da53e2130.bindTooltip(
+                `<div>
+                     Leg 90: KISM→KFPR (27.7 min)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            map_7de437d5051f05bcbcdfc33eec0ee05f.fitBounds(
+                [[25.6479, -150.0937], [64.8151, -80.0851]],
+                {}
+            );
+        
+</script>
+</html>
